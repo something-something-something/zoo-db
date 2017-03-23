@@ -1,1 +1,1 @@
-- [  ] Figure out triggers, views, and pages 
+- [ ] Figure out triggers, views, and pages 
