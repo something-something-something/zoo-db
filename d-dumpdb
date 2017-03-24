@@ -1,0 +1,3 @@
+#!/bin/sh
+docker-compose exec -T db mysqldump -u g20 -pp adb -r /db.sql
+docker-compose exec db cat /db.sql > db.sql
