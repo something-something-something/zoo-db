@@ -1,0 +1,17 @@
+version: '2'
+services:
+ phpzoo:
+  volumes:
+   - /var/www/html/settings/files
+  ports:
+   - "127.0.0.1:8080:80"
+  build:
+   context: .
+   dockerfile: php.Dockerfile
+ db:
+  image: mysql:5.7
+  environment:
+   MYSQL_ROOT_PASSWORD: pass
+   MYSQL_DATABASE: adb
+   MYSQL_USER: g20
+   MYSQL_PASSWORD: p

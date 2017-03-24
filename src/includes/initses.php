@@ -1,0 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['CSRF'])){
+	$_SESSION['CSRF']=bin2hex(random_bytes(4096));
+}
+if(!isset($_SESSION['EMPLID'])){
+	$_SESSION['EMPLID']=NULL;
+}
+?>
