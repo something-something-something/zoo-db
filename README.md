@@ -68,17 +68,29 @@ or
 go to [http://127.0.0.1:8080/setupform.php](http://127.0.0.1:8080/setupform.php)
 
 for the following fields fill put in the following
+
 Database host:127.0.0.1
+
 User name:your mysql user name
+
 Password:your mysql password
+
 Database name: the name of the schema you created
+
 fName: first name of employee
+
 lname: last name of employee
+
 id: for employee
+
 username: foremployee
+
 Password: for employee
+
 sex: for employee
+
 ssn: for employee
+
 email: for employee
 
 the employee created heare will be a superUser
