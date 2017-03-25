@@ -1,4 +1,5 @@
 <?php
+/*if setup has already ocured pages that require this will not run.*/
 $ALREADYSETUPhtml=<<<'ALREADYSETUP'
 
 <!doctype html>
