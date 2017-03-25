@@ -5,6 +5,7 @@
 	require_once('func/empluser.php');
 ?>
 <?php
+/*make sure that stuff has actually been submited to this page from the form (probly want to do more to verify that this is proper data)*/
 if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['id'],$_POST['fname'],$_POST['lname'],$_POST['ssn'],$_POST['dob'],$_POST['sex'],$_POST['email'],$_POST['addr'])){
 	
 	$dbsettings=[];
@@ -18,6 +19,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['i
 		echo 'MYSQLI: '. $mysqlidb->connect_errno . ' '. $mysqlidb->connect_error;
 	}
 	else{
+		/* creates tables in specified schema*/
 		/*Not using prepared statments here as there should be no posibility of sql injection*/
 		$mysqlidb->query('DROP TABLE IF EXISTS Department');
 		$mysqlidb->query("CREATE TABLE Department (departmentID VARCHAR(10),name VARCHAR(10),PRIMARY KEY(departmentID))");
@@ -57,8 +59,9 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['i
 
 		$mysqlidb->query('DROP TABLE IF EXISTS GrossVendorSales');
 		$mysqlidb->query("CREATE TABLE GrossVendorSales(ID VARCHAR(10),Day DATE,saleAmount DECIMAL(10,2),PRIMARY KEY(ID,Day),FOREIGN KEY(ID) REFERENCES Vendor(vendorID))");
-		
+		/*adds employee as super user*/
 		if(EmplUser\add($mysqlidb,$_POST['id'],$_POST['emplusername'],$_POST['emplpass'],$_POST['fname'],$_POST['lname'],$_POST['ssn'],$_POST['dob'],"superUser",null,$_POST['sex'],$_POST['email'],$_POST['addr'],null,null)){
+			/**/
 			file_put_contents('settings/files/db.json',json_encode($dbsettings));
 		}
 		else{
