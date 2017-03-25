@@ -4,6 +4,7 @@ require_once('includes/aftersetup.php');
 require_once('includes/mysqlcon.php');
 require_once('func/empluser.php');
 require_once('includes/checkcsrf.php');
+/*logs user in if they are who they claim to be.*/
 if(!isset($_POST['user'],$_POST['pass'])){
 	die();
 }

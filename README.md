@@ -2,7 +2,7 @@
 A relational database for managing a zoo 
 
 # Installing Requirements
-In genreral install php 7.1 and mysql (note you may have to install the mysql extension depending on wheather or not it comes bundled with php)
+In genreral install php 7.1 and mysql (note you may have to install the mysql php extension depending on wheather or not it comes bundled with php)
 
 make sure mysql is started
 
@@ -60,8 +60,7 @@ run
 
 ## On docker on Linux
 
-run `sudo sh d-run`
-or 
+run `sudo sh d-run` or `docker-compose up --build` (might need to prefix with `sudo` )
 
 ## Setup website
 
@@ -69,11 +68,11 @@ go to [http://127.0.0.1:8080/setupform.php](http://127.0.0.1:8080/setupform.php)
 
 for the following fields fill put in the following
 
-Database host:127.0.0.1
+Database host:127.0.0.1 (unless you are using docker in which case it is `db` )
 
-User name:your mysql user name
+User name:your mysql user name (for docker `g20` )
 
-Password:your mysql password
+Password:your mysql password (for docker `p` )
 
 Database name: the name of the schema you created
 
@@ -101,4 +100,4 @@ delete `src/settings/files/db.json`
 run `drop schema somedbname`
 
  ## reseting on Docker
-run `sudo sh d-reset`
+run `sudo sh d-reset` or `docker-compose rm -vf` (might need to prefix with `sudo` )
