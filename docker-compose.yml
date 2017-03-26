@@ -2,6 +2,7 @@ version: '2'
 services:
  phpzoo:
   volumes:
+   - ./src:/var/www/html/:ro
    - /var/www/html/settings/files
   ports:
    - "127.0.0.1:8080:80"
