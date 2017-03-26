@@ -20,15 +20,15 @@ the folowing commands will install php7.1 and mysql etc
 `sudo apt install php7.1 mysql-server-5.6 php7.1-mysql`
 
 ## OSX
-I don't own one so some one else will have to figure this out. Prusmably one could install php through one of the various package managers for osx. 
+I don't own one so some one else will have to figure this out. Presumably one could install php through one of the various package managers for osx. 
 
 ## Linux
-either istall php and mysql (note recent distros uses  MariaDB  instead of mysql  MariaDB  will work fine.)
+either install php and mysql (note recent distros uses  MariaDB  instead of mysql  MariaDB  will work fine.)
 
 or install docker and docker compose
 
 ### ALL EXCEPT DOCKER USERS
-crete a schema to store the tables in
+create a schema to store the tables in
 
 `mysql -u root -p`
 
@@ -74,7 +74,7 @@ User name:your mysql user name (for docker `g20` )
 
 Password:your mysql password (for docker `p` )
 
-Database name: the name of the schema you created
+Database name: the name of the schema you created (for docker `adb` )
 
 fName: first name of employee
 
@@ -92,12 +92,14 @@ ssn: for employee
 
 email: for employee
 
-the employee created heare will be a superUser
+click submit This will create the tables and an employee as specified by the form. 
+
+the employee created here will be a superUser
 
 ## reseting on other platforms
 
 delete `src/settings/files/db.json`
-run `drop schema somedbname`
+run `drop schema somedbname` in mysql
 
  ## reseting on Docker
 run `sudo sh d-reset` or `docker-compose rm -vf` (might need to prefix with `sudo` )
