@@ -92,6 +92,10 @@ ssn: for employee
 
 email: for employee
 
+address: for employee
+
+dob: for employee
+
 click submit This will create the tables and an employee as specified by the form. 
 
 the employee created here will be a superUser
