@@ -1,6 +1,10 @@
 <?php
 require_once('includes/initses.php');
 require_once('includes/aftersetup.php');
+require_once('func/empluser.php');
+?>
+<?php
+if(!EmplUser\loggedIn()){
 ?>
 <!doctype html>
 <html>
@@ -17,3 +21,26 @@ require_once('includes/aftersetup.php');
 	</form>
 	</body>
 </html>
+<?php
+
+}
+else{
+?>
+	<!doctype html>
+	<html>
+		<head>
+			<title>
+			</title>
+		</head>
+		<body>
+		logout
+		<form action="logout.php" method="POST">
+			<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
+			<input type="submit">
+		</form>
+		</body>
+	</html>
+	
+<?php
+}
+?>

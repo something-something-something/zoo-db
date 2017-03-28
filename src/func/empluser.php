@@ -1,14 +1,17 @@
 <?php
 namespace EmplUser{
-	/*for all the below functions $db id=s the databse connection*/
+	/*for all the below functions $db is the databse connection*/
 	
 	/* adds an employee user some of these if statments are probaly excesive*/
 	function add($db,$id,$username,$password,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID){
-		/* Locks the tables not 100% sure tis syntax is right
+		/* Locks the tables not 100% sure this syntax is right
+		seems they do not suport prepared statments.
 		Done to make sure that no user names are added that could conflit with the one we are trying to add affter we make sure it is avalible
 		returns true on sucsess and false on faliure.
 		*/
-		$db->query("lock tables Users,Employee write");
+
+		$db->query('lock tables Users write, Employee write');
+
 		/* checks if username is already used exists 
 		*/
 		$statment=$db->prepare("select username from Users where username=?");
@@ -108,6 +111,7 @@ namespace EmplUser{
 	/*nothing below a call to this function will be run if not logged in as employee*/
 	function restrictPageToLoggedIn(){
 		if(!loggedIn()){
+			header('Location: /loginform.php');
 			die();
 		}
 	}
@@ -115,6 +119,7 @@ namespace EmplUser{
 	nothing below a call to this function will be run if the user is not loged in and a member of at least one position in $positions  */
 	function restrictPageToPositions($db,$positions){
 		if(!loggedIn()){
+			header('Location: /loginform.php');
 			die();
 		}
 		$statment=$db->prepare("select position from Employee where employeeID=?");
@@ -134,6 +139,7 @@ namespace EmplUser{
 			}
 		}
 		if(!$hasApprovedPosition){
+			header('Location: /loginform.php');
 			die();
 		}
 	}

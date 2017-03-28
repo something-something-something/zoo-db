@@ -14,6 +14,7 @@
 		User name:<input type="text" name="user"></br>
 		Password:<input type="password" name="pass"><br>
 		Database name:<input type="text" name="dbname"><br>
+		<br>New Employee Details<br>
 		fName::<input type="text" name="fname"><br>
 		lname:<input type="text" name="lname"><br>
 		id:<input type="text" value="1234567890" name="id"><br>
