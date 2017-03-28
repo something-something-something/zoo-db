@@ -10,4 +10,4 @@
 ?>
 
 
-you are logged in now
+you are logged in now. See <a href="/employeelist.php">the employee list</a> if you are a superUser
