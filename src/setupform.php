@@ -24,7 +24,7 @@
 		ssn:<input type="text" value="123456789" name="ssn"><br>
 		email:<input type="text" value="r@example.com" name="email"><br>
 		address:<input type="text" value="1234 Some St" name="addr"><br>
-		dob:<input type="date" value="10/10/2010"  name="dob"><br>
+		dob:<input type="date" value="2010-10-21" name="dob"><br>
 		<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 		<input type="submit">
 	</form>
