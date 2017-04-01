@@ -15,7 +15,7 @@ $statment->execute();
 $statment->bind_result($id,$fname,$lname);
 while($statment->fetch()){
 	//need to escape html charchters will do later
-	echo $id.' '.$fname.' '.$lname.' '.$username.'<br>';
+	echo '<a href="edituserform.php?id='.$id.'">'.$id.'</a> '.$fname.' '.$lname.' '.$username.'<br>';
 }
 
 ?>

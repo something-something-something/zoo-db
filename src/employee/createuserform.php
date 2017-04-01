@@ -16,22 +16,10 @@
 	<label>Female</label><input type="radio" name="sex" value="f"><br>
 	username:<input type="text" value="jsmith" name="username"><br>
 	Password:<input type="password" name="pass"><br>
-	username:<input type="text" value="jsmith@example.com" name="email"><br>
+	email:<input type="text" value="jsmith@example.com" name="email"><br>
 	dob:<input type="date" value="2010-10-21" name="dob"><br>
 	job<br>
-	<select required name="pos">
-		<option selected value="superUser">superUser</option>
-		<option value="ticketSeller">ticket seller</option>
-		<option value="waiter">waiter</option>
-		<option value="zooKeeper">zooKeeper</option>
-		<option value="cook">cook</option>
-		<option value="guide">guide</option>
-		<option value="cashier">cashier</option>
-		<option value="quarterMaster"> Quarter master</option>
-		<option value="departmentManager">departmentManager</option>
-		<option value="vendor">Vendor</option>
-		<option value="bookKeeper">book keeper</option>
-	</select>
+	<?php echo EmplUser\selectPositionHTML(); ?>
 	<br>
 	<select required name="type">
 		<option value="fullTime">full time</option>
