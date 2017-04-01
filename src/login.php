@@ -13,7 +13,7 @@ if(EmplUser\validatePassword($db,$_POST['user'],$_POST['pass'])){
 	$id=EmplUser\getIDFromUserName($db,$_POST['user']);
 	if($id!==false){
 		$_SESSION['EMPLID']=$id;
-		header('Location: /logincheck.php');
+		header('Location: /employee/index.php');
 	}
 	else{
 		header('Location: /loginform.php');
