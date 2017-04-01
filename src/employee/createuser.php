@@ -8,7 +8,7 @@
 
 ?>
 <?php
-	if(isset($_POST['id'],
+	if(isset(
 		$_POST['username'],
 		$_POST['pass'],
 		$_POST['fname'],
@@ -22,7 +22,7 @@
 		$_POST['address'])){
 		$dID=NULL;
 		$sID=NULL;
-		if(EmplUser\add($db,$_POST['id'],
+		if(EmplUser\add($db,
 		$_POST['username'],
 		$_POST['pass'],
 		$_POST['fname'],
