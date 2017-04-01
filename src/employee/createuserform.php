@@ -10,7 +10,6 @@
 <form action="createuser.php" method="POST">
 	first name<input type="text" name="fname" value="John"><br>
 	last name<input type="text" name="lname" value="Smith"><br>
-	id<input type="text" name="id" value="0987654321"><br>
 	ssn<input type="text" name="ssn" value="234785567"><br>
 	<label>Male</label><input type="radio" checked name="sex" value="m">
 	<label>Female</label><input type="radio" name="sex" value="f"><br>

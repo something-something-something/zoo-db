@@ -5,7 +5,7 @@ namespace EmplUser{
 	/*for all the below functions $db is the databse connection*/
 	
 	/* adds an employee user some of these if statments are probaly excesive*/
-	function add($db,$id,$username,$password,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID){
+	function add($db,$username,$password,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID){
 		/* Locks the tables not 100% sure this syntax is right
 		seems they do not suport prepared statments.
 		Done to make sure that no user names are added that could conflit with the one we are trying to add affter we make sure it is avalible
@@ -34,12 +34,12 @@ namespace EmplUser{
 		}
 		/*insert employee into employee table
 		*/
-		$statmentET=$db->prepare("insert into Employee values(?,?,?,?,?,?,?,?,?,?,?,?)");
+		$statmentET=$db->prepare("insert into Employee values(DEFAULT,?,?,?,?,?,?,?,?,?,?,?)");
 		if(!$statmentET){
 			$db->query("unlock tables");
 			return false;
 		}
-		$statmentET->bind_param('ssssssssssss',$id,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID);
+		$statmentET->bind_param('sssssssssss',$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID);
 		
 		if(!$statmentET->execute()){
 			$db->query("unlock tables");
@@ -47,14 +47,14 @@ namespace EmplUser{
 		}
 		/*insert employee into user table  
 		*/
-		$statmentUT=$db->prepare("insert into Users values(?,?,?,?)");
+		$statmentUT=$db->prepare("insert into Users values(?,?,LAST_INSERT_ID(),?)");
 		if(!$statmentUT){
 			$db->query("unlock tables");
 			return false;
 		}
 		/* Seems php does not like directly putting NULLs into bind_param() */
 		$memID=NULL;
-		$statmentUT->bind_param('ssss',$username,password_hash($password,PASSWORD_DEFAULT),$id,$memID);
+		$statmentUT->bind_param('sss',$username,password_hash($password,PASSWORD_DEFAULT),$memID);
 		if(!$statmentUT->execute()){
 			$db->query("unlock tables");
 			return false;
@@ -68,7 +68,7 @@ namespace EmplUser{
 		if(!$statment){
 			return false;
 		}
-		$statment->bind_param('s',$id);
+		$statment->bind_param('i',$id);
 		if(!$statment->execute()){
 			return false;
 		}
@@ -125,7 +125,7 @@ namespace EmplUser{
 			die();
 		}
 		$statment=$db->prepare("select position from Employee where employeeID=?");
-		$statment->bind_param('s',$_SESSION['EMPLID']);
+		$statment->bind_param('i',$_SESSION['EMPLID']);
 		if(!$statment->execute()){
 			die();
 		}

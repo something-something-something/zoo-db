@@ -17,7 +17,7 @@
 		<br>New Employee Details<br>
 		fName::<input type="text" name="fname"><br>
 		lname:<input type="text" name="lname"><br>
-		id:<input type="text" value="1234567890" name="id"><br>
+		<!--id:<input type="text" value="0" name="id"><br>-->
 		username:<input type="text" name="emplusername"><br>
 		Password:<input type="password" name="emplpass"><br>
 		sex:<input type="text" value="m" name="sex"><br>

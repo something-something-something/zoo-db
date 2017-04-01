@@ -10,7 +10,7 @@
 
 // TODO add checks to make sure post data is okay
 	$statment=$db->prepare("update Employee set firstName=?,lastName=?,eSsn=?,employeeDOB=?,position=?,employeeType=?,sex=?,employeeEmail=?,address=? where employeeID=?");
-	$statment->bind_param('ssssssssss',
+	$statment->bind_param('sssssssssi',
 	$_POST['fname'],
 	$_POST['lname'],
 	$_POST['ssn'],

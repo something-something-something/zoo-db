@@ -10,7 +10,7 @@
 		die('specifiy an employee');
 	}
 	$statment=$db->prepare("select employeeID,firstName,lastName,eSsn,employeeDOB,position,employeeType,sex,employeeEmail,address from Employee where employeeID=?");
-	$statment->bind_param('s',$_GET['id']);
+	$statment->bind_param('i',$_GET['id']);
 	if(!$statment->execute()){
 		die('prepared statment failed');
 	}
