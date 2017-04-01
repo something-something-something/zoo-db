@@ -26,7 +26,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		}
 
 		/*prepare create table statments (maybe should rewrite as an array?)*/
-		$stmtCreateDep=$mysqlidb->prepare("CREATE TABLE Department (departmentID INT AUTO_INCREMENT,name VARCHAR(10),PRIMARY KEY(departmentID))");
+		$stmtCreateDep=$mysqlidb->prepare("CREATE TABLE Department (departmentID INT AUTO_INCREMENT,name VARCHAR(100),PRIMARY KEY(departmentID))");
 		
 		
 		$stmtCreateEmp=$mysqlidb->prepare("CREATE TABLE Employee(employeeID INT AUTO_INCREMENT,firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper'),employeeType ENUM('fullTime','partTime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID INT,supID INT,PRIMARY KEY(employeeID),UNIQUE(Essn), FOREIGN KEY(supID) REFERENCES Employee(employeeID), FOREIGN KEY(departmentID) REFERENCES Department(departmentID))");
