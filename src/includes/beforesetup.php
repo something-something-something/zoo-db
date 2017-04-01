@@ -12,7 +12,7 @@ $ALREADYSETUPhtml=<<<'ALREADYSETUP'
 	</body>
 </html>
 ALREADYSETUP;
-if(file_exists('settings/files/db.json')){
+if(file_exists($_SERVER['CONTEXT_DOCUMENT_ROOT'].'/settings/files/db.json')){
 	die($ALREADYSETUPhtml);
 }
 ?>

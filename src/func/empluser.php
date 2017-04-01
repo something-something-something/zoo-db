@@ -1,5 +1,7 @@
 <?php
 namespace EmplUser{
+	const POSITIONS=[['zooKeeper','Zoo Keeper'],['waiter','Waiter'],['cook','Cook'],['guide','Guide'],['cashier','Cashier'],['superUser','Super User'],['ticketSeller','Ticket Salesperson'],['quarterMaster','Quarter Master'],['departmentManager','Department Manager'],['vendor','Vendor'],['bookKeeper','Book Keeper']];
+	const TYPES=[['fullTime','Full Time'],['partTime','Part Time'],['volunteer','Volunteer']];
 	/*for all the below functions $db is the databse connection*/
 	
 	/* adds an employee user some of these if statments are probaly excesive*/
@@ -142,6 +144,30 @@ namespace EmplUser{
 			header('Location: /loginform.php');
 			die();
 		}
+	}
+	function selectPositionHTML($posSelected='superUser',$name='pos'){
+		$positionSelectHTML='<select required name="'.$name.'">';
+		foreach(POSITIONS as $posOp){
+			if($posSelected===$posOp[0]){
+				$positionSelectHTML.='<option selected value="'.$posOp[0].'">'.$posOp[1].'</option>';	
+			}
+			else{
+				$positionSelectHTML.='<option value="'.$posOp[0].'">'.$posOp[1].'</option>';
+			}
+		}
+		return $positionSelectHTML.'</select>';
+	}
+	function selectTypeHTML($typeSelected='fullTime',$name='type'){
+		$typeSelectHTML='<select required name="'.$name.'">';
+		foreach(TYPES as $typeOp){
+			if($typeSelected===$typeOp[0]){
+				$typeSelectHTML.='<option selected value="'.$typeOp[0].'">'.$typeOp[1].'</option>';	
+			}
+			else{
+				$typeSelectHTML.='<option value="'.$typeOp[0].'">'.$typeOp[1].'</option>';
+			}
+		}
+		return $typeSelectHTML.'</select>';
 	}
 }
 ?>

@@ -29,7 +29,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['i
 		$stmtCreateDep=$mysqlidb->prepare("CREATE TABLE Department (departmentID VARCHAR(10),name VARCHAR(10),PRIMARY KEY(departmentID))");
 		
 		
-		$stmtCreateEmp=$mysqlidb->prepare("CREATE TABLE Employee(employeeID VARCHAR(10),firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zookeeper','waiter','cook','salesperson','superUser'),employeeType ENUM('fulltime','parttime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID VARCHAR(10),supID VARCHAR(10),PRIMARY KEY(employeeID),UNIQUE(Essn), FOREIGN KEY(supID) REFERENCES Employee(employeeID), FOREIGN KEY(departmentID) REFERENCES Department(departmentID))");
+		$stmtCreateEmp=$mysqlidb->prepare("CREATE TABLE Employee(employeeID VARCHAR(10),firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper'),employeeType ENUM('fullTime','partTime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID VARCHAR(10),supID VARCHAR(10),PRIMARY KEY(employeeID),UNIQUE(Essn), FOREIGN KEY(supID) REFERENCES Employee(employeeID), FOREIGN KEY(departmentID) REFERENCES Department(departmentID))");
 		
 		
 		$stmtCreateHab=$mysqlidb->prepare("CREATE TABLE Habitats(HabitatID VARCHAR(10),Htype ENUM('cage','aquarium','fence'),Hname VARCHAR(999),status ENUM('occupied','empty','undergoing-maintenance'),PRIMARY KEY(habitatID))");
