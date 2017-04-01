@@ -3,21 +3,23 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
+	require_once('../func/dept.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy an employee');
 	}
-	$statment=$db->prepare("select employeeID,firstName,lastName,eSsn,employeeDOB,position,employeeType,sex,employeeEmail,address from Employee where employeeID=?");
+	$statment=$db->prepare("select employeeID,firstName,lastName,eSsn,employeeDOB,position,employeeType,sex,employeeEmail,address,departmentID from Employee where employeeID=?");
 	$statment->bind_param('i',$_GET['id']);
 	if(!$statment->execute()){
 		die('prepared statment failed');
 	}
-	$statment->bind_result($id,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr);
+	$statment->bind_result($id,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dept);
 	if(!$statment->fetch()){
 		die('no employee found');
 	}
+	$statment->close();
 ?>
 
 <?php
@@ -32,6 +34,7 @@ else{
 
 $selectPosHTML=EmplUser\selectPositionHTML($pos);
 $selectTypeHTML=EmplUser\selectTypeHTML($type);
+$selectDeptHTML=Dept\selectDeptHTML($db,$dept);
 //TODO need to escape stuff
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
@@ -46,6 +49,8 @@ ID: $id<br>
 		$selectPosHTML
 		<br>
 		$selectTypeHTML
+		<br>
+		$selectDeptHTML
 		<br>
 		<textarea name="address">$addr</textarea><br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">

@@ -9,8 +9,14 @@
 <?php
 
 // TODO add checks to make sure post data is okay
-	$statment=$db->prepare("update Employee set firstName=?,lastName=?,eSsn=?,employeeDOB=?,position=?,employeeType=?,sex=?,employeeEmail=?,address=? where employeeID=?");
-	$statment->bind_param('sssssssssi',
+	if($_POST['dept']==='none'){
+		$dept=NULL;
+	}
+	else{
+		$dept=$_POST['dept'];
+	}
+	$statment=$db->prepare("update Employee set firstName=?,lastName=?,eSsn=?,employeeDOB=?,position=?,employeeType=?,sex=?,employeeEmail=?,address=?,departmentID=? where employeeID=?");
+	$statment->bind_param('sssssssssii',
 	$_POST['fname'],
 	$_POST['lname'],
 	$_POST['ssn'],
@@ -20,11 +26,13 @@
 	$_POST['sex'],
 	$_POST['email'],
 	$_POST['address'],
+	$dept,
 	$_POST['id']);
 	if($statment->execute()){
 		echo 'updated user';
 	}
 	else{
+		echo $db->error;
 		echo 'Failed to update user';
 	}
 ?>

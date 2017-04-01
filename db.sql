@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `Animals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Animals` (
-  `animalID` varchar(10) NOT NULL,
+  `animalID` int(11) NOT NULL AUTO_INCREMENT,
   `Aname` varchar(99) DEFAULT NULL,
   `taxonomy` varchar(99) DEFAULT NULL,
   `animalDOB` date DEFAULT NULL,
-  `habitatID` varchar(10) DEFAULT NULL,
+  `habitatID` int(11) DEFAULT NULL,
   `sex` enum('m','f') DEFAULT NULL,
-  `departmentID` varchar(10) DEFAULT NULL,
+  `departmentID` int(11) DEFAULT NULL,
   PRIMARY KEY (`animalID`),
   KEY `departmentID` (`departmentID`),
   KEY `habitatID` (`habitatID`),
@@ -55,10 +55,10 @@ DROP TABLE IF EXISTS `Department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Department` (
-  `departmentID` varchar(10) NOT NULL,
-  `name` varchar(10) DEFAULT NULL,
+  `departmentID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`departmentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +67,7 @@ CREATE TABLE `Department` (
 
 LOCK TABLES `Department` WRITE;
 /*!40000 ALTER TABLE `Department` DISABLE KEYS */;
+INSERT INTO `Department` VALUES (1,'Insect Department'),(2,'Reptile Department');
 /*!40000 ALTER TABLE `Department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,25 +79,25 @@ DROP TABLE IF EXISTS `Employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Employee` (
-  `employeeID` varchar(10) NOT NULL,
+  `employeeID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(99) DEFAULT NULL,
   `lastName` varchar(99) DEFAULT NULL,
   `eSsn` varchar(9) NOT NULL,
   `employeeDOB` date DEFAULT NULL,
-  `position` enum('zookeeper','waiter','cook','salesperson','superUser') DEFAULT NULL,
-  `employeeType` enum('fulltime','parttime','volunteer') DEFAULT NULL,
+  `position` enum('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper') DEFAULT NULL,
+  `employeeType` enum('fullTime','partTime','volunteer') DEFAULT NULL,
   `sex` enum('m','f') DEFAULT NULL,
   `employeeEmail` varchar(999) DEFAULT NULL,
   `address` text,
-  `departmentID` varchar(10) DEFAULT NULL,
-  `supID` varchar(10) DEFAULT NULL,
+  `departmentID` int(11) DEFAULT NULL,
+  `supID` int(11) DEFAULT NULL,
   PRIMARY KEY (`employeeID`),
   UNIQUE KEY `eSsn` (`eSsn`),
   KEY `supID` (`supID`),
   KEY `departmentID` (`departmentID`),
   CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`supID`) REFERENCES `Employee` (`employeeID`),
   CONSTRAINT `Employee_ibfk_2` FOREIGN KEY (`departmentID`) REFERENCES `Department` (`departmentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +106,7 @@ CREATE TABLE `Employee` (
 
 LOCK TABLES `Employee` WRITE;
 /*!40000 ALTER TABLE `Employee` DISABLE KEYS */;
-INSERT INTO `Employee` VALUES ('1234567890','f','l','123456789','0023-12-13','superUser',NULL,'m','r@example.com','1234 Some St',NULL,NULL);
+INSERT INTO `Employee` VALUES (1,'Test','Lastname','123456789','2010-10-21','superUser','fullTime','m','r@example.com','1234 Some St',1,NULL),(2,'John','Smith','234785567','2010-10-21','zooKeeper','fullTime','m','jsmith@example.com','12345 Some street',2,NULL);
 /*!40000 ALTER TABLE `Employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,11 +118,11 @@ DROP TABLE IF EXISTS `EquipmentAndSupplies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `EquipmentAndSupplies` (
-  `ESID` varchar(10) NOT NULL,
+  `ESID` int(11) NOT NULL AUTO_INCREMENT,
   `ESName` varchar(999) DEFAULT NULL,
   `EStype` enum('small-tools','large-tools','human-food-meat','vehicle','human-food-vegtable','animal-food-meat','animal-food-vegtable') DEFAULT NULL,
   `ESQuantity` int(11) DEFAULT NULL,
-  `department` varchar(10) DEFAULT NULL,
+  `department` int(11) DEFAULT NULL,
   PRIMARY KEY (`ESID`),
   KEY `department` (`department`),
   CONSTRAINT `EquipmentAndSupplies_ibfk_1` FOREIGN KEY (`department`) REFERENCES `Department` (`departmentID`)
@@ -145,7 +146,7 @@ DROP TABLE IF EXISTS `GrossVendorSales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `GrossVendorSales` (
-  `ID` varchar(10) NOT NULL,
+  `ID` int(11) NOT NULL,
   `Day` date NOT NULL,
   `saleAmount` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`ID`,`Day`),
@@ -170,7 +171,7 @@ DROP TABLE IF EXISTS `Habitats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Habitats` (
-  `HabitatID` varchar(10) NOT NULL,
+  `HabitatID` int(11) NOT NULL AUTO_INCREMENT,
   `Htype` enum('cage','aquarium','fence') DEFAULT NULL,
   `Hname` varchar(999) DEFAULT NULL,
   `status` enum('occupied','empty','undergoing-maintenance') DEFAULT NULL,
@@ -195,8 +196,8 @@ DROP TABLE IF EXISTS `Manages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Manages` (
-  `eID` varchar(10) NOT NULL,
-  `dID` varchar(10) NOT NULL,
+  `eID` int(11) NOT NULL,
+  `dID` int(11) NOT NULL,
   `startDATE` date NOT NULL,
   `endDate` date DEFAULT NULL,
   PRIMARY KEY (`eID`,`dID`,`startDATE`),
@@ -223,7 +224,7 @@ DROP TABLE IF EXISTS `MemberVisits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MemberVisits` (
-  `MID` varchar(10) NOT NULL,
+  `MID` int(11) NOT NULL,
   `TimeStamp` datetime NOT NULL,
   `numOfPeople` int(11) DEFAULT NULL,
   PRIMARY KEY (`MID`,`TimeStamp`),
@@ -248,7 +249,7 @@ DROP TABLE IF EXISTS `Members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Members` (
-  `memberID` varchar(10) NOT NULL,
+  `memberID` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(99) DEFAULT NULL,
   `lastname` varchar(99) DEFAULT NULL,
   `memberdob` date DEFAULT NULL,
@@ -277,12 +278,12 @@ DROP TABLE IF EXISTS `MembershipSales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MembershipSales` (
-  `membershipOrderNum` int(11) NOT NULL,
+  `membershipOrderNum` int(11) NOT NULL AUTO_INCREMENT,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `memberType` enum('family','senior','single') DEFAULT NULL,
   `membershipPrice` decimal(9,2) DEFAULT NULL,
-  `memberID` varchar(10) DEFAULT NULL,
+  `memberID` int(11) DEFAULT NULL,
   PRIMARY KEY (`membershipOrderNum`),
   KEY `memberID` (`memberID`),
   CONSTRAINT `MembershipSales_ibfk_1` FOREIGN KEY (`memberID`) REFERENCES `Members` (`memberID`)
@@ -306,7 +307,7 @@ DROP TABLE IF EXISTS `Tickets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tickets` (
-  `serialNumber` int(11) NOT NULL,
+  `serialNumber` int(11) NOT NULL AUTO_INCREMENT,
   `ticketType` enum('student','senior','child','adult') DEFAULT NULL,
   `ticketPrice` decimal(5,2) DEFAULT NULL,
   `date` date DEFAULT NULL,
@@ -333,8 +334,8 @@ DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
   `username` varchar(60) NOT NULL,
   `password` varchar(500) DEFAULT NULL,
-  `employeeID` varchar(10) DEFAULT NULL,
-  `memberID` varchar(10) DEFAULT NULL,
+  `employeeID` int(11) DEFAULT NULL,
+  `memberID` int(11) DEFAULT NULL,
   PRIMARY KEY (`username`),
   KEY `employeeID` (`employeeID`),
   KEY `memberID` (`memberID`),
@@ -349,7 +350,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('e','$2y$10$6hOC4I9W/UuCODf9wZr/rue5XRnFyPnGEVM8WJ2rJCXXtzTxFyUcC','1234567890',NULL);
+INSERT INTO `Users` VALUES ('e','$2y$10$olMoy9TwvJsqVihZ3omvHeKiS/iiwlpupee67Lew5rcedY70Z4t4C',1,NULL),('jsmith','$2y$10$abA8LaQWI4VWcv5u44dDYuNnRStwiv8WQx3aM5ufsExKm9BVSqWti',2,NULL);
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,10 +362,10 @@ DROP TABLE IF EXISTS `Vendor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Vendor` (
-  `vendorID` varchar(10) NOT NULL,
+  `vendorID` int(11) NOT NULL AUTO_INCREMENT,
   `vendorType` enum('food','retail','ride') DEFAULT NULL,
   `Vname` varchar(999) DEFAULT NULL,
-  `department` varchar(10) DEFAULT NULL,
+  `department` int(11) DEFAULT NULL,
   `capacity` int(11) DEFAULT NULL,
   PRIMARY KEY (`vendorID`),
   KEY `department` (`department`),
@@ -390,4 +391,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-24  6:04:20
+-- Dump completed on 2017-04-01 18:36:01
