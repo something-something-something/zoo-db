@@ -10,4 +10,5 @@
 ?>
 you are logged in now. See <a href="employeelist.php">the employee list</a> if you are a superUser<br>
 See <a href="createuserform.php">Create a User</a> if you are a superUser<br>
-See <a href="createdepartmentform.php">Create a Department</a> if you are a superUser
+See <a href="createdepartmentform.php">Create a Department</a> if you are a superUser<br>
+See <a href="createanimalform.php">Create a Animal</a> if you are a superUser
