@@ -58,7 +58,7 @@ CREATE TABLE `Department` (
   `departmentID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`departmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `Department` (
 
 LOCK TABLES `Department` WRITE;
 /*!40000 ALTER TABLE `Department` DISABLE KEYS */;
-INSERT INTO `Department` VALUES (1,'Insect Department'),(2,'Reptile Department');
+INSERT INTO `Department` VALUES (1,'Insect Department');
 /*!40000 ALTER TABLE `Department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +97,7 @@ CREATE TABLE `Employee` (
   KEY `departmentID` (`departmentID`),
   CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`supID`) REFERENCES `Employee` (`employeeID`),
   CONSTRAINT `Employee_ibfk_2` FOREIGN KEY (`departmentID`) REFERENCES `Department` (`departmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,8 +106,35 @@ CREATE TABLE `Employee` (
 
 LOCK TABLES `Employee` WRITE;
 /*!40000 ALTER TABLE `Employee` DISABLE KEYS */;
-INSERT INTO `Employee` VALUES (1,'Test','Lastname','123456789','2010-10-21','superUser','fullTime','m','r@example.com','1234 Some St',1,NULL),(2,'John','Smith','234785567','2010-10-21','zooKeeper','fullTime','m','jsmith@example.com','12345 Some street',2,NULL);
+INSERT INTO `Employee` VALUES (1,'q','w','123456789','2010-10-21','superUser','fullTime','m','r@example.com','1234 Some St',1,NULL);
 /*!40000 ALTER TABLE `Employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `EmployeeUsers`
+--
+
+DROP TABLE IF EXISTS `EmployeeUsers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EmployeeUsers` (
+  `username` varchar(60) NOT NULL,
+  `password` varchar(500) DEFAULT NULL,
+  `employeeID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  KEY `employeeID` (`employeeID`),
+  CONSTRAINT `EmployeeUsers_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `Employee` (`employeeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `EmployeeUsers`
+--
+
+LOCK TABLES `EmployeeUsers` WRITE;
+/*!40000 ALTER TABLE `EmployeeUsers` DISABLE KEYS */;
+INSERT INTO `EmployeeUsers` VALUES ('e','$2y$10$d.AD3ShQpuFHP1heJWgfve0qoI4xm/3wYwFhU/z6xZ7Pu9CeH04H2',1);
+/*!40000 ALTER TABLE `EmployeeUsers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -217,6 +244,33 @@ LOCK TABLES `Manages` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `MemberUsers`
+--
+
+DROP TABLE IF EXISTS `MemberUsers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MemberUsers` (
+  `username` varchar(60) NOT NULL,
+  `password` varchar(500) DEFAULT NULL,
+  `memberID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  KEY `memberID` (`memberID`),
+  CONSTRAINT `MemberUsers_ibfk_1` FOREIGN KEY (`memberID`) REFERENCES `Members` (`memberID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MemberUsers`
+--
+
+LOCK TABLES `MemberUsers` WRITE;
+/*!40000 ALTER TABLE `MemberUsers` DISABLE KEYS */;
+INSERT INTO `MemberUsers` VALUES ('jDoe','$2y$10$TGNb9olCV57xpWjj9ydbWOssZs7jrw.yMPYE8Vj7oCscgTMovozUu',1),('jDoe2','$2y$10$K0H.iq.X4hNfKJwPtCIJGeuviGzNLG0PdnUQc8IIGxYe7iLD.dPz2',2);
+/*!40000 ALTER TABLE `MemberUsers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `MemberVisits`
 --
 
@@ -250,15 +304,15 @@ DROP TABLE IF EXISTS `Members`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Members` (
   `memberID` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(99) DEFAULT NULL,
-  `lastname` varchar(99) DEFAULT NULL,
-  `memberdob` date DEFAULT NULL,
+  `firstName` varchar(99) DEFAULT NULL,
+  `lastName` varchar(99) DEFAULT NULL,
+  `memberDOB` date DEFAULT NULL,
+  `memberSex` enum('m','f') DEFAULT NULL,
+  `memberEmail` varchar(99) DEFAULT NULL,
   `memberAddress` text,
   `memberPhone` varchar(20) DEFAULT NULL,
-  `memberEmail` varchar(99) DEFAULT NULL,
-  `memberSex` enum('m','f') DEFAULT NULL,
   PRIMARY KEY (`memberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,6 +321,7 @@ CREATE TABLE `Members` (
 
 LOCK TABLES `Members` WRITE;
 /*!40000 ALTER TABLE `Members` DISABLE KEYS */;
+INSERT INTO `Members` VALUES (1,'Jane','Doe','2010-10-21','f','jdoe@example.com','12345 Some street','111-111-1111'),(2,'Jane','Doe','2010-10-21','f','jdoe@example.com','12345 Some street','111-111-1111');
 /*!40000 ALTER TABLE `Members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,36 +380,6 @@ LOCK TABLES `Tickets` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Users`
---
-
-DROP TABLE IF EXISTS `Users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Users` (
-  `username` varchar(60) NOT NULL,
-  `password` varchar(500) DEFAULT NULL,
-  `employeeID` int(11) DEFAULT NULL,
-  `memberID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`username`),
-  KEY `employeeID` (`employeeID`),
-  KEY `memberID` (`memberID`),
-  CONSTRAINT `Users_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `Employee` (`employeeID`),
-  CONSTRAINT `Users_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `Members` (`memberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Users`
---
-
-LOCK TABLES `Users` WRITE;
-/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('e','$2y$10$olMoy9TwvJsqVihZ3omvHeKiS/iiwlpupee67Lew5rcedY70Z4t4C',1,NULL),('jsmith','$2y$10$abA8LaQWI4VWcv5u44dDYuNnRStwiv8WQx3aM5ufsExKm9BVSqWti',2,NULL);
-/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Vendor`
 --
 
@@ -391,4 +416,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-01 18:36:01
+-- Dump completed on 2017-04-02 20:12:37
