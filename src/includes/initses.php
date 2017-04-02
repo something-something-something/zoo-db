@@ -10,4 +10,7 @@ if(!isset($_SESSION['CSRF'])){
 if(!isset($_SESSION['EMPLID'])){
 	$_SESSION['EMPLID']=NULL;
 }
+if(!isset($_SESSION['MEMID'])){
+	$_SESSION['MEMID']=NULL;
+}
 ?>
