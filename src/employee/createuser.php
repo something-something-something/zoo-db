@@ -20,7 +20,13 @@
 		$_POST['sex'],
 		$_POST['email'],
 		$_POST['address'])){
-		$dID=NULL;
+		if($_POST['dept']==='none'){
+			$dID=NULL;
+		}
+		else{
+			$dID=$_POST['dept'];
+		}
+		
 		$sID=NULL;
 		if(EmplUser\add($db,
 		$_POST['username'],

@@ -4,6 +4,7 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
+	require_once('../func/dept.php');
 
 ?>
 
@@ -25,6 +26,8 @@
 		<option value="partTime">part time</option>
 		<option value="volunteer">volunteer</option>
 	</select>
+	<br>
+	<?php echo Dept\selectDeptHTML($db) ?>
 	<br>
 	<textarea name="address">12345 Some street</textarea><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
