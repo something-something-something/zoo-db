@@ -12,11 +12,11 @@ namespace EmplUser{
 		returns true on sucsess and false on faliure.
 		*/
 
-		$db->query('lock tables Users write, Employee write');
+		$db->query('lock tables EmployeeUsers write, Employee write');
 
 		/* checks if username is already used exists 
 		*/
-		$statment=$db->prepare("select username from Users where username=?");
+		$statment=$db->prepare("select username from EmployeeUsers where username=?");
 		if(!$statment){
 			$db->query("unlock tables");
 			return false;
@@ -47,14 +47,13 @@ namespace EmplUser{
 		}
 		/*insert employee into user table  
 		*/
-		$statmentUT=$db->prepare("insert into Users values(?,?,LAST_INSERT_ID(),?)");
+		$statmentUT=$db->prepare("insert into EmployeeUsers values(?,?,LAST_INSERT_ID())");
 		if(!$statmentUT){
 			$db->query("unlock tables");
 			return false;
 		}
 		/* Seems php does not like directly putting NULLs into bind_param() */
-		$memID=NULL;
-		$statmentUT->bind_param('sss',$username,password_hash($password,PASSWORD_DEFAULT),$memID);
+		$statmentUT->bind_param('ss',$username,password_hash($password,PASSWORD_DEFAULT));
 		if(!$statmentUT->execute()){
 			$db->query("unlock tables");
 			return false;
@@ -64,7 +63,7 @@ namespace EmplUser{
 	}
 	/* gets a user name from the employee id returns the username or false on faliure*/
 	function getUserName($db,$id){
-		$statment->$db->prepare("select username from Users where employeeID=?");
+		$statment->$db->prepare("select username from EmployeeUsers where employeeID=?");
 		if(!$statment){
 			return false;
 		}
@@ -82,7 +81,7 @@ namespace EmplUser{
 	}
 	/*validates the password matches the hash for a user*/
 	function validatePassword($db,$username,$password){
-		$statment=$db->prepare("select password from Users where username=?");
+		$statment=$db->prepare("select password from EmployeeUsers where username=?");
 		$statment->bind_param('s',$username);
 		if(!$statment->execute()){
 			return false;
@@ -95,7 +94,7 @@ namespace EmplUser{
 	}
 	/*gets the id from anemplyee username returns false on faliure (might want to handle null employeeid's')*/
 	function getIDFromUserName($db,$username){
-		$statment=$db->prepare("select employeeID from Users where username=?");
+		$statment=$db->prepare("select employeeID from EmployeeUsers where username=?");
 		$statment->bind_param('s',$username);
 		if(!$statment->execute()){
 			return false;

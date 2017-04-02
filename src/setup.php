@@ -44,7 +44,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		$stmtCreateEqu=$mysqlidb->prepare("CREATE TABLE EquipmentAndSupplies(ESID INT AUTO_INCREMENT,ESName VARCHAR(999),EStype ENUM('small-tools','large-tools','human-food-meat','vehicle','human-food-vegtable','animal-food-meat','animal-food-vegtable'),ESQuantity INT,department INT,PRIMARY KEY(ESID),FOREIGN KEY(department) REFERENCES Department(departmentID))");
 
 		
-		$stmtCreateMem=$mysqlidb->prepare("CREATE TABLE Members(memberID INT AUTO_INCREMENT, firstname VARCHAR(99),lastname VARCHAR(99),memberdob DATE,memberAddress TEXT,memberPhone VARCHAR(20),memberEmail varchar(99),memberSex ENUM('m','f'),PRIMARY KEY(memberID))");
+		$stmtCreateMem=$mysqlidb->prepare("CREATE TABLE Members(memberID INT AUTO_INCREMENT, firstName VARCHAR(99),lastName VARCHAR(99),memberDOB DATE,memberSex ENUM('m','f'),memberEmail varchar(99),memberAddress TEXT,memberPhone VARCHAR(20),PRIMARY KEY(memberID))");
 
 		
 		$stmtCreateMemSal=$mysqlidb->prepare("CREATE TABLE MembershipSales(membershipOrderNum INT AUTO_INCREMENT,startDate DATE,endDate DATE,memberType ENUM('family','senior','single'),membershipPrice DECIMAL(9,2),memberID INT, PRIMARY KEY(membershipOrderNum),FOREIGN KEY(memberID) REFERENCES Members(memberID))");
@@ -56,7 +56,9 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		$stmtCreateMemVis=$mysqlidb->prepare("CREATE TABLE MemberVisits(MID INT ,TimeStamp DATETIME,numOfPeople INT, PRIMARY KEY(MID,TimeStamp), FOREIGN KEY(MID) REFERENCES Members(memberID) )");
 
 
-		$stmtCreateUse=$mysqlidb->prepare("CREATE TABLE Users(username VARCHAR(60),password VARCHAR(500),employeeID INT,memberID INT,PRIMARY KEY(username),FOREIGN KEY(employeeID) REFERENCES Employee(employeeID),FOREIGN KEY(memberID) REFERENCES Members(memberID))");
+		$stmtCreateEmpUse=$mysqlidb->prepare("CREATE TABLE EmployeeUsers(username VARCHAR(60),password VARCHAR(500),employeeID INT,PRIMARY KEY(username),FOREIGN KEY(employeeID) REFERENCES Employee(employeeID))");
+
+		$stmtCreateMemUse=$mysqlidb->prepare("CREATE TABLE MemberUsers(username VARCHAR(60),password VARCHAR(500),memberID INT,PRIMARY KEY(username),FOREIGN KEY(memberID) REFERENCES Members(memberID))");
 		
 		
 		$stmtCreateMan=$mysqlidb->prepare("CREATE TABLE Manages(eID INT,dID INT,startDATE DATE,endDate DATE,PRIMARY KEY(eID,dID,startDate),FOREIGN KEY(eID) REFERENCES Employee(employeeID),FOREIGN KEY(dID) REFERENCES Department(departmentID))");
@@ -95,8 +97,11 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		if(!$stmtCreateMemVis->execute()){
 			die('Failed to Create MemberVisits table');
 		}
-		if(!$stmtCreateUse->execute()){
-			die('Failed to Create Users table');
+		if(!$stmtCreateEmpUse->execute()){
+			die('Failed to Create Employee Users table');
+		}
+		if(!$stmtCreateMemUse->execute()){
+			die('Failed to Create Member Users table');
 		}
 		if(!$stmtCreateMan->execute()){
 			die('Failed to create Manages table');
