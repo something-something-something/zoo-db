@@ -105,5 +105,9 @@ the employee created here will be a superUser
 delete `src/settings/files/db.json`
 run `drop schema somedbname` in mysql
 
+## accessing sql on docker (for debuging)
+
+run `sudo sh d-enterdb` or `docker-compose exec db mysql -u g20 -pp adb`
+
  ## reseting on Docker
 run `sudo sh d-reset` or `docker-compose rm -vf` (might need to prefix with `sudo` )
