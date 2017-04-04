@@ -17,5 +17,5 @@ while($statment->fetch()){
 	//need to escape html charchters will do later
 	echo '<a href="edituserform.php?id='.$id.'">'.$id.'</a> '.$fname.' '.$lname.' '.$username.'<br>';
 }
-
+$statment->close();
 ?>

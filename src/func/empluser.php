@@ -29,9 +29,11 @@ namespace EmplUser{
 		$statment->bind_result($alreadyusedname);
 		/*if there are any results then the username is already in use*/
 		if($statment->fetch()){
+			$statment->close();
 			$db->query("unlock tables");
 			return false;
 		}
+		$statment->close();
 		/*insert employee into employee table
 		*/
 		$statmentET=$db->prepare("insert into Employee values(DEFAULT,?,?,?,?,?,?,?,?,?,?,?)");
@@ -42,9 +44,11 @@ namespace EmplUser{
 		$statmentET->bind_param('sssssssssss',$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID);
 		
 		if(!$statmentET->execute()){
+			$statmentET->close();
 			$db->query("unlock tables");
 			return false;
 		}
+		$statmentET->close();
 		/*insert employee into user table  
 		*/
 		$statmentUT=$db->prepare("insert into EmployeeUsers values(?,?,LAST_INSERT_ID())");
@@ -52,12 +56,13 @@ namespace EmplUser{
 			$db->query("unlock tables");
 			return false;
 		}
-		/* Seems php does not like directly putting NULLs into bind_param() */
 		$statmentUT->bind_param('ss',$username,password_hash($password,PASSWORD_DEFAULT));
 		if(!$statmentUT->execute()){
+			$statmentUT->close();
 			$db->query("unlock tables");
 			return false;
 		}
+		$statmentUT->close();
 		$db->query("unlock tables");
 		return true;
 	}
@@ -69,13 +74,16 @@ namespace EmplUser{
 		}
 		$statment->bind_param('i',$id);
 		if(!$statment->execute()){
+			$statment->close();
 			return false;
 		}
 		$statment->bind_result($uname);
 		if(!$statment->fetch()){
+			$statment->close();
 			return false;
 		}
 		else{
+			$statment->close();
 			return $uname;
 		}
 	}
@@ -84,12 +92,15 @@ namespace EmplUser{
 		$statment=$db->prepare("select password from EmployeeUsers where username=?");
 		$statment->bind_param('s',$username);
 		if(!$statment->execute()){
+			$statment->close();
 			return false;
 		}
 		$statment->bind_result($hpass);
 		if(!$statment->fetch()){
+			$statment->close();
 			return false;
 		}
+		$statment->close();
 		return password_verify($password,$hpass);
 	}
 	/*gets the id from anemplyee username returns false on faliure (might want to handle null employeeid's')*/
@@ -97,12 +108,15 @@ namespace EmplUser{
 		$statment=$db->prepare("select employeeID from EmployeeUsers where username=?");
 		$statment->bind_param('s',$username);
 		if(!$statment->execute()){
+			$statment->close();
 			return false;
 		}
 		$statment->bind_result($id);
 		if(!$statment->fetch()){
+			$statment->close();
 			return false;
 		}
+		$statment->close();
 		return $id;
 	}
 	/*returns true if logedin or false if not loggedin*/
@@ -126,10 +140,12 @@ namespace EmplUser{
 		$statment=$db->prepare("select position from Employee where employeeID=?");
 		$statment->bind_param('i',$_SESSION['EMPLID']);
 		if(!$statment->execute()){
+			$statment->close();
 			die();
 		}
 		$statment->bind_result($userposition);
 		if(!$statment->fetch()){
+			$statment->close();
 			die();
 		}
 
@@ -140,9 +156,11 @@ namespace EmplUser{
 			}
 		}
 		if(!$hasApprovedPosition){
+			$statment->close();
 			header('Location: /loginform.php');
 			die();
 		}
+		$statment->close();
 	}
 	function selectPositionHTML($posSelected='superUser',$name='pos'){
 		$positionSelectHTML='<select required name="'.$name.'">';

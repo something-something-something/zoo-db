@@ -32,7 +32,7 @@
 		echo 'updated user';
 	}
 	else{
-		echo $db->error;
 		echo 'Failed to update user';
 	}
+	$statment->close();
 ?>
