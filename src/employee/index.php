@@ -16,3 +16,4 @@ See <a href="createhabform.php">Create a Habitat</a> if you are a superUser<br>
 See <a href="createvendorform.php">Create a Vendor</a> if you are a superUser<br>
 See <a href="animallist.php">the animal list</a> if you are a superUser<br>
 See <a href="deptlist.php">the Department list</a> if you are a superUser<br>
+See <a href="hablist.php">the Habitat list</a> if you are a superUser<br>
