@@ -16,9 +16,11 @@ namespace MemUser{
 		$statment->bind_result($alreadyusedname);
 		/*if there are any results then the username is already in use*/
 		if($statment->fetch()){
+			$statment->close();
 			$db->query("unlock tables");
 			return false;
 		}
+		$statment->close();
 		/*insert member into members table
 		*/
 		$statmentMT=$db->prepare("insert into Members values(DEFAULT,?,?,?,?,?,?,?)");
@@ -32,6 +34,7 @@ namespace MemUser{
 			$db->query("unlock tables");
 			return false;
 		}
+		$statmentMT->close();
 		/*insert member into memberuser table  
 		*/
 		$statmentUT=$db->prepare("insert into MemberUsers values(?,?,LAST_INSERT_ID())");
@@ -44,6 +47,7 @@ namespace MemUser{
 			$db->query("unlock tables");
 			return false;
 		}
+		$statmentUT->close();
 		$db->query("unlock tables");
 		return true;
 	}
@@ -55,8 +59,10 @@ namespace MemUser{
 		}
 		$statment->bind_result($hpass);
 		if(!$statment->fetch()){
+			$statment->close();
 			return false;
 		}
+		$statment->close();
 		return password_verify($password,$hpass);
 	}
 	function getIDFromUserName($db,$username){
@@ -67,8 +73,10 @@ namespace MemUser{
 		}
 		$statment->bind_result($id);
 		if(!$statment->fetch()){
+			$statment->close();
 			return false;
 		}
+		$statment->close();
 		return $id;
 	}
 	function loggedIn(){

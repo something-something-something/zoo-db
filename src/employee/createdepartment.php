@@ -19,5 +19,5 @@ if($statment->execute()){
 else{
 	echo 'could not add Department';
 }
-
+$statment->close();
 ?>

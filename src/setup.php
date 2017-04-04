@@ -24,7 +24,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		if(!$statmentDeleteTables->execute()){
 			die('failed to delete old databases');
 		}
-
+		$statmentDeleteTables->close();
 		/*prepare create table statments (maybe should rewrite as an array?)*/
 		$stmtCreateDep=$mysqlidb->prepare("CREATE TABLE Department (departmentID INT AUTO_INCREMENT,name VARCHAR(100),PRIMARY KEY(departmentID))");
 		
@@ -70,45 +70,60 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		if(!$stmtCreateDep->execute()){
 			die('Failed to create  Department table');
 		}
+		$stmtCreateDep->close();
 		if(!$stmtCreateEmp->execute()){
 			die('Failed to create  Employee table');
 		}
+		$stmtCreateEmp->close();
 		if(!$stmtCreateHab->execute()){
 			die('failed to create Habitiats table');
 		}
+		$stmtCreateHab->close();
 		if(!$stmtCreateAni->execute()){
 			die('Failed to create Animals table');
 		}
+		$stmtCreateAni->close();
 		if(!$stmtCreateVen->execute()){
 			die('Failed to Create Vemdor Table');
 		}
+		$stmtCreateVen->close();
 		if(!$stmtCreateEqu->execute()){
 			die('Failed to Create EquipmentAndSupplies table');
 		}
+		$stmtCreateEqu->close();
 		if(!$stmtCreateMem->execute()){
 			die('Failed to Create Members table');
 		}
+		$stmtCreateMem->close();
 		if(!$stmtCreateMemSal->execute()){
 			die('Failed to Create MembershipSales table');
 		}
+		$stmtCreateMemSal->close();
 		if(!$stmtCreateTic->execute()){
 			die('Failed to Create Tickets table');
 		}
+		$stmtCreateTic->close();
 		if(!$stmtCreateMemVis->execute()){
 			die('Failed to Create MemberVisits table');
 		}
+		$stmtCreateMemVis->close();
 		if(!$stmtCreateEmpUse->execute()){
 			die('Failed to Create Employee Users table');
 		}
+		$stmtCreateEmpUse->close();
 		if(!$stmtCreateMemUse->execute()){
 			die('Failed to Create Member Users table');
 		}
+		$stmtCreateMemUse->close();
 		if(!$stmtCreateMan->execute()){
 			die('Failed to create Manages table');
 		}
+		$stmtCreateMan->close();
 		if(!$stmtCreateGros->execute()){
 			die('Failed to create GrossVendorSales table');
 		}
+		$stmtCreateGros->close();
+
 
 		/*adds employee as super user*/
 		if(EmplUser\add($mysqlidb,$_POST['emplusername'],$_POST['emplpass'],$_POST['fname'],$_POST['lname'],$_POST['ssn'],$_POST['dob'],"superUser",null,$_POST['sex'],$_POST['email'],$_POST['addr'],null,null)){
