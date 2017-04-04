@@ -8,7 +8,8 @@
 <?php
 	EmplUser\restrictPageToLoggedIn();
 ?>
-you are logged in now. See <a href="employeelist.php">the employee list</a> if you are a superUser<br>
+you are logged in now. <a href="/loginform.php">Logout</a><br>
+See <a href="employeelist.php">the employee list</a> if you are a superUser<br>
 See <a href="createuserform.php">Create a User</a> if you are a superUser<br>
 See <a href="createdepartmentform.php">Create a Department</a> if you are a superUser<br>
 See <a href="createanimalform.php">Create a Animal</a> if you are a superUser<br>
@@ -17,3 +18,4 @@ See <a href="createvendorform.php">Create a Vendor</a> if you are a superUser<br
 See <a href="animallist.php">the animal list</a> if you are a superUser<br>
 See <a href="deptlist.php">the Department list</a> if you are a superUser<br>
 See <a href="hablist.php">the Habitat list</a> if you are a superUser<br>
+See <a href="deptanimallist.php">the animal list</a> if you are a superUser,departmentManager, or zooKeeper<br>
