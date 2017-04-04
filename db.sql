@@ -58,7 +58,7 @@ CREATE TABLE `Department` (
   `departmentID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`departmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,6 @@ CREATE TABLE `Department` (
 
 LOCK TABLES `Department` WRITE;
 /*!40000 ALTER TABLE `Department` DISABLE KEYS */;
-INSERT INTO `Department` VALUES (1,'Insect Department');
 /*!40000 ALTER TABLE `Department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +105,7 @@ CREATE TABLE `Employee` (
 
 LOCK TABLES `Employee` WRITE;
 /*!40000 ALTER TABLE `Employee` DISABLE KEYS */;
-INSERT INTO `Employee` VALUES (1,'q','w','123456789','2010-10-21','superUser','fullTime','m','r@example.com','1234 Some St',1,NULL);
+INSERT INTO `Employee` VALUES (1,'q','w','123456789','2010-10-21','superUser',NULL,'m','r@example.com','1234 Some St',NULL,NULL);
 /*!40000 ALTER TABLE `Employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +132,7 @@ CREATE TABLE `EmployeeUsers` (
 
 LOCK TABLES `EmployeeUsers` WRITE;
 /*!40000 ALTER TABLE `EmployeeUsers` DISABLE KEYS */;
-INSERT INTO `EmployeeUsers` VALUES ('e','$2y$10$d.AD3ShQpuFHP1heJWgfve0qoI4xm/3wYwFhU/z6xZ7Pu9CeH04H2',1);
+INSERT INTO `EmployeeUsers` VALUES ('e','$2y$10$c82wikzfSzYUEoKcvEaGPuIs3xu5pUqNfm.QKMAf9E6SYNudh6Ucy',1);
 /*!40000 ALTER TABLE `EmployeeUsers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,9 +200,9 @@ CREATE TABLE `Habitats` (
   `HabitatID` int(11) NOT NULL AUTO_INCREMENT,
   `Htype` enum('cage','aquarium','fence') DEFAULT NULL,
   `Hname` varchar(999) DEFAULT NULL,
-  `status` enum('occupied','empty','undergoing-maintenance') DEFAULT NULL,
+  `status` enum('okay','needs-maintenance','undergoing-maintenance') DEFAULT NULL,
   PRIMARY KEY (`HabitatID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,6 +211,7 @@ CREATE TABLE `Habitats` (
 
 LOCK TABLES `Habitats` WRITE;
 /*!40000 ALTER TABLE `Habitats` DISABLE KEYS */;
+INSERT INTO `Habitats` VALUES (1,'cage','Some Place','okay'),(2,'fence','Some Place','undergoing-maintenance'),(3,'aquarium','Some Place','needs-maintenance');
 /*!40000 ALTER TABLE `Habitats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +266,6 @@ CREATE TABLE `MemberUsers` (
 
 LOCK TABLES `MemberUsers` WRITE;
 /*!40000 ALTER TABLE `MemberUsers` DISABLE KEYS */;
-INSERT INTO `MemberUsers` VALUES ('jDoe','$2y$10$TGNb9olCV57xpWjj9ydbWOssZs7jrw.yMPYE8Vj7oCscgTMovozUu',1),('jDoe2','$2y$10$K0H.iq.X4hNfKJwPtCIJGeuviGzNLG0PdnUQc8IIGxYe7iLD.dPz2',2);
 /*!40000 ALTER TABLE `MemberUsers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +311,7 @@ CREATE TABLE `Members` (
   `memberAddress` text,
   `memberPhone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`memberID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +320,6 @@ CREATE TABLE `Members` (
 
 LOCK TABLES `Members` WRITE;
 /*!40000 ALTER TABLE `Members` DISABLE KEYS */;
-INSERT INTO `Members` VALUES (1,'Jane','Doe','2010-10-21','f','jdoe@example.com','12345 Some street','111-111-1111'),(2,'Jane','Doe','2010-10-21','f','jdoe@example.com','12345 Some street','111-111-1111');
 /*!40000 ALTER TABLE `Members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -416,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-02 20:12:37
+-- Dump completed on 2017-04-04 20:28:42

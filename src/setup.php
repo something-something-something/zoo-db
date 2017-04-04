@@ -32,7 +32,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		$stmtCreateEmp=$mysqlidb->prepare("CREATE TABLE Employee(employeeID INT AUTO_INCREMENT,firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper'),employeeType ENUM('fullTime','partTime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID INT,supID INT,PRIMARY KEY(employeeID),UNIQUE(Essn), FOREIGN KEY(supID) REFERENCES Employee(employeeID), FOREIGN KEY(departmentID) REFERENCES Department(departmentID))");
 		
 		
-		$stmtCreateHab=$mysqlidb->prepare("CREATE TABLE Habitats(HabitatID INT AUTO_INCREMENT,Htype ENUM('cage','aquarium','fence'),Hname VARCHAR(999),status ENUM('occupied','empty','undergoing-maintenance'),PRIMARY KEY(habitatID))");
+		$stmtCreateHab=$mysqlidb->prepare("CREATE TABLE Habitats(HabitatID INT AUTO_INCREMENT,Htype ENUM('cage','aquarium','fence'),Hname VARCHAR(999),status ENUM('okay','needs-maintenance','undergoing-maintenance'),PRIMARY KEY(habitatID))");
 
 		
 		$stmtCreateAni=$mysqlidb->prepare("CREATE TABLE Animals(animalID INT AUTO_INCREMENT,Aname VARCHAR(99),taxonomy varchar(99),animalDOB DATE,habitatID INT,sex ENUM('m','f'),departmentID INT,PRIMARY KEY(animalID),FOREIGN KEY(departmentID) REFERENCES Department(departmentID),FOREIGN KEY(habitatID) REFERENCES Habitats(habitatID))");
