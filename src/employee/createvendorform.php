@@ -14,7 +14,6 @@
   		<option value="ride">Ride</option>
 	</select><br>
 	Name: <input type="text" value="" name="name"><br>
-	DepartmentID: <input type="number" name="dept"><br>
 	Capacity: <input type="number" value="" name="capacity"><br>
 	<?php echo Dept\selectDeptHTML($db); ?><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
