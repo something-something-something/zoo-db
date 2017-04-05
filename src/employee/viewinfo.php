@@ -3,13 +3,13 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
+	EmplUser\restrictPageToLoggedIn();
 ?>
 <h2> Current Information </h2>
 <?php
 // needs more error checking will do later
-$currentid = $_SESSION['EMPLID'];
-$statment=$db->prepare("select firstname, lastname, employeeDOB, position, employeeType, sex, employeeEmail, address, departmentID, supid from employee where employeeID =".$currentid);
-//$statment->bind_param();
+$statment=$db->prepare("select firstname, lastname, employeeDOB, position, employeeType, sex, employeeEmail, address, departmentID, supid from Employee where employeeID =?");
+$statment->bind_param('i',$_SESSION['EMPLID']);
 //echo $db->error;
 $statment->execute();
 $statment->bind_result($fname, $lname, $dob, $position, $employeeType, $sex, $email, $address, $departmentID, $supervisorID);
