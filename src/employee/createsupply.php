@@ -16,8 +16,8 @@ if($_POST['dept']==='none'){
 else{
 	echo $_POST['dept'];
 	$deptID=$_POST['dept'];
-}
-$statment=$db->prepare("insert into equipmentandsupplies values(DEFAULT,?,?,?,?)");
+}                                   
+$statment=$db->prepare("insert into EquipmentAndSupplies values(DEFAULT,?,?,?,?)");
 echo $db->error;
 $statment->bind_param('ssii',$_POST['name'],$_POST['type'],$_POST['quantity'],$deptID);
 if($statment->execute()){
