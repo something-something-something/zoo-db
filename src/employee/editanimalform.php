@@ -4,6 +4,7 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
+	require_once('../func/hab.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 ?>
 <?php
@@ -32,6 +33,7 @@ else{
 		<label>Female</label><input type="radio" checked name="sex" value="f"><br>';
 }
 $selectDeptHTML=Dept\selectDeptHTML($db,$dept);
+$selectHabHTML=Habitat\selectHabitatHTML($db,$hID);
 //TODO need to escape stuff
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
@@ -42,6 +44,8 @@ ID: $id<br>
 		dob:<input type="date" value="$dob" name="dob"><br>
 		<br>
 		$selectDeptHTML
+		<br>
+		$selectHabHTML
 		<br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 		<input type="hidden" value="$id" name="id">

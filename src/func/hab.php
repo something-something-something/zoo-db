@@ -26,5 +26,32 @@ namespace Habitat{
 		}
 		return $statusSelectHTML.'</select>';
 	}
+	function selectHabitatHTML($db,$habID=NULL,$name="habitat"){
+		$statment=$db->prepare("select HabitatID,Hname from Habitats");
+		$habSelectHTML='<select name="'.$name.'">';
+		$selectedoption=false;
+		if($statment->execute()){
+			$statment->bind_result($id,$hname);
+			while($statment->fetch()){
+				if($habID===$id){
+					$habSelectHTML.='<option selected value="'.$id.'">'.$hname.'</option>';
+					$selectedoption=true;
+				}
+				else{
+					$habSelectHTML.='<option value="'.$id.'">'.$hname.'</option>';
+				}
+			}
+		
+		}
+		if($selectedoption){
+			$habSelectHTML.='<option value="none">None</option>';
+		}
+		else{
+			$habSelectHTML.='<option  selected value="none">None</option>';
+		}
+		$statment->close();
+		return $habSelectHTML.'</select>';
+	}
+
 }
 ?>
