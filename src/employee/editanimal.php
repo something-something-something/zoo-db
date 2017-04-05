@@ -15,11 +15,18 @@
 	else{
 		$dept=$_POST['dept'];
 	}
-	$statment=$db->prepare("update Animals set Aname=?,taxonomy=?,animalDOB=?,sex=?,departmentID=? where animalID=?");
-	$statment->bind_param('ssssii',
+	if($_POST['habitat']==='none'){
+		$hab=NULL;
+	}
+	else{
+		$hab=$_POST['habitat'];
+	}
+	$statment=$db->prepare("update Animals set Aname=?,taxonomy=?,animalDOB=?,habitatID=?,sex=?,departmentID=? where animalID=?");
+	$statment->bind_param('sssisii',
 	$_POST['name'],
 	$_POST['tax'],
 	$_POST['dob'],
+	$hab,
 	$_POST['sex'],
 	$dept,
 	$_POST['id']);
