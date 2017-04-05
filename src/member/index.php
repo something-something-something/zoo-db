@@ -20,5 +20,5 @@ if($statment->fetch()){
 $statment->close();
 ?>
 <a href="memberprofile.php">Profile</a>
-<a href="membershipinfo.php">Membership</a>
+<a href="membershipinfo.php">Membership</a> <a href="editmemberform.php">Edit</a>
 you are logged in now.

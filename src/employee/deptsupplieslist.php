@@ -8,18 +8,17 @@
 <h2> Equipment And Supplies </h2>
 <?php
 //needs more error checking will do later
-$statment=$db->prepare("select esID, esname,estype, esquantity, department from EquipmentAndSupplies");
-//$statment->bind_param();
+$statment=$db->prepare("select esID, esname,estype, esquantity from EquipmentAndSupplies where department=(select departmentid from Employee where employeeid=?)");
+$statment->bind_param('i',$_SESSION['EMPLID']);
 echo $db->error;
 $statment->execute();
-$statment->bind_result($id,$name,$type,$quantity, $department);
+$statment->bind_result($id,$name,$type,$quantity);
 echo "<table>
   <tr>
     <th>ID</th>
     <th>Name</th>
     <th>Type</th>
     <th>Quantity</th>
-    <th>Department</th>
   </tr>";
 while($statment->fetch()){
 	//need to escape html charchters will do later
@@ -28,13 +27,9 @@ while($statment->fetch()){
 	<td>'.$name.'</td>
 	<td>'.$type.'</td>
 	<td>'.$quantity.'</td>
-	<td>'.$department.'</td>
 	</tr>';
 }
-echo"
-<form action=\"/employee/createsupplyform.php\">
-    <input type=\"submit\" value=\"Add\" />
-</form>
+echo"</table>
 <form action=\"/employee/index.php\">
     <input type=\"submit\" value=\"Go Back\" />
 </form>";
