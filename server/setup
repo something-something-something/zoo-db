@@ -83,7 +83,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker kill g20mysql
 ExecStartPre=-/usr/bin/docker rm g20mysql
 ExecStartPre=/usr/bin/docker pull mysql:5.7
-ExecStart=/usr/bin/docker run --network g20network -e MYSQL_ROOT_PASSWORD=hdshdResehvga5679 -e MYSQL_USER=g20 -e MYSQL_PASSWORD=ugisguYtRjkbTyt54Hhf -v g20dbfiles:/var/lib/mysql --name g20mysql mysql:5.7
+ExecStart=/usr/bin/docker run --network g20network -e MYSQL_ROOT_PASSWORD=hdshdResDfgyehklohy4wrtexggfhyt5432vga5679 -e MYSQL_USER=g20 -e MYSQL_PASSWORD=ugisguYtRjkbTyhjftyd524jhfzaet54Hhf -e MYSQL_DATABASE=zoodb -v g20dbfiles:/var/lib/mysql --name g20mysql mysql:5.7
 ExecStop=/usr/bin/docker stop g20mysql
 [Install]
 WantedBy=multi-user.target
@@ -147,4 +147,4 @@ systemctl enable g20nginx.service
 systemctl enable g20php.service
 systemctl enable g20mysql.service
 
-echo 'please restart'
+echo 'please delete me and restart'

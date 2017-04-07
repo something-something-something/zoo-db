@@ -1,0 +1,10 @@
+ssh root@159.203.145.99 systemctl stop g20php
+ssh root@159.203.145.99 systemctl stop g20mysql
+ssh root@159.203.145.99 docker kill g20php
+ssh root@159.203.145.99 docker kill g20mysql
+ssh root@159.203.145.99 docker rm g20php
+ssh root@159.203.145.99 docker rm g20mysql
+ssh root@159.203.145.99 docker volume rm g20settingsfiles
+ssh root@159.203.145.99 docker volume rm g20dbfiles
+ssh root@159.203.145.99 systemctl start g20mysql
+ssh root@159.203.145.99 systemctl start g20php
