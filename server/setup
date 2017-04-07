@@ -59,6 +59,7 @@ cat << 'phpdockerservice' > /etc/systemd/system/g20php.service
 Description=php container
 After=docker.service
 Wants=g20mysql.service
+After=g20mysql.service
 [Service]
 Restart=always
 ExecStartPre=-/usr/bin/docker kill g20php
@@ -94,6 +95,8 @@ cat << 'nginxdockerservice' > /etc/systemd/system/g20nginx.service
 Description=nginx container
 After=docker.service
 Requires=docker.service
+Wants=g20php.service
+After=g20php.service
 Wants=g20certbot.service
 After=g20certbot.service
 [Service]
