@@ -1,0 +1,150 @@
+#!/bin/bash
+ufw enable
+ufw allow in 80/tcp
+ufw allow in 443/tcp
+ufw allow ssh
+
+systemctl start docker
+systemctl enable docker
+
+docker network create g20network
+
+
+mkdir -p /var/g20files/
+mkdir -p /var/g20files/src/
+
+cat << 'PHPDOCKERFILE' > /var/g20files/php.Dockerfile
+FROM php:7.1-apache
+RUN docker-php-ext-install mysqli
+RUN mkdir -p /var/www/html/settings/files
+RUN chown -R www-data /var/www/html/settings/files
+PHPDOCKERFILE
+
+cat << 'nginxconf' > /var/g20files/nginx.conf
+user  nginx;
+worker_processes 1;
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+events{
+	worker_connections 512;
+}
+http {
+	include /etc/nginx/mime.types;
+	default_type  application/octet-stream;
+	log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+	                  '$status $body_bytes_sent "$http_referer" '
+	                  '"$http_user_agent" "$http_x_forwarded_for"';
+	
+	access_log  /var/log/nginx/access.log  main;
+
+	ssl_certificate /data/cert/live/group20-db.ekrebs.com/fullchain.pem;
+	ssl_certificate_key /data/cert/live/group20-db.ekrebs.com/privkey.pem;
+	sendfile        on;
+	#tcp_nopush     on;
+	keepalive_timeout  65;
+	#gzip  on;
+	server{
+		listen 80;
+		listen 443 ssl;
+		server_name localhost;
+		location / {
+			proxy_pass http://g20php/;
+		}
+	}
+}
+nginxconf
+
+cat << 'phpdockerservice' > /etc/systemd/system/g20php.service
+[Unit]
+Description=php container
+After=docker.service
+Wants=g20mysql.service
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker kill g20php
+ExecStartPre=-/usr/bin/docker rm g20php
+ExecStartPre=-/usr/bin/docker rmi g20php-image
+ExecStartPre=/usr/bin/docker pull php:7.1-apache
+ExecStartPre=/usr/bin/docker build --tag g20php-image -f /var/g20files/php.Dockerfile /var/g20files/
+ExecStart=/usr/bin/docker run --network g20network -v /var/g20files/src:/var/www/html/ -v g20settingsfiles:/var/www/html/settings/files --name g20php g20php-image
+ExecStop=/usr/bin/docker stop g20php
+[Install]
+WantedBy=multi-user.target
+phpdockerservice
+
+#note sets password in service file. Not ideal but should be fine for what we are doing
+
+cat << 'mysqldockerservice' > /etc/systemd/system/g20mysql.service
+[Unit]
+Description=mysql container
+After=docker.service
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker kill g20mysql
+ExecStartPre=-/usr/bin/docker rm g20mysql
+ExecStartPre=/usr/bin/docker pull mysql:5.7
+ExecStart=/usr/bin/docker run --network g20network -e MYSQL_ROOT_PASSWORD=hdshdResDfgyehklohy4wrtexggfhyt5432vga5679 -e MYSQL_USER=g20 -e MYSQL_PASSWORD=ugisguYtRjkbTyhjftyd524jhfzaet54Hhf -e MYSQL_DATABASE=zoodb -v g20dbfiles:/var/lib/mysql --name g20mysql mysql:5.7
+ExecStop=/usr/bin/docker stop g20mysql
+[Install]
+WantedBy=multi-user.target
+mysqldockerservice
+
+cat << 'nginxdockerservice' > /etc/systemd/system/g20nginx.service
+[Unit]
+Description=nginx container
+After=docker.service
+Requires=docker.service
+Wants=g20certbot.service
+After=g20certbot.service
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker kill g20nginx
+ExecStartPre=-/usr/bin/docker rm g20nginx
+ExecStartPre=/usr/bin/docker pull nginx:1.11
+ExecStart=/usr/bin/docker run -p 80:80 -p 443:443 --network g20network -v g20certs-etc:/data/cert:ro -v /var/g20files/nginx.conf:/etc/nginx/nginx.conf:ro --name g20nginx nginx:1.11
+ExecStop=/usr/bin/docker stop g20nginx
+[Install]
+WantedBy=multi-user.target
+nginxdockerservice
+
+
+cat << 'certbotdockerservice' > /etc/systemd/system/g20certbot.service
+[Unit]
+Description=generate security certificate
+After=docker.service
+Requires=docker.service
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/bin/docker kill g20certbot
+ExecStartPre=-/usr/bin/docker rm g20certbot
+ExecStartPre=/usr/bin/docker pull quay.io/letsencrypt/letsencrypt:latest
+ExecStart=-/usr/bin/docker run --rm -p 443:443 -p 80:80 --name g20certbot -v g20certs-etc:/etc/letsencrypt -v g20certs-var-lib:/var/lib/letsencrypt quay.io/letsencrypt/letsencrypt:latest certonly -n -d group20-db.ekrebs.com --keep --agree-tos --email ekrebs@outlook.com --standalone --preferred-challenges http-01
+certbotdockerservice
+
+cat << 'renewcertservice' > /etc/systemd/system/g20renewcert.service
+[Unit]
+Description=renew cert
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/bin/systemctl stop g20nginx
+ExecStart=-/usr/bin/systemctl restart g20certbot
+ExecStartPost=-/usr/bin/systemctl restart g20nginx
+renewcertservice
+
+cat << 'renewcerttimer' > /etc/systemd/system/g20renewcert.timer
+[Unit]
+Description=Perform maintenance on timer
+[Timer]
+OnCalendar=sun 7:00:00 UTC
+Persistent=true
+[Install]
+WantedBy=timers.target
+renewcerttimer
+
+systemctl enable g20renewcert.timer
+systemctl enable g20nginx.service
+systemctl enable g20php.service
+systemctl enable g20mysql.service
+
+echo 'please delete me and restart'

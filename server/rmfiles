@@ -1,0 +1,1 @@
+ssh root@159.203.145.99 rm -I -r /var/g20files/src/*
