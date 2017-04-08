@@ -3,8 +3,20 @@
 	require_once('includes/beforesetup.php');
 	require_once('includes/checkcsrf.php');
 	require_once('func/empluser.php');
+	require_once('func/memuser.php');
 ?>
 <?php
+
+function genRandomPassword(){
+	$password='';
+	$length=random_int(18,30);
+	for($i=0;$i<$length;$i++){
+		//echo $i.'<br>';
+		$password=$password.chr(random_int(33,126));
+	}
+	return $password;
+}
+
 /*make sure that stuff has actually been submited to this page from the form (probly want to do more to verify that this is proper data)*/
 if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['fname'],$_POST['lname'],$_POST['ssn'],$_POST['dob'],$_POST['sex'],$_POST['email'],$_POST['addr'])){
 	
@@ -129,6 +141,32 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		if(EmplUser\add($mysqlidb,$_POST['emplusername'],$_POST['emplpass'],$_POST['fname'],$_POST['lname'],$_POST['ssn'],$_POST['dob'],"superUser",null,$_POST['sex'],$_POST['email'],$_POST['addr'],null,null)){
 			/**/
 			file_put_contents('settings/files/db.json',json_encode($dbsettings));
+			/*
+
+			testing data
+			*/
+			$fnameArr=['Jane','John','Sally','Jill','Tom','Lucy','Robert','William','Abby','Helen','Ben','Susan','Jukka'];
+			$lnameArr=['Smith','Doe','Green','Black','Bates','Keeton','James','Cunningham','Poole','Sarasti'];
+			$sexArr=['m','f'];
+
+			/*employees 2-21*/
+			for($i=0;$i<20;$i++){
+				$emplPass=genRandomPassword();
+				//echo $i.' '.$emplPass.'<br>';
+				EmplUser\add($mysqlidb,'randomEmployeeUsername'.$i,$emplPass,$fnameArr[random_int(0,count($fnameArr)-1)],$lnameArr[random_int(0,count($lnameArr)-1)],str_pad($i,9,'0'),random_int(1960,1997).'-'.random_int(1,12).'-'.random_int(1,20),"cook",'fullTime',$sexArr[random_int(0,1)],'emailuser'.$i.'@example.com','1234 Some St',null,null);
+			}
+			/*members 1-20*/
+			for($i=0;$i<20;$i++){
+				$memPass=genRandomPassword();
+				//echo $i.' '.$memPass.'<br>';
+				MemUser\add($mysqlidb,'randMem'.$i,$memPass,$fnameArr[random_int(0,count($fnameArr)-1)],$lnameArr[random_int(0,count($lnameArr)-1)],random_int(1960,1997).'-'.random_int(1,12).'-'.random_int(1,20),$sexArr[random_int(0,1)],'memberemail@example.com','1234 Some Other St','713 123 4578');
+			}
+
+
+
+
+
+
 			header('Location: /loginform.php');
 		}
 		else{

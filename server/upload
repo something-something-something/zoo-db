@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -e ssh --delete --rsync-path="sudo rsync" -vv -r src/ root@159.203.145.99:/var/g20files/src
+rsync -e ssh --delete -vv -r src/ root@159.203.145.99:/var/g20files/src
