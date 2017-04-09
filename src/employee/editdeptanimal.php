@@ -9,7 +9,7 @@
 <?php
 
 // TODO add checks to make sure post data is okay
-	$statment=$db->prepare("update Animals set Animals.Aname=?,Animals.taxonomy=?,Animals.animalDOB=?,Animals.sex=? where animalID=? and departmentID=(select departmentID from Employee where employeeID=?)");
+	$statment=$db->prepare("update Animals set Animals.Aname=?,Animals.species=?,Animals.animalDOB=?,Animals.sex=? where animalID=? and departmentID=(select departmentID from Employee where employeeID=?)");
 	$statment->bind_param('ssssii',
 	$_POST['name'],
 	$_POST['tax'],

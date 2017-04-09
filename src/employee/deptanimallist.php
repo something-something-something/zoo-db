@@ -8,7 +8,7 @@
 
 <?php
 //needs more error checking will do later
-$statment=$db->prepare("select Animals.animalID,Animals.Aname,Animals.taxonomy from Animals,Employee where Employee.employeeID=? and Employee.departmentID=Animals.departmentID");
+$statment=$db->prepare("select Animals.animalID,Animals.Aname,Animals.species from Animals,Employee where Employee.employeeID=? and Employee.departmentID=Animals.departmentID");
 $statment->bind_param(i,$_SESSION['EMPLID']);
 echo $db->error;
 $statment->execute();
