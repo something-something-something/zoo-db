@@ -157,21 +157,26 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			}
 
 
-			$animalsHabitatsTypeArr=['fence','fence','cage'];
-			$animalsHabitatsNameArr=['T-Rex pen','T-Rex pen 2','Tiger Pen'];
-			$animalsHabitatsNameSatus=['needs-maintenance','okay','okay'];
+	
 			
-			/*
+			$mysqlidb->query("INSERT INTO Habitats (Htype, Hname, status)
+			VALUES ('fence', 'T-Rex pen', 'needs-maintenance');");
 
-			INSERT INTO Animals (Aname, taxonomy, animalDOB, habitatID, sex, departmentID)
-			VALUES ('Toothy', 'Dinosaur', '2017-04-08', '4', 'f', '2');
+			$mysqlidb->query("INSERT INTO Habitats (Htype, Hname, status)
+			VALUES ('fence', 'T-Rex pen 2', 'okay');");
 
-			INSERT INTO Vendor (vendorType, Vname, department, capacity)
-			VALUES ('food', 'Peezahute', '7', '50');
+			$mysqlidb->query("INSERT INTO Habitats (Htype, Hname, status)
+			VALUES ('cage', 'Tiger pen', 'okay');");
 
-			INSERT INTO Vendor (vendorType, Vname, department, capacity)
-			VALUES ('retail', 'The Junk Store', '6', '20');
-			*/
+			$mysqlidb->query("INSERT INTO Animals (Aname, taxonomy, animalDOB, habitatID, sex, departmentID)
+			VALUES ('Toothy', 'Dinosaur', '2017-04-08', '1', 'f', '2');");
+
+			$mysqlidb->query("INSERT INTO Vendor (vendorType, Vname, department, capacity)
+			VALUES ('food', 'Peezahute', '7', '50');");
+
+			$mysqlidb->query("INSERT INTO Vendor (vendorType, Vname, department, capacity)
+			VALUES ('retail', 'The Junk Store', '6', '20');");
+
 
 			$fnameArr=['Jane','John','Sally','Jill','Tom','Lucy','Robert','William','Abby','Helen','Ben','Susan','Jukka'];
 			$lnameArr=['Smith','Doe','Green','Black','Bates','Keeton','James','Cunningham','Poole','Sarasti'];
@@ -213,11 +218,385 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			//TODO MAKE INO PREPARED STATMENTS
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-03-11 10:45:16', '2')");
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-04-08 09:42:16', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Shock Baton', 'small-tools', '20', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Mice', 'animal-food-meat', '20500', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('25ft light Rope', 'small-tools', '3', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('2015 Kawasaki Mule', 'vehicle', '1', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Post Driver', 'large-tools', '2', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Ribeye Steak', 'human-food-meat', '50', '6')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('2016 Jeep Wrangler', 'vehicle', '1', '9')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('2014 Jeep Wrangler', 'vehicle', '1', '9')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Powered Wheelchair', 'vehicle', '5', '10')");
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'child', '20000.00', '2015-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'student', '20.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'student', '20.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'student', '20.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'student', '20.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'child', '30.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'child', '30.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'student', '20.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-01')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-02')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'child', '30.00', '2017-03-02')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-02')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-02')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-02')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'child', '30.00', '2017-03-03')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'child', '30.00', '2017-03-03')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'child', '30.00', '2017-03-03')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'child', '30.00', '2017-03-03')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'child', '30.00', '2017-03-03')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-03')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-03')");
+
+			$mysqlidb->query("IINSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("IINSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("IINSERT INTO Tickets
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("IINSERT INTO Tickets
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("IINSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-04')");
+
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'student', '20.00', '2017-03-05')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets 
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-06')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'adult', '40.00', '2017-03-07')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'student', '20.00', '2017-03-08')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'student', '20.00', '2017-03-09')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'student', '20.00', '2017-03-10')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'student', '20.00', '2017-03-11')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'senior', '30.00', '2017-03-16')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'student', '20.00', '2017-03-16')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'senior', '30.00', '2017-05-25')");
+
+			$mysqlidb->query("	INSERT INTO Tickets  
+			VALUES (DEFAULT,'student', '20.00', '2017-05-25')");		
 			
-			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-03-11 10:45:16', '2');");
 
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-04-08 09:42:16', '2');");
 
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-01', '13489.55');");
 
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-02', '16548.77');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-03', '1.25');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-04', '6897.20');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-05', '11000');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-06', '8000.42');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-07', '8011.42');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-08', '5860.99');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-09', '12345.67');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-10', '3333.55');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-11', '9876.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-12', '8888.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-13', '78984.10');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-14', '2684.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-15', '1111.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-16', '2222.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-17', '3333.54');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-18', '4444.54');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-19', '5555.54');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-20', '6666.44');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-21', '222.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-22', '1234.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-23', '5321.19');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-24', '9999.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-25', '4561.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-26', '461.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-27', '19.15');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-28', '9813.12');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-29', '451.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-30', '561.10');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-31', '999.99');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-04-01', '0.99');");
+
+			$mysqlidb->query("		INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-04-02', '100000');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-04-03', '200000');");
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-01', '1.55');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-02', '2.77');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-03', '1.25');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-04', '7.20');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-05', '11');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-06', '8.42');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-07', '1.42');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-08', '0.99');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-09', '5.67');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-10', '3.55');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-11', '6.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-12', '8.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-13', '4.10');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-14', '4.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-15', '1.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-16', '2.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-17', '3.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-18', '4.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-19', '5.54');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-20', '6.44');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-21', '2.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-22', '4.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-23', '1.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-24', '9.19');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-25', '1.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-26', '1.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-27', '1.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-28', '3.12');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-29', '1.15');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-30', '1.10');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-03-31', '9.99');");
+
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-04-01', '10.99');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-04-02', '10');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('2', '2017-04-03', '2');");
 
 			header('Location: /loginform.php');
 		}
