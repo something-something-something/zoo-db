@@ -47,7 +47,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		$stmtCreateHab=$mysqlidb->prepare("CREATE TABLE Habitats(HabitatID INT AUTO_INCREMENT,Htype ENUM('cage','aquarium','fence'),Hname VARCHAR(999),status ENUM('okay','needs-maintenance','undergoing-maintenance'),PRIMARY KEY(habitatID))");
 
 		
-		$stmtCreateAni=$mysqlidb->prepare("CREATE TABLE Animals(animalID INT AUTO_INCREMENT,Aname VARCHAR(99),taxonomy varchar(99),animalDOB DATE,habitatID INT,sex ENUM('m','f'),departmentID INT,PRIMARY KEY(animalID),FOREIGN KEY(departmentID) REFERENCES Department(departmentID),FOREIGN KEY(habitatID) REFERENCES Habitats(habitatID))");
+		$stmtCreateAni=$mysqlidb->prepare("CREATE TABLE Animals(animalID INT AUTO_INCREMENT,Aname VARCHAR(99),species varchar(99),animalDOB DATE,habitatID INT,sex ENUM('m','f'),departmentID INT,PRIMARY KEY(animalID),FOREIGN KEY(departmentID) REFERENCES Department(departmentID),FOREIGN KEY(habitatID) REFERENCES Habitats(habitatID))");
 
 		
 		$stmtCreateVen=$mysqlidb->prepare("CREATE TABLE Vendor(vendorID INT AUTO_INCREMENT,vendorType ENUM('food','retail','ride'),Vname VARCHAR(999),department INT,capacity INT,PRIMARY KEY(vendorID),FOREIGN KEY(department) REFERENCES Department(departmentID))");
@@ -168,7 +168,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			$mysqlidb->query("INSERT INTO Habitats (Htype, Hname, status)
 			VALUES ('cage', 'Tiger pen', 'okay');");
 
-			$mysqlidb->query("INSERT INTO Animals (Aname, taxonomy, animalDOB, habitatID, sex, departmentID)
+			$mysqlidb->query("INSERT INTO Animals (Aname, species, animalDOB, habitatID, sex, departmentID)
 			VALUES ('Toothy', 'Dinosaur', '2017-04-08', '1', 'f', '2');");
 
 			$mysqlidb->query("INSERT INTO Vendor (vendorType, Vname, department, capacity)

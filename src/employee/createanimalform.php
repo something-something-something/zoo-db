@@ -8,7 +8,7 @@
 ?>
 <form action="createanimal.php" method="POST">
 	name: <input type="text" value="" name="name"><br>
-	Taxonomy: <input type="text" name="tax"><br>
+	species: <input type="text" name="tax"><br>
 	dob: <input type="date" value="2010-01-19" name="dob"><br>
 	Male<input type="radio" name="sex" value="m">
 	Female<input type="radio" checked name="sex" value="f"><br>

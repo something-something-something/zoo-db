@@ -10,7 +10,7 @@
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy an animal');
 	}
-	$statment=$db->prepare("select Animals.animalID,Animals.Aname,Animals.taxonomy,Animals.animalDOB,Animals.habitatID,Animals.sex,Animals.departmentID from Animals,Employee where Animals.animalID=? and Employee.employeeID=? and Employee.departmentID=Animals.departmentID");
+	$statment=$db->prepare("select Animals.animalID,Animals.Aname,Animals.species,Animals.animalDOB,Animals.habitatID,Animals.sex,Animals.departmentID from Animals,Employee where Animals.animalID=? and Employee.employeeID=? and Employee.departmentID=Animals.departmentID");
 	$statment->bind_param('ii',$_GET['id'],$_SESSION['EMPLID']);
 	if(!$statment->execute()){
 		die('prepared statment failed');
@@ -36,7 +36,7 @@ $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 	<form action="editdeptanimal.php" method="POST">
 		name<input type="text" name="name" value="$name"><br>
-		taxonomy<input type="text" name="tax" value="$tax"><br>
+		species<input type="text" name="tax" value="$tax"><br>
 		$sexHTML
 		dob:<input type="date" value="$dob" name="dob"><br>
 		<br>

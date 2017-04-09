@@ -8,7 +8,7 @@
 
 <?php
 //needs more error checking will do later
-$statment=$db->prepare("select animalID, Aname,taxonomy from Animals");
+$statment=$db->prepare("select animalID, Aname,species from Animals");
 //$statment->bind_param();
 echo $db->error;
 $statment->execute();
