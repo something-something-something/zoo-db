@@ -145,6 +145,34 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 
 			testing data
 			*/
+
+
+
+			$departmentsArr=['IT','Reptiles','Small Animals','Aquatic','Large Mammals','Food And Beverages','Retail','Park Maintenance','Security',	'Customer Service'];
+			for($i=0;$i<count($departmentsArr);$i++){
+				$deptAddStatment=$mysqlidb->prepare("insert into Department values(DEFAULT,?)");
+				$deptAddStatment->bind_param('s',$departmentsArr[$i]);
+				$deptAddStatment->execute();
+				$deptAddStatment->close();
+			}
+
+
+			$animalsHabitatsTypeArr=['fence','fence','cage'];
+			$animalsHabitatsNameArr=['T-Rex pen','T-Rex pen 2','Tiger Pen'];
+			$animalsHabitatsNameSatus=['needs-maintenance','okay','okay'];
+			
+			/*
+
+			INSERT INTO Animals (Aname, taxonomy, animalDOB, habitatID, sex, departmentID)
+			VALUES ('Toothy', 'Dinosaur', '2017-04-08', '4', 'f', '2');
+
+			INSERT INTO Vendor (vendorType, Vname, department, capacity)
+			VALUES ('food', 'Peezahute', '7', '50');
+
+			INSERT INTO Vendor (vendorType, Vname, department, capacity)
+			VALUES ('retail', 'The Junk Store', '6', '20');
+			*/
+
 			$fnameArr=['Jane','John','Sally','Jill','Tom','Lucy','Robert','William','Abby','Helen','Ben','Susan','Jukka'];
 			$lnameArr=['Smith','Doe','Green','Black','Bates','Keeton','James','Cunningham','Poole','Sarasti'];
 			$sexArr=['m','f'];
@@ -162,7 +190,31 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 				MemUser\add($mysqlidb,'randMem'.$i,$memPass,$fnameArr[random_int(0,count($fnameArr)-1)],$lnameArr[random_int(0,count($lnameArr)-1)],random_int(1960,1997).'-'.random_int(1,12).'-'.random_int(1,20),$sexArr[random_int(0,1)],'memberemail@example.com','1234 Some Other St','713 123 4578');
 			}
 
+			/*
+			"INSERT INTO MembershipSales (startDate, endDate, memberType, membershipPrice, memberID)
+			VALUES ('2016-10-10', '2017-10-10', 'senior', '59.99', '1');
 
+			INSERT INTO MembershipSales (startDate, endDate, memberType, membershipPrice, memberID)
+			VALUES ('2016-10-09', '2017-10-09', 'single', '89.99', '2');
+			INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-03-11 10:45:16', '2');
+
+			INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-04-08 09:42:16', '2');");*/
+
+			$memSalesArr=[['2016-10-10', '2017-10-10', 'senior', 59.99, 1],['2016-10-09', '2017-10-09', 'single', 89.99, 2]];
+			for($i=0;$i<count($memSalesArr);$i++){
+				$memSalesCurrArr=$memSalesArr[$i];
+				$memSalesStatment=$mysqlidb->prepare("INSERT INTO MembershipSales VALUES (DEFAULT,?, ?, ?, ?, ?)");
+				$memSalesStatment->bind_param('sssdi',$memSalesCurrArr[0],$memSalesCurrArr[1],$memSalesCurrArr[2],$memSalesCurrArr[3],$memSalesCurrArr[4]);
+				$memSalesStatment->execute();
+				$memSalesStatment->close();
+			}
+			//TODO MAKE INO PREPARED STATMENTS
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-03-11 10:45:16', '2')");
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-04-08 09:42:16', '2')");
+			
+			
 
 
 
