@@ -5,8 +5,10 @@
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
 	require_once('../func/hab.php');
+	require_once('../func/fancy.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 ?>
+<?php Fancy\printHeader($db,'Edit animal','employee','animal'); ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy an animal');
@@ -55,3 +57,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>

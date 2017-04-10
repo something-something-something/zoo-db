@@ -4,8 +4,10 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	require_once('../includes/checkcsrf.php');
+	require_once('../func/fancy.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 ?>
+<?php Fancy\printHeader($db,'Edit animal','employee','animal'); ?>
 <?php
 
 // TODO add checks to make sure post data is okay
@@ -38,3 +40,4 @@
 	}
 	$statment->close();
 ?>
+<?php Fancy\printFooter(); ?>
