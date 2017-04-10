@@ -4,8 +4,10 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
+	require_once('../func/fancy.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
 ?>
+<?php Fancy\printHeader($db,'Create an Animal','employee','animal'); ?>
 <form action="createanimal.php" method="POST">
 	name: <input type="text" value="" name="name"><br>
 	species: <input type="text" name="tax"><br>
@@ -16,3 +18,4 @@
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
+<?php Fancy\printFooter(); ?>
