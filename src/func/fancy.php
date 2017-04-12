@@ -27,8 +27,9 @@ HEADHTML;
 			['/employee/index.php','Home'],
 			['/employee/animallist.php','Animals'],
 			['/employee/employeelist.php','Employees'],
-			['/emploee/memberslist.php','Members'],
-			['/emploee/viewinfo.php','Self'],
+			['/employee/memberslist.php','Members'],
+			['/employee/tickets.php','Tickets'],
+			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
 			];
 		}
