@@ -31,6 +31,7 @@ HEADHTML;
 			['/employee/tickets.php','Tickets'],
 			['/employee/hablist.php','Habitats'],
 			['/employee/supplieslist.php','Supplies'],
+			['/employee/salesreportform.php','Finance'],
 			['/employee/viewinfo.php','Self'],
 			['/employee/employeechangepassform.php','Change Password'],
 			['/loginform.php','Log Out']
