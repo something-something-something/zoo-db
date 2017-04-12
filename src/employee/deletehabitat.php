@@ -8,7 +8,7 @@
 ?>
 <?php
 
-$statment=$db->prepare("delete from habitats where habitatID=?");
+$statment=$db->prepare("delete from Habitats where habitatID=?");
 $statment->bind_param('i',$_POST['id']);
 $statment->execute();
 $statment->close();

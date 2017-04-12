@@ -5,8 +5,10 @@
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../includes/checkcsrf.php');
+	require_once('../func/fancy.php');
 
 ?>
+<?php Fancy\printHeader($db,'Employees','employee','employee'); ?>
 <?php
 	if(isset(
 		$_POST['username'],
@@ -48,3 +50,4 @@
 		}
 	}
 ?>
+<?php Fancy\printFooter(); ?>

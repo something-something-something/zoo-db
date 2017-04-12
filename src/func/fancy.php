@@ -27,8 +27,10 @@ HEADHTML;
 			['/employee/index.php','Home'],
 			['/employee/animallist.php','Animals'],
 			['/employee/employeelist.php','Employees'],
-			['/employee/memberslist.php','Members'],
+			['/employee/memberlist.php','Members'],
 			['/employee/tickets.php','Tickets'],
+			['/employee/hablist.php','Habitats'],
+			['/employee/supplieslist.php','Supplies'],
 			['/employee/viewinfo.php','Self'],
 			['/employee/employeechangepassform.php','Change Password'],
 			['/loginform.php','Log Out']
@@ -65,6 +67,30 @@ if($subNav!=='none'){
 		['/employee/createanimalform.php','Create Animal']
 		];
 	}
+	else if($subNav==='employee'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/employeelist.php','Employees'],
+		['/employee/createuserform.php','Create Employee']
+		];
+	}
+	else if($subNav==='hab'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/hablist.php','Habitats'],
+		['/employee/createhabform.php','Create Habitat']
+		];
+	}
+	else if($subNav==='sup'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/supplieslist.php','Supplies'],
+		['/employee/createsupplyform.php','Create Supply']
+		];
+	}
+	else if($subNav==='self'){
+		$subNavArr=[['/employee/viewinfo.php','Info'],
+		['/employee/editinfoform.php','Edit Info']
+		];
+	}
+
 
 
 

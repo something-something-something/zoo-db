@@ -9,7 +9,7 @@ body{
 	
 }
 a{
-	color:rgb(0,150,0);
+	color:rgb(0,50,255);
 	text-decoration: none;
 	transition: color 1s;
 }

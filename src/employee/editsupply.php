@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	require_once('../includes/checkcsrf.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Equipment And Supplies','employee','sup'); ?>
 <?php
 
 // TODO add checks to make sure post data is okay
@@ -36,3 +38,4 @@
 	}
 	$statment->close();
 ?>
+<?php Fancy\printFooter(); ?>

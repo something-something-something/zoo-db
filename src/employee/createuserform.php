@@ -5,9 +5,10 @@
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../func/dept.php');
+	require_once('../func/fancy.php');
 
 ?>
-
+<?php Fancy\printHeader($db,'Employees','employee','employee'); ?>
 <form action="createuser.php" method="POST">
 	first name<input type="text" name="fname" value="John"><br>
 	last name<input type="text" name="lname" value="Smith"><br>
@@ -33,5 +34,4 @@
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
-
-
+<?php Fancy\printFooter(); ?>

@@ -210,15 +210,15 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			//TODO MAKE INO PREPARED STATMENTS
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-03-11 10:45:16', '2')");
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-04-08 09:42:16', '2')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Shock Baton', 'small-tools', '20', '2')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Mice', 'animal-food-meat', '20500', '2')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('25ft light Rope', 'small-tools', '3', '2')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('2015 Kawasaki Mule', 'vehicle', '1', '2')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Post Driver', 'large-tools', '2', '2')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Ribeye Steak', 'human-food-meat', '50', '6')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('2016 Jeep Wrangler', 'vehicle', '1', '9')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('2014 Jeep Wrangler', 'vehicle', '1', '9')");
-			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES ('Powered Wheelchair', 'vehicle', '5', '10')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Shock Baton', 'small-tools', '20', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Mice', 'animal-food-meat', '20500', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'25ft light Rope', 'small-tools', '3', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'2015 Kawasaki Mule', 'vehicle', '1', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Post Driver', 'large-tools', '2', '2')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Ribeye Steak', 'human-food-meat', '50', '6')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'2016 Jeep Wrangler', 'vehicle', '1', '9')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'2014 Jeep Wrangler', 'vehicle', '1', '9')");
+			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Powered Wheelchair', 'vehicle', '5', '10')");
 			$mysqlidb->query("INSERT INTO Tickets
 			VALUES (DEFAULT,'child', '20000.00', '2015-03-01')");
 

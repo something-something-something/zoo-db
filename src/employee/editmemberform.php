@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Members','employee'); ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('Specify a Member');
@@ -53,3 +55,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>
