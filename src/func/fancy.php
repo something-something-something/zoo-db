@@ -29,6 +29,7 @@ HEADHTML;
 			['/employee/employeelist.php','Employees'],
 			['/employee/memberlist.php','Members'],
 			['/employee/tickets.php','Tickets'],
+			['/employee/hablist.php','Habitats'],
 			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
 			];
@@ -64,8 +65,15 @@ if($subNav!=='none'){
 		];
 	}
 	else if($subNav==='employee'&&$emplPos==='superUser'){
-		$subNavArr=[['/employee/employeelist.php','Employees'],
+		$subNavArr=[
+		['/employee/employeelist.php','Employees'],
 		['/employee/createuserform.php','Create Employee']
+		];
+	}
+	else if($subNav==='hab'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/hablist.php','Habitats'],
+		['/employee/createhabform.php','Create Habitat']
 		];
 	}
 	else if($subNav==='self'){
