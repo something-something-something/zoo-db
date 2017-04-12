@@ -2,10 +2,12 @@
 	require_once('../includes/initses.php');
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
-	
+	require_once('../func/fancy.php');
+	require_once('../func/empluser.php');
+	EmplUser\restrictPageToPositions($db,["superUser","bookKeeper"]);
 	$today = date('Y\-m\-d');
 ?>
-<h1>Sales Report</h1>
+<?php Fancy\printHeader($db,'Sales Report','employee'); ?>
 <form action="salesreport.php" method="POST">
 	From<br>
 		<input type="date" value="<?php echo $today;?>" name="startDate"><br>
@@ -168,3 +170,4 @@ echo "<h1>Total Sales</h1>";
 echo "<i>Total Sales in " . $month . ": $" . ($ticketMonthSum + $membershipMonthSum + $vendorMonthSum) . "</i><br>";
 echo "<i>Total Sales in " . $currentyear . ": $" . ($ticketYearSum + $membershipYearSum + $vendorYearSum) . "</i><br>";
 ?>
+<?php Fancy\printFooter(); ?>

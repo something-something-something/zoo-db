@@ -3,9 +3,10 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
-	EmplUser\restrictPageToPositions($db,["superUser"]);
+	EmplUser\restrictPageToPositions($db,["superUser","bookKeeper"]);
+		require_once('../func/fancy.php');
 ?>
-<h1>Sales Report </h1>
+<?php Fancy\printHeader($db,'Sales Report','employee'); ?>
 <?php
 // Tickets
 $statment=$db->prepare("SELECT serialNumber, ticketType, ticketPrice, date FROM Tickets WHERE date >=? AND date <=?");
@@ -88,3 +89,4 @@ echo "<i><h3>Total Vendor Sales: $" . $totalMembershipSales . "</h3></i>";
 $statment->close();
 echo '<hr><i><h2>Total Sales: $' . ($totalMembershipSales + $ticketSalesSum + $vendorSalesSum) . '</i></h2>';
 ?>
+<?php Fancy\printFooter(); ?>
