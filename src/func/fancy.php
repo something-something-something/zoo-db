@@ -63,6 +63,11 @@ if($subNav!=='none'){
 		['/employee/createanimalform.php','Create Animal']
 		];
 	}
+	else if($subNav==='employee'&&$emplPos==='superUser'){
+		$subNavArr=[['/employee/employeelist.php','Employees'],
+		['/employee/createuserform.php','Create Employee']
+		];
+	}
 
 
 
