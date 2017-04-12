@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
 	EmplUser\restrictPageToLoggedIn();
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Current Information','employee','self'); ?>
 <h2> Edit Your Information </h2>
 <?php
 $statment=$db->prepare("select employeeEmail, address from Employee where employeeID=?");
@@ -24,3 +26,4 @@ if(!$statment->fetch()){
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
+<?php Fancy\printFooter(); ?>

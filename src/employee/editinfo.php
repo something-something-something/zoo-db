@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	require_once('../includes/checkcsrf.php');
 	EmplUser\restrictPageToLoggedIn();
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Current Information','employee','self'); ?>
 <?php
 //TODO validate Posts
 $statment=$db->prepare("update Employee set employeeEmail=(?), address=(?) where employeeID=?");
@@ -21,3 +23,4 @@ else{
 $statment->close();
 
 ?>
+<?php Fancy\printFooter(); ?>

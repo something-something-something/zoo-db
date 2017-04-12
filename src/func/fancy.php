@@ -27,7 +27,7 @@ HEADHTML;
 			['/employee/index.php','Home'],
 			['/employee/animallist.php','Animals'],
 			['/employee/employeelist.php','Employees'],
-			['/employee/memberslist.php','Members'],
+			['/employee/memberlist.php','Members'],
 			['/employee/tickets.php','Tickets'],
 			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
@@ -68,6 +68,12 @@ if($subNav!=='none'){
 		['/employee/createuserform.php','Create Employee']
 		];
 	}
+	else if($subNav==='self'){
+		$subNavArr=[['/employee/viewinfo.php','Info'],
+		['/employee/editinfoform.php','Edit Info']
+		];
+	}
+
 
 
 

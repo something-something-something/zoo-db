@@ -4,8 +4,9 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToLoggedIn();
+	require_once('../func/fancy.php');
 ?>
-<h2> Current Information </h2>
+<?php Fancy\printHeader($db,'Current Information','employee','self'); ?>
 <?php
 // needs more error checking will do later
 $statment=$db->prepare("select firstname, lastname, employeeDOB, position, employeeType, sex, employeeEmail, address, departmentID, supid from Employee where employeeID =?");
@@ -27,10 +28,4 @@ if($statment->fetch()){
 	"<br>Supervisor ID: " . $supervisorID . "<br>";
 }
 ?>
-<br>
-<form action="/employee/editinfoform.php">
-    <input type="submit" value="Edit" />
-</form>
-<form action="/employee/index.php">
-    <input type="submit" value="Go Back" />
-</form>
+<?php Fancy\printFooter(); ?>
