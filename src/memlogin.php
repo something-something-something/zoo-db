@@ -10,6 +10,7 @@ if(!isset($_POST['user'],$_POST['pass'])){
 	die();
 }
 if(MemUser\validatePassword($db,$_POST['user'],$_POST['pass'])){
+	$_SESSION['MEMUSERNAME']=$_POST['user'];
 	$id=MemUser\getIDFromUserName($db,$_POST['user']);
 	if($id!==false){
 		$_SESSION['MEMID']=$id;

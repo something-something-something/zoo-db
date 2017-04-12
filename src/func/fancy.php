@@ -30,6 +30,7 @@ HEADHTML;
 			['/employee/memberslist.php','Members'],
 			['/employee/tickets.php','Tickets'],
 			['/employee/viewinfo.php','Self'],
+			['/employee/employeechangepassform.php','Change Password'],
 			['/loginform.php','Log Out']
 			];
 		}
@@ -37,6 +38,7 @@ HEADHTML;
 	else if($type==='member'){
 		$mainNavArr=[
 		['/member/index.php','Home'],
+		['/member/membershipchangepassform.php', 'Change Password'],
 		['/member/editmemberform.php','Edit'],
 		['/member/getmembershipform.php','Membership'],
 		['/member/membershipinfo.php','Purchase History'],
@@ -52,7 +54,7 @@ HEADHTML;
 	$bodyHtmlA=<<<BODYHTMLA
 	<body>
 		<header><div class="headerLogo"><a href="/index.php"><img src="/fancy/logo.png"></a></div><nav>$mainNavHtml</nav></header>
-		
+
 BODYHTMLA;
 
 if($subNav!=='none'){
@@ -101,7 +103,7 @@ FOOTERHTML;
 		}
 		return $html;
 	}
-	
+
 }
 
 ?>

@@ -10,6 +10,7 @@ if(!isset($_POST['user'],$_POST['pass'])){
 	die();
 }
 if(EmplUser\validatePassword($db,$_POST['user'],$_POST['pass'])){
+	$_SESSION['EMPLUSERNAME']=$_POST['user'];
 	$id=EmplUser\getIDFromUserName($db,$_POST['user']);
 	if($id!==false){
 		$_SESSION['EMPLID']=$id;

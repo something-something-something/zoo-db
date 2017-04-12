@@ -29,20 +29,20 @@ namespace MemUser{
 			return false;
 		}
 		$statmentMT->bind_param('sssssss',$fn,$ln,$dob,$sex,$email,$addr,$phone);
-		
+
 		if(!$statmentMT->execute()){
 			$db->query("unlock tables");
 			return false;
 		}
 		$statmentMT->close();
-		/*insert member into memberuser table  
+		/*insert member into memberuser table
 		*/
 		$statmentUT=$db->prepare("insert into MemberUsers values(?,?,LAST_INSERT_ID())");
 		if(!$statmentUT){
 			$db->query("unlock tables");
 			return false;
 		}
-		$statmentUT->bind_param('ss',$username,password_hash($password,PASSWORD_DEFAULT));
+		$statmentUT->bind_param('ss',$username, password_hash($password,PASSWORD_DEFAULT));
 		if(!$statmentUT->execute()){
 			$db->query("unlock tables");
 			return false;
@@ -51,6 +51,22 @@ namespace MemUser{
 		$db->query("unlock tables");
 		return true;
 	}
+
+	/*changes user password*/
+	/*requires the username */
+	/*
+	function changePassword($db, $username, $password){
+		//$statment=$db->prepare("update MemberUsers set password = password_hash($password, PASSWORD_DEFAULT) where username=?");
+		$statment=$db->prepare("update MemberUsers set password where username=?");
+		$statment->bind_param('ss', password_hash($password, PASSWORD_DEFAULT), $username);
+
+		if(!$statment->execute()){
+			return false;
+		}
+		$statment->close();
+	}
+	*/
+
 	function validatePassword($db,$username,$password){
 		$statment=$db->prepare("select password from MemberUsers where username=?");
 		$statment->bind_param('s',$username);
@@ -81,6 +97,7 @@ namespace MemUser{
 	}
 	function loggedIn(){
 		return isset($_SESSION['MEMID'])&&$_SESSION['MEMID']!==NULL;
+		return isset($_SESSION['MEMUSERNAME']) && $_SESSION['MEMUSERNAME'] !== NULL;
 	}
 	/*nothing below a call to this function will be run if not logged in as employee*/
 	function restrictPageToLoggedIn(){

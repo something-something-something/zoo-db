@@ -13,4 +13,10 @@ if(!isset($_SESSION['EMPLID'])){
 if(!isset($_SESSION['MEMID'])){
 	$_SESSION['MEMID']=NULL;
 }
+if(!isset($_SESSION['EMPLUSERNAME'])){
+	$_SESSION['EMPLUSERNAME']=NULL;
+}
+if(!isset($_SESSION['MEMUSERNAME'])){
+	$_SESSION['MEMUSERNAME']=NULL;
+}
 ?>

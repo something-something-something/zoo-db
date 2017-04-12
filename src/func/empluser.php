@@ -3,7 +3,7 @@ namespace EmplUser{
 	const POSITIONS=[['zooKeeper','Zoo Keeper'],['waiter','Waiter'],['cook','Cook'],['guide','Guide'],['cashier','Cashier'],['superUser','Super User'],['ticketSeller','Ticket Salesperson'],['quarterMaster','Quarter Master'],['departmentManager','Department Manager'],['vendor','Vendor'],['bookKeeper','Book Keeper']];
 	const TYPES=[['fullTime','Full Time'],['partTime','Part Time'],['volunteer','Volunteer']];
 	/*for all the below functions $db is the databse connection*/
-	
+
 	/* adds an employee user some of these if statments are probaly excesive*/
 	function add($db,$username,$password,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID){
 		/* Locks the tables not 100% sure this syntax is right
@@ -14,7 +14,7 @@ namespace EmplUser{
 
 		$db->query('lock tables EmployeeUsers write, Employee write');
 
-		/* checks if username is already used exists 
+		/* checks if username is already used exists
 		*/
 		$statment=$db->prepare("select username from EmployeeUsers where username=?");
 		if(!$statment){
@@ -42,14 +42,14 @@ namespace EmplUser{
 			return false;
 		}
 		$statmentET->bind_param('sssssssssss',$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dID,$sID);
-		
+
 		if(!$statmentET->execute()){
 			$statmentET->close();
 			$db->query("unlock tables");
 			return false;
 		}
 		$statmentET->close();
-		/*insert employee into user table  
+		/*insert employee into user table
 		*/
 		$statmentUT=$db->prepare("insert into EmployeeUsers values(?,?,LAST_INSERT_ID())");
 		if(!$statmentUT){
@@ -103,10 +103,24 @@ namespace EmplUser{
 		$statment->close();
 		return password_verify($password,$hpass);
 	}
+
+	/*changes user password*/
+	/*requires the username */
+	function changePassword($db, $password, $username){
+		$statment=$db->prepare("update EmployeeUsers set password = password_hash($password, PASSWORD_DEFAULT) where username=?");
+		$statment->bind_param('ss', $_POST['pass'], $_POST['username']);
+
+		if($statment->execute()){
+			$statment->close();
+			return false;
+		}
+		$statment->close();
+	}
+
 	/*gets the id from anemplyee username returns false on faliure (might want to handle null employeeid's')*/
 	function getIDFromUserName($db,$username){
 		$statment=$db->prepare("select employeeID from EmployeeUsers where username=?");
-		$statment->bind_param('s',$username);
+		$statment->bind_param('s', $username);
 		if(!$statment->execute()){
 			$statment->close();
 			return false;
@@ -122,6 +136,7 @@ namespace EmplUser{
 	/*returns true if logedin or false if not loggedin*/
 	function loggedIn(){
 		return isset($_SESSION['EMPLID'])&&$_SESSION['EMPLID']!==NULL;
+		return isset($_SESSION['EMPLUSERNAME'])&&$_SESSION['EMPLUSERNAME']!==NULL;
 	}
 	/*nothing below a call to this function will be run if not logged in as employee*/
 	function restrictPageToLoggedIn(){
@@ -166,7 +181,7 @@ namespace EmplUser{
 		$positionSelectHTML='<select required name="'.$name.'">';
 		foreach(POSITIONS as $posOp){
 			if($posSelected===$posOp[0]){
-				$positionSelectHTML.='<option selected value="'.$posOp[0].'">'.$posOp[1].'</option>';	
+				$positionSelectHTML.='<option selected value="'.$posOp[0].'">'.$posOp[1].'</option>';
 			}
 			else{
 				$positionSelectHTML.='<option value="'.$posOp[0].'">'.$posOp[1].'</option>';
@@ -178,7 +193,7 @@ namespace EmplUser{
 		$typeSelectHTML='<select required name="'.$name.'">';
 		foreach(TYPES as $typeOp){
 			if($typeSelected===$typeOp[0]){
-				$typeSelectHTML.='<option selected value="'.$typeOp[0].'">'.$typeOp[1].'</option>';	
+				$typeSelectHTML.='<option selected value="'.$typeOp[0].'">'.$typeOp[1].'</option>';
 			}
 			else{
 				$typeSelectHTML.='<option value="'.$typeOp[0].'">'.$typeOp[1].'</option>';
