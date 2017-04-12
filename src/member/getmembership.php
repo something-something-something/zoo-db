@@ -3,10 +3,12 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/memuser.php');
+		require_once('../func/fancy.php');
 	/*visiting this page will print something if loged in*/
 	MemUser\restrictPageToLoggedIn();
 	require_once('../includes/checkcsrf.php');
 ?>
+<?php Fancy\printHeader($db,'Purchasing Mmebership','member'); ?>
 <?php
 if($_POST['type']==='senior'){
 	$price=119;
@@ -22,3 +24,4 @@ $statment=$db->prepare("insert into MembershipSales values(DEFAULT,CURDATE(),CUR
 $statment->bind_param('sii',$_POST['type'],$price,$_SESSION['MEMID']);
 $statment->execute();
 ?>
+<?php Fancy\printFooter(); ?>

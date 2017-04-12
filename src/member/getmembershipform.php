@@ -3,9 +3,11 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/memuser.php');
+	require_once('../func/fancy.php');
 	/*visiting this page will print something if loged in*/
 	MemUser\restrictPageToLoggedIn();
 ?>
+<?php Fancy\printHeader($db,'Purchase Membership','member'); ?>
 <?php
 $statment=$db->prepare("select membertype,enddate from MembershipSales where memberid=? and datediff(enddate,curdate())>0");
 $statment->bind_param('i',$_SESSION['MEMID']);
@@ -31,3 +33,4 @@ echo $htmlformmain;
 }
 
 ?>
+<?php Fancy\printFooter(); ?>
