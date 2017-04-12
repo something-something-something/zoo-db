@@ -3,9 +3,11 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/memuser.php');
+	require_once('../func/fancy.php');
 	/*visiting this page will print something if loged in*/
 	MemUser\restrictPageToLoggedIn();
 ?>
+<?php Fancy\printHeader($db,'Edit Info','member'); ?>
 <?php
 $statment=$db->prepare("select firstname,lastname,memberdob,membersex,memberemail,memberaddress,memberphone from Members where memberid=?");
 $statment->bind_param('i',$_SESSION['MEMID']);
@@ -44,3 +46,4 @@ HTMLFORMMAIN;
 echo $htmlformmain;
 
 ?>
+<?php Fancy\printFooter(); ?>

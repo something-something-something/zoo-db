@@ -23,19 +23,29 @@ HEADHTML;
 			die('You are not a real employee');
 		}
 		if($emplPos==='superUser'){
-			$mainNavArr=[['/employee/animallist.php','Animals'],
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/animallist.php','Animals'],
 			['/employee/employeelist.php','Employees'],
 			['/emploee/memberslist.php','Members'],
-			['/emploee/viewinfo.php','Self']
+			['/emploee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
 			];
 		}
 	}
 	else if($type==='member'){
-
+		$mainNavArr=[
+		['/member/index.php','Home'],
+		['/member/editmemberform.php','Edit'],
+		['/member/getmembershipform.php','Membership'],
+		['/member/membershipinfo.php','Purchase History'],
+		];
 	}
 	else{
 		$mainNavArr=[['/employee/index.php','Employee'],
-		['/member/index.php','Member']];
+		['/member/index.php','Member'],
+		['/memregisterform.php','Register']
+		];
 	}
 	$mainNavHtml=navArrToHtml($mainNavArr);
 	$bodyHtmlA=<<<BODYHTMLA

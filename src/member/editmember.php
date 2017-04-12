@@ -4,8 +4,11 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/memuser.php');
 	require_once('../includes/checkcsrf.php');
+	require_once('../func/fancy.php');
 	MemUser\restrictPageToLoggedIn();
+
 ?>
+<?php Fancy\printHeader($db,'Editing','member'); ?>
 <?php
 
 // TODO add checks to make sure post data is okay
@@ -32,3 +35,4 @@
 	}
 	$statment->close();
 ?>
+<?php Fancy\printFooter(); ?>

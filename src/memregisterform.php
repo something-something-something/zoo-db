@@ -1,7 +1,10 @@
 <?php
 	require_once('includes/initses.php');
 	require_once('includes/aftersetup.php');
+	require_once('includes/mysqlcon.php');
+	require_once('func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Home'); ?>
 <form action="memregister.php" method="POST">
 	first name<input type="text" value="Jane" name="fname"><br>
 	last name<input type="text" value="Doe" name="lname"><br>
@@ -16,3 +19,4 @@
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
+<?php Fancy\printFooter(); ?>
