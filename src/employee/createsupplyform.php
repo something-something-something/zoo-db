@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Equipment And Supplies','employee','sup'); ?>
 <h2> Add a Supply</h2>
 <form action="createsupply.php" method="POST">
 	Name: <input type="text" value="" name="name"><br>
@@ -24,3 +26,4 @@
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
+<?php Fancy\printFooter(); ?>

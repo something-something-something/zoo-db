@@ -7,7 +7,9 @@
 	require_once('../func/hab.php');
 	require_once('../func/equisup.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Equipment And Supplies','employee','sup'); ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy a supply');
@@ -47,3 +49,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>

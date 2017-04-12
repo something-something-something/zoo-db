@@ -30,6 +30,7 @@ HEADHTML;
 			['/employee/memberlist.php','Members'],
 			['/employee/tickets.php','Tickets'],
 			['/employee/hablist.php','Habitats'],
+			['/employee/supplieslist.php','Supplies'],
 			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
 			];
@@ -74,6 +75,12 @@ if($subNav!=='none'){
 		$subNavArr=[
 		['/employee/hablist.php','Habitats'],
 		['/employee/createhabform.php','Create Habitat']
+		];
+	}
+	else if($subNav==='sup'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/supplieslist.php','Supplies'],
+		['/employee/createsupplyform.php','Create Supply']
 		];
 	}
 	else if($subNav==='self'){
