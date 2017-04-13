@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../includes/checkcsrf.php');
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Vendor Sales','employee','vendor'); ?>
 <?php
 //TODO validate Posts
 //$habID=NULL;
@@ -28,3 +30,4 @@ else{
 }
 $statment->close();
 ?>
+<?php Fancy\printFooter(); ?>

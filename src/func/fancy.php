@@ -31,10 +31,9 @@ HEADHTML;
 			['/employee/tickets.php','Tickets'],
 			['/employee/hablist.php','Habitats'],
 			['/employee/supplieslist.php','Supplies'],
-			['/employee/salesreportform.php','Vendor'],
+			['/employee/vendorlist.php','Vendor'],
 			['/employee/salesreportform.php','Finance'],
 			['/employee/viewinfo.php','Self'],
-			['/employee/employeechangepassform.php','Change Password'],
 			['/loginform.php','Log Out']
 			];
 		}
@@ -93,10 +92,18 @@ if($subNav!=='none'){
 		['/employee/supplieslist.php','Supplies'],
 		['/employee/createsupplyform.php','Create Supply']
 		];
+	}	
+	else if($subNav==='vendor'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/vendorlist.php','Vendor'],
+		['/employee/createvendorform.php','Create Vendor'],
+		['/employee/grossvendorsalesform.php','Vendor Sales']
+		];
 	}
 	else if($subNav==='self'){
 		$subNavArr=[['/employee/viewinfo.php','Info'],
-		['/employee/editinfoform.php','Edit Info']
+		['/employee/editinfoform.php','Edit Info'],
+		['/employee/employeechangepassform.php','Change Password'],
 		];
 	}
 
