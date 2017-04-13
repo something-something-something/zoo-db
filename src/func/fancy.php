@@ -26,6 +26,7 @@ HEADHTML;
 			$mainNavArr=[
 			['/employee/index.php','Home'],
 			['/employee/animallist.php','Animals'],
+			['/employee/deptlist.php','Departments'],
 			['/employee/employeelist.php','Employees'],
 			['/employee/memberlist.php','Members'],
 			['/employee/tickets.php','Tickets'],
@@ -91,6 +92,12 @@ if($subNav!=='none'){
 		$subNavArr=[
 		['/employee/supplieslist.php','Supplies'],
 		['/employee/createsupplyform.php','Create Supply']
+		];
+	}	
+	else if($subNav==='dept'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/deptlist.php','Departments'],
+		['/employee/createdepartmentform.php','Create Department']
 		];
 	}	
 	else if($subNav==='vendor'&&$emplPos==='superUser'){
