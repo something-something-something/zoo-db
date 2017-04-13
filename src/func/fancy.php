@@ -104,7 +104,8 @@ if($subNav!=='none'){
 		$subNavArr=[
 		['/employee/vendorlist.php','Vendor'],
 		['/employee/createvendorform.php','Create Vendor'],
-		['/employee/grossvendorsalesform.php','Vendor Sales']
+		['/employee/grossvendorsalesform.php','Add Vendor Sale'],
+		['/employee/vendorsaleslist.php','View Vendor Sales']
 		];
 	}
 	else if($subNav==='self'){

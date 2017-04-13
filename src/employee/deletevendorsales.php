@@ -8,7 +8,7 @@
 ?>
 <?php
 
-$statment=$db->prepare("delete from grossvendorsales where id=? and day=?");
+$statment=$db->prepare("delete from GrossVendorSales where id=? and day=?");
 $statment->bind_param('is',$_POST['id'],$_POST['day']);
 $statment->execute();
 $statment->close();
