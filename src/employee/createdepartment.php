@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../includes/checkcsrf.php');
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Create Department','employee','dept'); ?>
 <?php
 //TODO Validate posts
 if(!isset($_POST['name'])){
@@ -21,3 +23,4 @@ else{
 }
 $statment->close();
 ?>
+<?php Fancy\printFooter(); ?>

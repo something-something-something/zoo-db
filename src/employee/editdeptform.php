@@ -4,8 +4,11 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Edit Department','employee','dept'); ?>
 <?php
+
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy a  department');
 	}
@@ -34,3 +37,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>
