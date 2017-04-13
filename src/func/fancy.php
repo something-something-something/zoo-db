@@ -31,6 +31,7 @@ HEADHTML;
 			['/employee/tickets.php','Tickets'],
 			['/employee/hablist.php','Habitats'],
 			['/employee/supplieslist.php','Supplies'],
+			['/employee/salesreportform.php','Vendor'],
 			['/employee/salesreportform.php','Finance'],
 			['/employee/viewinfo.php','Self'],
 			['/employee/employeechangepassform.php','Change Password'],
@@ -71,7 +72,8 @@ if($subNav!=='none'){
 	else if($subNav==='employee'&&$emplPos==='superUser'){
 		$subNavArr=[
 		['/employee/employeelist.php','Employees'],
-		['/employee/createuserform.php','Create Employee']
+		['/employee/createuserform.php','Create Employee'],
+		['/employee/delemployeelist.php','Deleted Employees']
 		];
 	}
 	else if($subNav==='hab'&&$emplPos==='superUser'){

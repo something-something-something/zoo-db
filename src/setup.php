@@ -68,11 +68,16 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		$stmtCreateMemVis=$mysqlidb->prepare("CREATE TABLE MemberVisits(MID INT ,TimeStamp DATETIME,numOfPeople INT, PRIMARY KEY(MID,TimeStamp), FOREIGN KEY(MID) REFERENCES Members(memberID))");
 
 
-		$stmtCreateEmpUse=$mysqlidb->prepare("CREATE TABLE EmployeeUsers(username VARCHAR(60),password VARCHAR(500),employeeID INT,PRIMARY KEY(username),FOREIGN KEY(employeeID) REFERENCES Employee(employeeID))");
+		$stmtCreateEmpUse=$mysqlidb->prepare("CREATE TABLE EmployeeUsers(username VARCHAR(60),password VARCHAR(500),employeeID INT,PRIMARY KEY(username),FOREIGN KEY(employeeID) REFERENCES Employee(employeeID) on delete cascade)");
 
 		$stmtCreateMemUse=$mysqlidb->prepare("CREATE TABLE MemberUsers(username VARCHAR(60),password VARCHAR(500),memberID INT,PRIMARY KEY(username),FOREIGN KEY(memberID) REFERENCES Members(memberID))");
 				
 		$stmtCreateGros=$mysqlidb->prepare("CREATE TABLE GrossVendorSales(ID INT,Day DATE,saleAmount DECIMAL(10,2),PRIMARY KEY(ID,Day),FOREIGN KEY(ID) REFERENCES Vendor(vendorID))");
+		
+		$stmtCreateEmpBack=$mysqlidb->prepare("CREATE TABLE EmployeeBackup(employeeID INT,firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper'),employeeType ENUM('fullTime','partTime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID INT,supID INT, deleted timestamp default current_timestamp)");
+		
+		
+		
 
 		/*create tables*/
 		if(!$stmtCreateDep->execute()){
@@ -127,7 +132,15 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			die('Failed to create GrossVendorSales table');
 		}
 		$stmtCreateGros->close();
+		
+		if(!$stmtCreateEmpBack->execute()){
+			die('Failed to create EmployeeBackup table');
+		}
+		$stmtCreateEmpBack->close();
 
+		if(!$mysqlidb->query("create trigger SaveEmployee before delete on Employee for each row insert into EmployeeBackup values(OLD.employeeid,OLD.firstname,OLD.lastname,OLD.essn,OLD.employeedob,OLD.position,OLD.employeetype,OLD.sex,OLD.employeeemail,OLD.address,OLD.departmentid,OLD.supid,DEFAULT)")){
+			die('Failed to create EmployeeBackup Trigger table');
+		}
 
 		/*adds employee as super user*/
 		if(EmplUser\add($mysqlidb,$_POST['emplusername'],$_POST['emplpass'],$_POST['fname'],$_POST['lname'],$_POST['ssn'],$_POST['dob'],"superUser",null,$_POST['sex'],$_POST['email'],$_POST['addr'],null,null)){

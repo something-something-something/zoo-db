@@ -18,7 +18,13 @@ echo '<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Dele
 while($statment->fetch()){
 	//need to escape html charchters will do later
 	echo '<tr><td><a href="edituserform.php?id='.$id.'">'.$id.'</a></td><td>'.$fname.'</td><td>'.$lname.'</td>';
-	echo '<td>Later Tonight</td>';
+	echo <<<DELETEEMPLOYEE
+		<td><form action="deleteemployee.php" method="POST">
+			<input type="hidden" name="id" value="$id">
+			<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
+			<input value="Delete" type="submit">
+		</form></td>
+DELETEEMPLOYEE;
 	echo '</tr>';
 }
 echo '</tbody></table>';
