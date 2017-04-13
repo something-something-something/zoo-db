@@ -6,14 +6,14 @@
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 	require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Members','employee','member'); ?>
+<?php Fancy\printHeader($db,'Deleted Members','employee','member'); ?>
 <?php
 //needs more error checking will do later
-$statment=$db->prepare("select memberID, firstName, lastName, memberdob, membersex,memberemail,memberaddress,memberphone from Members");
+$statment=$db->prepare("select memberID, firstName, lastName, memberdob, membersex,memberemail,memberaddress,memberphone,deleted from MembersBackup");
 //$statment->bind_param();
 echo $db->error;
 $statment->execute();
-$statment->bind_result($id,$fname,$lname,$dob,$sex,$email,$address,$phone);
+$statment->bind_result($id,$fname,$lname,$dob,$sex,$email,$address,$phone,$deleted);
 echo "<table>
   <tr>
     <th>ID</th>
@@ -24,7 +24,7 @@ echo "<table>
     <th>Email</th>
     <th>Address</th>
     <th>Phone</th>
-	<th>Delete</th>
+	<th>Deleted</th>
   </tr>";
 while($statment->fetch()){
 	//need to escape html charchters will do later
@@ -36,14 +36,8 @@ while($statment->fetch()){
 	<td>'.$sex.'</td>
 	<td>'.$email.'</td>
 	<td>'.$address.'</td>
-	<td>'.$phone.'</td>';
-	echo <<<DELETEMEMBER
-		<td><form action="deletemember.php" method="POST">
-			<input type="hidden" name="id" value="$id">
-			<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
-			<input value="Delete" type="submit">
-		</form></td>
-DELETEMEMBER;
+	<td>'.$phone.'</td>
+	<td>'.$deleted.'</td>';
 
 	echo '</tr>';
 }

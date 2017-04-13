@@ -7,7 +7,7 @@
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 	require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Edit Member','employee'); ?>
+<?php Fancy\printHeader($db,'Edit Member','employee','member'); ?>
 <?php
 
 // TODO add checks to make sure post data is okay

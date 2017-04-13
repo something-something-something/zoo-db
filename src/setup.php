@@ -32,11 +32,13 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 	}
 	else{
 		/* delete tables if they exist*/
-		$statmentDeleteTables=$mysqlidb->prepare('DROP TABLE IF EXISTS GrossVendorSales,Manages,EmployeeUsers,MemberUsers,MemberVisits,Tickets,MembershipSales, Members, Animals, Habitats, EquipmentAndSupplies, Vendor, Employee, Department');
+		$statmentDeleteTables=$mysqlidb->prepare('DROP TABLE IF EXISTS GrossVendorSales,Manages,EmployeeUsers,MemberUsers,MemberVisits,Tickets,MembershipSales, Members, Animals, Habitats, EquipmentAndSupplies, Vendor, Employee, Department,EmployeeBackup,MembersBackup');
 		if(!$statmentDeleteTables->execute()){
 			die('failed to delete old databases');
 		}
 		$statmentDeleteTables->close();
+
+
 		/*prepare create table statments (maybe should rewrite as an array?)*/
 		$stmtCreateDep=$mysqlidb->prepare("CREATE TABLE Department (departmentID INT AUTO_INCREMENT,name VARCHAR(100),PRIMARY KEY(departmentID))");
 		
@@ -70,13 +72,13 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 
 		$stmtCreateEmpUse=$mysqlidb->prepare("CREATE TABLE EmployeeUsers(username VARCHAR(60),password VARCHAR(500),employeeID INT,PRIMARY KEY(username),FOREIGN KEY(employeeID) REFERENCES Employee(employeeID) on delete cascade)");
 
-		$stmtCreateMemUse=$mysqlidb->prepare("CREATE TABLE MemberUsers(username VARCHAR(60),password VARCHAR(500),memberID INT,PRIMARY KEY(username),FOREIGN KEY(memberID) REFERENCES Members(memberID))");
+		$stmtCreateMemUse=$mysqlidb->prepare("CREATE TABLE MemberUsers(username VARCHAR(60),password VARCHAR(500),memberID INT,PRIMARY KEY(username),FOREIGN KEY(memberID) REFERENCES Members(memberID) on delete cascade)");
 				
 		$stmtCreateGros=$mysqlidb->prepare("CREATE TABLE GrossVendorSales(ID INT,Day DATE,saleAmount DECIMAL(10,2),PRIMARY KEY(ID,Day),FOREIGN KEY(ID) REFERENCES Vendor(vendorID))");
 		
 		$stmtCreateEmpBack=$mysqlidb->prepare("CREATE TABLE EmployeeBackup(employeeID INT,firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper'),employeeType ENUM('fullTime','partTime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID INT,supID INT, deleted timestamp default current_timestamp)");
 		
-		
+		$stmtCreateMemBack=$mysqlidb->prepare("CREATE TABLE MembersBackup(memberID INT, firstName VARCHAR(99),lastName VARCHAR(99),memberDOB DATE,memberSex ENUM('m','f'),memberEmail varchar(99),memberAddress TEXT,memberPhone VARCHAR(20),deleted timestamp default current_timestamp)");
 		
 
 		/*create tables*/
@@ -139,7 +141,15 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 		$stmtCreateEmpBack->close();
 
 		if(!$mysqlidb->query("create trigger SaveEmployee before delete on Employee for each row insert into EmployeeBackup values(OLD.employeeid,OLD.firstname,OLD.lastname,OLD.essn,OLD.employeedob,OLD.position,OLD.employeetype,OLD.sex,OLD.employeeemail,OLD.address,OLD.departmentid,OLD.supid,DEFAULT)")){
-			die('Failed to create EmployeeBackup Trigger table');
+			die('Failed to create EmployeeBackup Trigger');
+		}
+
+		if(!$stmtCreateMemBack->execute()){
+			die('Failed to create MembersBackup table');
+		}
+		$stmtCreateMemBack->close();
+		if(!$mysqlidb->query("create trigger SaveMember before delete on Members for each row insert into MembersBackup values(OLD.memberid,OLD.firstname,OLD.lastname,OLD.memberdob,OLD.membersex,OLD.memberemail,OLD.memberaddress,OLD.memberphone,DEFAULT)")){
+			die('Failed to create MemberBackup Trigger');
 		}
 
 		/*adds employee as super user*/

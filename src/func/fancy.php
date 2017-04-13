@@ -76,6 +76,12 @@ if($subNav!=='none'){
 		['/employee/delemployeelist.php','Deleted Employees']
 		];
 	}
+	else if($subNav==='member'&&$emplPos==='superUser'){
+		$subNavArr=[
+		['/employee/memberlist.php','Members'],
+		['/employee/delmemberlist.php','Deleted Members']
+		];
+	}
 	else if($subNav==='hab'&&$emplPos==='superUser'){
 		$subNavArr=[
 		['/employee/hablist.php','Habitats'],
