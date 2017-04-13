@@ -74,7 +74,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 
 		$stmtCreateMemUse=$mysqlidb->prepare("CREATE TABLE MemberUsers(username VARCHAR(60),password VARCHAR(500),memberID INT,PRIMARY KEY(username),FOREIGN KEY(memberID) REFERENCES Members(memberID) on delete cascade)");
 				
-		$stmtCreateGros=$mysqlidb->prepare("CREATE TABLE GrossVendorSales(ID INT,Day DATE,saleAmount DECIMAL(10,2),PRIMARY KEY(ID,Day),FOREIGN KEY(ID) REFERENCES Vendor(vendorID))");
+		$stmtCreateGros=$mysqlidb->prepare("CREATE TABLE GrossVendorSales(ID INT,Day DATE,saleAmount DECIMAL(10,2),PRIMARY KEY(ID,Day),FOREIGN KEY(ID) REFERENCES Vendor(vendorID) on delete cascade)");
 		
 		$stmtCreateEmpBack=$mysqlidb->prepare("CREATE TABLE EmployeeBackup(employeeID INT,firstName VARCHAR(99) ,lastName VARCHAR(99),eSsn VARCHAR(9) NOT NULL,employeeDOB DATE,position ENUM('zooKeeper','waiter','cook','guide','cashier','superUser','ticketSeller','quarterMaster','departmentManager','vendor','bookKeeper'),employeeType ENUM('fullTime','partTime','volunteer'),sex ENUM('m','f'),employeeEmail VARCHAR(999),address text,departmentID INT,supID INT, deleted timestamp default current_timestamp)");
 		

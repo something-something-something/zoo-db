@@ -5,7 +5,9 @@
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Add Vendor','employee','vendor'); ?>
 <form action="createvendor.php" method="POST">
 	Type of Vendor: 
 	<select name="type">
@@ -19,3 +21,4 @@
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
+<?php Fancy\printFooter(); ?>

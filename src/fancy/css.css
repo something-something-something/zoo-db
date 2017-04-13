@@ -27,6 +27,7 @@ header{
 	border-color:rgb(255,255,255);
 	margin:0;
 	padding:0;
+	flex-flow: wrap;
 	align-items: stretch;
 	
 }
@@ -56,10 +57,12 @@ header nav{
 	padding:0;
 	display:flex;
 	align-items:stretch;
+	flex-flow: wrap;
+	justify-content: center;
 	
 }
 header nav a{
-	background-color:rgba(0,200,0,0.5);
+	background-color:rgba(0,200,0,0.0);
 	
 	color:rgb(255,255,255);
 	padding:calc(( ( 1em / 0.25) * ( 1 - 0.25) / 2 ) + 0.2 * ( 1em / 0.25)) 1em;
