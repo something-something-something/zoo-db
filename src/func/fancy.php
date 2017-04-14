@@ -42,6 +42,7 @@ HEADHTML;
 			$mainNavArr=[
 			['/employee/index.php','Home'],
 			['/employee/deptanimallist.php','Animals'],
+			['/employee/deptsupplieslist.php','Supplies'],
 			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
 			];
