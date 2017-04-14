@@ -7,32 +7,29 @@
 	EmplUser\restrictPageToPositions($db,["superUser","ticketSeller"]);
 ?>
 <?php Fancy\printHeader($db,'Tickets','employee','ticket'); ?>
-<form action="sellticket.php" method="POST">
-	<select required name="type">
-		<option value="adult">adult $10</option>
-		<option value="child">child $5</option>
-		<option value="student">student $7</option>
-		<option value="senior">senior $8</option>
-	</select>
+<form action="addmembervisit.php" method="POST">
+	<label>Member id</label><input type="text" name="id"><br>
+	<label>Number of people</label><input type="text" name="num"><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>
 
 <?php
-	$statment=$db->prepare("select serialnumber,tickettype,ticketprice,date from Tickets");
+	$statment=$db->prepare("select mid,timestamp,numofpeople from MemberVisits");
 	$statment->execute();
-	$statment->bind_result($num,$type,$price,$date);
-	echo '<table><thead><tr><th>Ticket Number</th><th>Type</th><th>Price</th><th>Date</th><th>Delete</th></thead><tbody>';
+	$statment->bind_result($id,$timestamp,$num);
+	echo '<table><thead><tr><th>Member ID</th><th>TIME</th><th>Number of people</th><th>Delete</th></thead><tbody>';
 	while($statment->fetch()){
 		echo '<tr>';
-		echo '<td>'.$num.'</td><td>'.$type.'</td><td>'.$price.'<td>'.$date.'</td>';
-		echo <<<DELETETICKET
-		<td><form action="deleteticket.php" method="POST">
-			<input type="hidden" name="num" value="$num">
+		echo '<td>'.$id.'</td><td>'.$timestamp.'</td><td>'.$num.'';
+		echo <<<DELETEMEMBERVISIT
+		<td><form action="deletemembervisit.php" method="POST">
+			<input type="hidden" name="id" value="$id">
+			<input type="hidden" name="timestamp" value="$timestamp">
 			<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 			<input value="Delete" type="submit">
 		</form></td>
-DELETETICKET;
+DELETEMEMBERVISIT;
 		echo '</tr>';
 	}
 	echo '</tbody></table>';

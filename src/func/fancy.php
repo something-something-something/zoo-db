@@ -123,6 +123,12 @@ if($subNav!=='none'){
 		['/employee/vendorsaleslist.php','View Vendor Sales']
 		];
 	}
+	else if($subNav==='ticket'){
+		$subNavArr=[
+		['/employee/tickets.php','Ticket'],
+		['/employee/membervisits.php','Member visits']
+		];
+	}	
 	else if($subNav==='self'){
 		$subNavArr=[['/employee/viewinfo.php','Info'],
 		['/employee/editinfoform.php','Edit Info'],
