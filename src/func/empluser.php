@@ -104,19 +104,6 @@ namespace EmplUser{
 		return password_verify($password,$hpass);
 	}
 
-	/*changes user password*/
-	/*requires the username */
-	function changePassword($db, $password, $username){
-		$statment=$db->prepare("update EmployeeUsers set password = password_hash($password, PASSWORD_DEFAULT) where username=?");
-		$statment->bind_param('ss', $_POST['pass'], $_POST['username']);
-
-		if($statment->execute()){
-			$statment->close();
-			return false;
-		}
-		$statment->close();
-	}
-
 	/*gets the id from anemplyee username returns false on faliure (might want to handle null employeeid's')*/
 	function getIDFromUserName($db,$username){
 		$statment=$db->prepare("select employeeID from EmployeeUsers where username=?");
@@ -136,7 +123,6 @@ namespace EmplUser{
 	/*returns true if logedin or false if not loggedin*/
 	function loggedIn(){
 		return isset($_SESSION['EMPLID'])&&$_SESSION['EMPLID']!==NULL;
-		return isset($_SESSION['EMPLUSERNAME'])&&$_SESSION['EMPLUSERNAME']!==NULL;
 	}
 	/*nothing below a call to this function will be run if not logged in as employee*/
 	function restrictPageToLoggedIn(){

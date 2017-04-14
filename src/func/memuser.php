@@ -52,20 +52,7 @@ namespace MemUser{
 		return true;
 	}
 
-	/*changes user password*/
-	/*requires the username */
-	/*
-	function changePassword($db, $username, $password){
-		//$statment=$db->prepare("update MemberUsers set password = password_hash($password, PASSWORD_DEFAULT) where username=?");
-		$statment=$db->prepare("update MemberUsers set password where username=?");
-		$statment->bind_param('ss', password_hash($password, PASSWORD_DEFAULT), $username);
 
-		if(!$statment->execute()){
-			return false;
-		}
-		$statment->close();
-	}
-	*/
 
 	function validatePassword($db,$username,$password){
 		$statment=$db->prepare("select password from MemberUsers where username=?");
@@ -97,7 +84,6 @@ namespace MemUser{
 	}
 	function loggedIn(){
 		return isset($_SESSION['MEMID'])&&$_SESSION['MEMID']!==NULL;
-		return isset($_SESSION['MEMUSERNAME']) && $_SESSION['MEMUSERNAME'] !== NULL;
 	}
 	/*nothing below a call to this function will be run if not logged in as employee*/
 	function restrictPageToLoggedIn(){
