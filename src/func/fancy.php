@@ -38,6 +38,21 @@ HEADHTML;
 			['/loginform.php','Log Out']
 			];
 		}
+		else if($emplPos==='ticketSeller'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/tickets.php','Tickets'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+		}
+		else{
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+		}
 	}
 	else if($type==='member'){
 		$mainNavArr=[
