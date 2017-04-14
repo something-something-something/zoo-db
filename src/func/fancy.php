@@ -38,6 +38,15 @@ HEADHTML;
 			['/loginform.php','Log Out']
 			];
 		}
+		else if($emplPos==='zooKeeper'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/deptanimallist.php','Animals'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+
+		}
 		else if($emplPos==='ticketSeller'){
 			$mainNavArr=[
 			['/employee/index.php','Home'],

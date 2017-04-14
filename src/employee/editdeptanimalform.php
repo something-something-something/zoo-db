@@ -4,8 +4,10 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	require_once('../func/dept.php');
+	require_once('../func/fancy.php');
 	EmplUser\restrictPageToPositions($db,["zooKeeper","departmentManager","superUser"]);
 ?>
+<?php Fancy\printHeader($db,'Department animal','employee'); ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy an animal');
@@ -48,3 +50,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>
