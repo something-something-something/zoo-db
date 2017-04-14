@@ -63,4 +63,66 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php
+	if(!isset($_GET['id'])||empty($_GET['id'])){
+		die('specifiy an employee');
+	}
+	$statment=$db->prepare("select employeeid, firstname, lastname, supid from Employee where employeeID=?");
+	$statment->bind_param('i',$_GET['id']);
+	if(!$statment->execute()){
+		die('prepared statment failed');
+	}
+	$statment->bind_result($id, $efname, $elname, $supid);
+	if(!$statment->fetch()){
+		die('no employee found');
+	}
+	$statment->close();
+
+	if($supid){
+		$query = "select firstname, lastname from Employee where employeeID=" . $supid;
+		$statment=$db->prepare($query);
+		$statment->execute();
+		$statment->bind_result($fname, $lname);
+		if(!$statment->fetch()){
+			die('no employee found');
+		}
+		$statment->close();
+	} else {
+		$fname='N/A';
+		$lname='';
+	}
+?>
+
+<?php
+echo "<h1>Select New Supervisor For " . $efname . " " . $elname . "</h1>";
+echo "<p>Current Supervisor: " . $fname . ' '. $lname. "</p>";
+echo '<p><form action="editsupervisor.php" method="POST">
+		Enter Supervisor ID:<input type="number" name="superid"><br>
+		<input type="hidden" value="{$_SESSION[\'CSRF\']}" name="csrf">
+		<input type="hidden" value="'. $id . '" name="id">
+		<input type="submit">
+	</form></p>';
+
+$statment=$db->prepare("select employeeID, firstName, lastName from Employee where employeeID !=" . $id);
+//$statment->bind_param();
+echo $db->error;
+$statment->execute();
+$statment->bind_result($id,$fname,$lname);
+echo "<h1>Employees</h1>";
+echo "<table>
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>";
+while($statment->fetch()){
+		echo '<tr>
+	<td>'.$id.'</td>
+	<td>'.$fname.'</td>
+	<td>'.$lname.
+	'</td></tr>';
+}
+echo '</table>';
+$statment->close();
+?>
 <?php Fancy\printFooter(); ?>

@@ -38,4 +38,5 @@
 	}
 	$statment->close();
 ?>
+
 <?php Fancy\printFooter(); ?>
