@@ -12,12 +12,12 @@
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy an employee');
 	}
-	$statment=$db->prepare("select employeeID,firstName,lastName,eSsn,employeeDOB,position,employeeType,sex,employeeEmail,address,departmentID from Employee where employeeID=?");
+	$statment=$db->prepare("select e.employeeID,e.firstName,e.lastName,e.eSsn,e.employeeDOB,e.position,e.employeeType,e.sex,e.employeeEmail,e.address,e.departmentID,u.username from Employee as e join EmployeeUsers as u on (e.employeeid=u.employeeid) where e.employeeID=?");
 	$statment->bind_param('i',$_GET['id']);
 	if(!$statment->execute()){
 		die('prepared statment failed');
 	}
-	$statment->bind_result($id,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dept);
+	$statment->bind_result($id,$fn,$ln,$ssn,$dob,$pos,$type,$sex,$email,$addr,$dept,$username);
 	if(!$statment->fetch()){
 		die('no employee found');
 	}
@@ -40,6 +40,7 @@ $selectDeptHTML=Dept\selectDeptHTML($db,$dept);
 //TODO need to escape stuff
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
+Username: $username
 	<form action="edituser.php" method="POST">
 		first name<input type="text" name="fname" value="$fn"><br>
 		last name<input type="text" name="lname" value="$ln"><br>
@@ -60,8 +61,18 @@ ID: $id<br>
 		<input type="submit">
 	</form>
 HTMLFORMMAIN;
+$changepasshtml=<<<CHANGEPASS
+<form action="changeanyemplpass.php" method="POST">
+	New Password: <input type="password" name="pass"><br>
+  Confirm Password: <input type="password" name="pass1"><br>
+  	<input type="hidden" value="$id" name="id">
+	<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
+	<input type="submit">
+</form>
+CHANGEPASS;
 
 echo $htmlformmain;
+echo $changepasshtml;
 ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
@@ -125,4 +136,6 @@ while($statment->fetch()){
 echo '</table>';
 $statment->close();
 ?>
+
+
 <?php Fancy\printFooter(); ?>
