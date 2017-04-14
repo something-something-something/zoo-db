@@ -3,7 +3,7 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
-	EmplUser\restrictPageToPositions($db,['superUser']);
+	EmplUser\restrictPageToPositions($db,['superUser','departmentManager','vendor']);
 	require_once('../includes/checkcsrf.php');
 	require_once('../func/fancy.php');
 ?>
@@ -20,14 +20,14 @@ else{
 	$deptID=$_POST['dept'];
 }
 
-$stValID=$db->prepare("select id from GrossVendorSales where id=(select vendorid from Vendor where department=(select departmentid from Employee where employeeid=?))");
+$stValID=$db->prepare("select vendorid from Vendor where department=(select departmentid from Employee where employeeid=?)");
 $stValID->bind_param('i',$_SESSION['EMPLID']);
 $idokay=false;
 $stValID->execute();
 $stValID->bind_result($valID);
 while($stValID->fetch()){
-
-	if($valID===$_POST['id']){
+	echo $valID.'<br>';
+	if("$valID"===$_POST['id']){
 		$idokay=true;
 	}
 }

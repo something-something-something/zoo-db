@@ -3,7 +3,7 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
-	EmplUser\restrictPageToPositions($db,["superUser"]);
+	EmplUser\restrictPageToPositions($db,["superUser","vendor","departmentManager"]);
 	require_once('../func/fancy.php');
 ?>
 <?php Fancy\printHeader($db,'Vendor Sales','employee','vendor'); ?>
