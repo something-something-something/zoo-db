@@ -4,34 +4,25 @@
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
 	require_once('../includes/checkcsrf.php');
-	EmplUser\restrictPageToPositions($db,["superUser"]);
+		EmplUser\restrictPageToPositions($db,["superUser","quarterMaster","zooKeeper","departmentManager","vendor"]);
+		require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Equipment And Supplies','employee'); ?>
 <?php
 
 // TODO add checks to make sure post data is okay
-	if($_POST['dept']==='none'){
-		$dept=NULL;
-	}
-	else{
-		$dept=$_POST['dept'];
-	}
-	if($_POST['habitat']==='none'){
-		$hab=NULL;
-	}
-	else{
-		$hab=$_POST['habitat'];
-	}
-	$statment=$db->prepare("update EquipmentAndSupplies set esname=?,estype=?,esquantity=?,department=? where esid=? and department=(select departmentid from Employee where employeeid=?)");
+	
+	$statment=$db->prepare("update EquipmentAndSupplies set esname=?,estype=?,esquantity=? where esid=? and department=(select departmentid from Employee where employeeid=?)");
+	echo $db->error;
 	$statment->bind_param('ssiii',
 	$_POST['name'],
 	$_POST['type'],
 	$_POST['quantity'],
-	$dept,
 	$_POST['id'],
 	$_SESSION['EMPLID']);
 	if($statment->execute()){
 		if($statment->affected_rows>0){
-			echo 'Failed to updated supply';
+			echo 'updated supply';
 		}
 		else{
 			echo 'Failed to update supply';
@@ -42,3 +33,4 @@
 	}
 	$statment->close();
 ?>
+<?php Fancy\printFooter(); ?>

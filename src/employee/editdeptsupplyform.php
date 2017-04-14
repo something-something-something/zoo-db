@@ -6,8 +6,10 @@
 	require_once('../func/dept.php');
 	require_once('../func/hab.php');
 	require_once('../func/equisup.php');
-	EmplUser\restrictPageToPositions($db,["superUser"]);
+	EmplUser\restrictPageToPositions($db,["superUser","quarterMaster","zooKeeper","departmentManager","vendor"]);
+		require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Equipment And Supplies','employee'); ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy a supply');
@@ -17,7 +19,7 @@
 	if(!$statment->execute()){
 		die('prepared statment failed');
 	}
-	$statment->bind_result($id,$name,$type,$quan,$dept);
+	$statment->bind_result($id,$name,$type,$quan);
 	if(!$statment->fetch()){
 		die('no Supply found');
 	}
@@ -30,7 +32,7 @@ $selectTypeHTML=EquiSup\selectTypeHTML($type);
 //TODO need to escape stuff
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
-	<form action="editsupply.php" method="POST">
+	<form action="editdeptsupply.php" method="POST">
 		name<input type="text" name="name" value="$name"><br>
 		quantity<input type="number" name="quantity" value="$quan"><br>
 		<br>
@@ -44,3 +46,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>

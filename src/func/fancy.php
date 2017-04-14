@@ -38,6 +38,35 @@ HEADHTML;
 			['/loginform.php','Log Out']
 			];
 		}
+		else if($emplPos==='zooKeeper'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/deptanimallist.php','Animals'],
+			['/employee/deptsupplieslist.php','Supplies'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+
+		}
+		else if($emplPos==='quarterMaster'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/deptsupplieslist.php','Supplies'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+
+		}
+		else if($emplPos==='vendor'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/deptvendorsaleslist.php','Vendor'],
+			['/employee/deptsupplieslist.php','Supplies'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+
+		}
 		else if($emplPos==='ticketSeller'){
 			$mainNavArr=[
 			['/employee/index.php','Home'],
@@ -121,6 +150,13 @@ if($subNav!=='none'){
 		['/employee/createvendorform.php','Create Vendor'],
 		['/employee/grossvendorsalesform.php','Add Vendor Sale'],
 		['/employee/vendorsaleslist.php','View Vendor Sales']
+		];
+	}
+	else if($subNav==='vendor'&&($emplPos==='vendor'||'departmentManager')){
+		$subNavArr=[
+
+		['/employee/deptgrossvendorsalesform.php','Add Vendor Sale'],
+		['/employee/deptvendorsaleslist.php','View Vendor Sales']
 		];
 	}
 	else if($subNav==='ticket'){

@@ -3,9 +3,10 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
-	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
+	EmplUser\restrictPageToPositions($db,["superUser","quarterMaster","zooKeeper","departmentManager","vendor"]);
 ?>
-<h2> Equipment And Supplies </h2>
+<?php Fancy\printHeader($db,'Equipment And Supplies','employee'); ?>
 <?php
 //needs more error checking will do later
 $statment=$db->prepare("select esID, esname,estype, esquantity from EquipmentAndSupplies where department=(select departmentid from Employee where employeeid=?)");
@@ -23,15 +24,13 @@ echo "<table>
 while($statment->fetch()){
 	//need to escape html charchters will do later
 	echo '<tr>
-	<td><a href="editsupplyform.php?id='.$id.'">'.$id.'</a></td>
+	<td><a href="editdeptsupplyform.php?id='.$id.'">'.$id.'</a></td>
 	<td>'.$name.'</td>
 	<td>'.$type.'</td>
 	<td>'.$quantity.'</td>
 	</tr>';
 }
-echo"</table>
-<form action=\"/employee/index.php\">
-    <input type=\"submit\" value=\"Go Back\" />
-</form>";
+echo"</table>";
 $statment->close();
 ?>
+<?php Fancy\printFooter(); ?>
