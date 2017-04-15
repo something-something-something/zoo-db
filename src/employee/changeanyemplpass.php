@@ -5,17 +5,21 @@
 	require_once('../func/empluser.php');
 	require_once('../includes/checkcsrf.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
+	
 ?><?php
 
 if(!$_POST['pass'] || !$_POST['pass1']) {
-	header( 'location: employeechangepassform.php');
-	echo 'Error: All the fields must be filled!';
+	Fancy\printHeader($db,'Employees','employee','employee');
+	echo 'Error: All the fields must be filled! <a href="javascript:history.back()">Go Back</a>';
+	Fancy\printFooter(); 
 	die();
 
 }
 if($_POST['pass'] !== $_POST['pass1']) {
-	header( 'location: employeechangepassform.php');
-	echo 'Error: Passwords do not match';
+	Fancy\printHeader($db,'Employees','employee','employee');
+	echo 'Error: Passwords do not match <a href="javascript:history.back()">Go Back</a>';
+	Fancy\printFooter(); 
 	die();
 }
 
@@ -23,7 +27,7 @@ if($_POST['pass'] !== $_POST['pass1']) {
 	$statment=$db->prepare("UPDATE EmployeeUsers SET password =? WHERE employeeid=?");
 	$statment->bind_param('si',password_hash($_POST['pass'], PASSWORD_DEFAULT),$_POST['id']);
 	$statment->execute();
-	header( 'refresh:3; url=index.php' ); //waits for 3 seconds before redirecting
+	header( 'refresh:3; url=employeelist.php' ); //waits for 3 seconds before redirecting
 	echo 'Password successfully changed';
 
 $db->close();
