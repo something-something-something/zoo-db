@@ -8,7 +8,7 @@
 ?>
 <?php
 
-$statment=$db->prepare("delete from animals where animalID=?");
+$statment=$db->prepare("delete from Animals where animalID=?");
 $statment->bind_param('i',$_POST['id']);
 $statment->execute();
 $statment->close();
