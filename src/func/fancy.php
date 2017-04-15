@@ -67,6 +67,17 @@ HEADHTML;
 			];
 
 		}
+		else if($emplPos==='departmentManager'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/deptanimallist.php','Animals'],
+			['/employee/deptvendorsaleslist.php','Vendor'],
+			['/employee/deptsupplieslist.php','Supplies'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+
+		}
 		else if($emplPos==='ticketSeller'){
 			$mainNavArr=[
 			['/employee/index.php','Home'],
@@ -152,7 +163,7 @@ if($subNav!=='none'){
 		['/employee/vendorsaleslist.php','View Vendor Sales']
 		];
 	}
-	else if($subNav==='vendor'&&($emplPos==='vendor'||'departmentManager')){
+	else if($subNav==='vendor'&&($emplPos==='vendor'||$emplPos==='departmentManager')){
 		$subNavArr=[
 
 		['/employee/deptgrossvendorsalesform.php','Add Vendor Sale'],
