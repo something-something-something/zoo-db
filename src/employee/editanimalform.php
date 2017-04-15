@@ -40,14 +40,13 @@ $selectHabHTML=Habitat\selectHabitatHTML($db,$hID);
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 	<form action="editanimal.php" method="POST">
-		name<input type="text" name="name" value="$name"><br>
-		species<input type="text" name="tax" value="$tax"><br>
+		Name<input type="text" name="name" value="$name"><br>
+		Species<input type="text" name="tax" value="$tax"><br>
 		$sexHTML
-		dob:<input type="date" value="$dob" name="dob"><br>
+		DOB/Date Arrived:<input type="date" value="$dob" name="dob"><br>
+		Department: $selectDeptHTML
 		<br>
-		$selectDeptHTML
-		<br>
-		$selectHabHTML
+		Enclosure: $selectHabHTML
 		<br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 		<input type="hidden" value="$id" name="id">

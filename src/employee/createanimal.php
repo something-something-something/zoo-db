@@ -9,6 +9,12 @@
 <?php
 //TODO validate Posts
 $habID=NULL;
+if($_POST['habitat']==='none'){
+	$habID=NULL;
+}
+else{
+	$habID=$_POST['habitat'];
+}
 
 if($_POST['dept']==='none'){
 	$deptID=NULL;
