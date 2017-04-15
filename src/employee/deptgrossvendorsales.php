@@ -16,7 +16,6 @@ if($_POST['dept']==='none'){
 	$deptID=NULL;
 }
 else{
-	echo $_POST['dept'];
 	$deptID=$_POST['dept'];
 }
 
@@ -26,14 +25,12 @@ $idokay=false;
 $stValID->execute();
 $stValID->bind_result($valID);
 while($stValID->fetch()){
-	echo $valID.'<br>';
 	if("$valID"===$_POST['id']){
 		$idokay=true;
 	}
 }
 if($idokay){
 	$statment=$db->prepare("insert into GrossVendorSales values(?,?,?)");
-	echo $db->error;
 	$statment->bind_param('isi',$_POST['id'],$_POST['day'],$_POST['saleamount']);
 	if($statment->execute()){
 		echo 'added Sales';

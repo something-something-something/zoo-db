@@ -17,12 +17,7 @@
 	else{
 		$dept=$_POST['dept'];
 	}
-	if($_POST['habitat']==='none'){
-		$hab=NULL;
-	}
-	else{
-		$hab=$_POST['habitat'];
-	}
+	
 	$statment=$db->prepare("update EquipmentAndSupplies set esname=?,estype=?,esquantity=?,department=? where esid=?");
 	$statment->bind_param('ssiii',
 	$_POST['name'],

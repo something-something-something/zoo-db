@@ -3,9 +3,12 @@
 	require_once('../includes/aftersetup.php');
 	require_once('../includes/mysqlcon.php');
 	require_once('../func/empluser.php');
-	require_once('../func/hab.php');
+	require_once('../func/vend.php');
+	require_once('../func/dept.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
+	require_once('../func/fancy.php');
 ?>
+<?php Fancy\printHeader($db,'Edit Vendor','employee','vendor'); ?>
 <?php
 	if(!isset($_GET['id'])||empty($_GET['id'])){
 		die('specifiy a Vendor');
@@ -23,19 +26,16 @@
 ?>
 
 <?php
-
-$selectTypeHTML=Habitat\selectTypeHTML($type);
+$selectDeptHTML=Dept\selectDeptHTML($db,$department);
+$selectTypeHTML=Vendor\selectTypeHTML($type);
 //TODO need to escape stuff
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 	<form action="editvendor.php" method="POST">
-		name<input type="text" name="name" value="$name"><br>
+		Name:<input type="text" name="name" value="$name"><br>
 		capacity<input type="number" name="capacity" value="$capacity"><br>
-		<select name="type">
-  			<option value="food">Food</option>
-  			<option value="retail">Retail</option>
-  			<option value="ride">Ride</option>
-		</select>
+		Type: $selectTypeHTML<br>
+		Department: $selectDeptHTML<br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 		<input type="hidden" value="$id" name="id">
 		<input type="submit">
@@ -44,3 +44,4 @@ HTMLFORMMAIN;
 
 echo $htmlformmain;
 ?>
+<?php Fancy\printFooter(); ?>
