@@ -76,12 +76,19 @@ HEADHTML;
 			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
 			];
-
 		}
 		else if($emplPos==='ticketSeller'){
 			$mainNavArr=[
 			['/employee/index.php','Home'],
 			['/employee/tickets.php','Tickets'],
+			['/employee/viewinfo.php','Self'],
+			['/loginform.php','Log Out']
+			];
+		}
+		else if($emplPos==='bookKeeper'){
+			$mainNavArr=[
+			['/employee/index.php','Home'],
+			['/employee/salesreportform.php','Finance'],
 			['/employee/viewinfo.php','Self'],
 			['/loginform.php','Log Out']
 			];
