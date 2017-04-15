@@ -9,7 +9,7 @@
 <?php Fancy\printHeader($db,'Vendor Sales','employee','vendor'); ?>
 <?php
 //needs more error checking will do later
-$statment=$db->prepare("select ID, day,saleamount from GrossVendorSales where id=(select vendorid from Vendor where department=(select departmentid from Employee where employeeid=?))");
+$statment=$db->prepare("select ID, day,saleamount from GrossVendorSales where id= any (select vendorid from Vendor where department=(select departmentid from Employee where employeeid=?))");
 $statment->bind_param('i',$_SESSION['EMPLID']);
 echo $db->error;
 $statment->execute();
