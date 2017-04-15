@@ -9,13 +9,14 @@
 ?>
 <?php Fancy\printHeader($db,'Sales Report','employee'); ?>
 <form action="salesreport.php" method="POST">
-	From<br>
+<h2>Enter Report Dates</h2>
+	From Date (yyyy-mm-dd):<br>
 		<input type="date" value="<?php echo $today;?>" name="startDate"><br>
-	To<br>
+	To Date (yyyy-mm-dd):<br>
 		<input type="date" value="<?php echo $today;?>" name="endDate"><br>
 	
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
-	<input type="submit">
+	<input type="submit" value="Get Report">
 </form>
 <?php
 echo "<h1>Current Month & Year</h1>";

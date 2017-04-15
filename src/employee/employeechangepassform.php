@@ -7,12 +7,13 @@
 	EmplUser\restrictPageToLoggedIn();
 	require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Employee Password Change Page','employee','self'); ?>
+<?php Fancy\printHeader($db,'Password Change','employee','self'); ?>
 
 <form action="employeechangepass.php" method="POST">
+<h2>Enter New Password</h2>
 	New Password: <input type="password" name="pass"><br>
   Confirm Password: <input type="password" name="pass1"><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
-	<input type="submit">
+	<input type="submit" value="Change Password">
 </form>
 <?php Fancy\printFooter(); ?>

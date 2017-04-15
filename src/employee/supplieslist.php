@@ -6,7 +6,7 @@
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 	require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Equipment And Supplies','employee','sup'); ?>
+<?php Fancy\printHeader($db,'Equipment and Supply List','employee','sup'); ?>
 <?php
 //needs more error checking will do later
 $statment=$db->prepare("select esID, esname,estype, esquantity, department from EquipmentAndSupplies");

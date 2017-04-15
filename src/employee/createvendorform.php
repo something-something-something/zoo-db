@@ -9,6 +9,7 @@
 ?>
 <?php Fancy\printHeader($db,'Add Vendor','employee','vendor'); ?>
 <form action="createvendor.php" method="POST">
+	<h2>New Vendor Information</h2>
 	Type of Vendor: 
 	<select name="type">
   		<option value="food">Food</option>
@@ -17,8 +18,8 @@
 	</select><br>
 	Name: <input type="text" value="" name="name"><br>
 	Capacity: <input type="number" value="" name="capacity"><br>
-	<?php echo Dept\selectDeptHTML($db); ?><br>
+	Department: <?php echo Dept\selectDeptHTML($db); ?><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
-	<input type="submit">
+	<input type="submit" value="Add New Vendor">
 </form>
 <?php Fancy\printFooter(); ?>

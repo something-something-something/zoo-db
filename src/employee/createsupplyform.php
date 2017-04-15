@@ -7,9 +7,9 @@
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Equipment And Supplies','employee','sup'); ?>
-<h2> Add a Supply</h2>
+<?php Fancy\printHeader($db,'New Equipment or Supply','employee','sup'); ?>
 <form action="createsupply.php" method="POST">
+<h2>New Inventory Information</h2>
 	Name: <input type="text" value="" name="name"><br>
 	Type of Supply:
 	<select name="type">
@@ -22,8 +22,8 @@
   		<option value="animal-food-vegtable">Animal Food - Vegetable</option>
 	</select><br>
 	Quantity: <input type="number" value="0" name="quantity"><br>
-	<?php echo Dept\selectDeptHTML($db); ?><br>
+	Department: <?php echo Dept\selectDeptHTML($db); ?><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
-	<input type="submit">
+	<input type="submit" value="Add Inventory">
 </form>
 <?php Fancy\printFooter(); ?>

@@ -7,9 +7,10 @@ require_once('func/fancy.php');
 <?php
 if(!memUser\loggedIn()){
 ?>
-<?php Fancy\printHeader($db,'Log in'); ?>
+<?php Fancy\printHeader($db,'Zoo Member Login'); ?>
 	<form action="memlogin.php" method="POST">
-		User name:<input type="text" name="user"></br>
+		<h2>Log On</h2>
+		Username:<input type="text" name="user"></br>
 		Password:<input type="password" name="pass"><br>
 		<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 		<input type="submit" value="Log In">
@@ -20,7 +21,7 @@ if(!memUser\loggedIn()){
 }
 else{
 ?>
-<?php Fancy\printHeader($db,'Log in'); ?>
+<?php Fancy\printHeader($db,'Log Out'); ?>
 		<form action="memlogout.php" method="POST">
 			<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 			<input type="submit" value="Log Out">
