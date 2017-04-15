@@ -16,7 +16,6 @@ if($_POST['dept']==='none'){
 	$deptID=NULL;
 }
 else{
-	echo $_POST['dept'];
 	$deptID=$_POST['dept'];
 }
 $statment=$db->prepare("insert into Vendor values(DEFAULT,?,?,?,?)");
