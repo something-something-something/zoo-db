@@ -31,10 +31,10 @@
 	$dept,
 	$_POST['id']);
 	if($statment->execute()){
-		echo 'updated user';
+		echo '<i>Successfully updated user</i>';
 	}
 	else{
-		echo 'Failed to update user';
+		echo '<i>Failed to update user</i>';
 	}
 	$statment->close();
 ?>

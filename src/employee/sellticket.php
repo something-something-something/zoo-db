@@ -22,10 +22,12 @@
 	$statment=$db->prepare("insert into Tickets values(DEFAULT,?,?,CURDATE())");
 	$statment->bind_param('si',$_POST['type'],$price);
 	if($statment->execute()){
+		header("Location: ./tickets.php");
 		echo 'sold ticket';
 	}
 	else{
-		echo 'ticket not sold';
+
+		echo 'ticket not sold <a href="javascript:history.back()">Go back</a>';
 	}
 	$statment->close();
 ?>

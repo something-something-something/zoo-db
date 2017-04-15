@@ -40,8 +40,8 @@ $selectHabHTML=Habitat\selectHabitatHTML($db,$hID);
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 	<form action="editanimal.php" method="POST">
-		Name<input type="text" name="name" value="$name"><br>
-		Species<input type="text" name="tax" value="$tax"><br>
+		Name<input type="text" name="name" value="$name" required><br>
+		Species<input type="text" name="tax" value="$tax" required><br>
 		$sexHTML
 		DOB/Date Arrived:<input type="date" value="$dob" name="dob"><br>
 		Department: $selectDeptHTML

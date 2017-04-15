@@ -43,10 +43,10 @@
 		$_POST['email'],
 		$_POST['address'],
 		$dID,$sID)){
-			echo 'Employee Created';
+			echo '<i>Succesfully created employee</i>';
 		}
 		else{
-			echo 'Can\'t create Employee';
+			echo '<i>Failed to create employee</i>';
 		}
 	}
 ?>

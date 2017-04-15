@@ -28,7 +28,7 @@
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 	<form action="editdept.php" method="POST">
-		name<input type="text" name="name" value="$name"><br>
+		Name<input type="text" name="name" value="$name" required><br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 		<input type="hidden" value="$id" name="id">
 		<input type="submit">

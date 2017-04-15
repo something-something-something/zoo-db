@@ -9,7 +9,7 @@
 ?>
 <?php Fancy\printHeader($db,'Habitats','employee','hab'); ?>
 <form action="createhab.php" method="POST">
-	name: <input type="text" value="Some Place" name="name"><br>
+	Name: <input type="text" value="Some Place" name="name" required><br>
 	Type: <?php echo Habitat\selectTypeHTML(); ?><br>
 	Status:<?php echo Habitat\selectStatusHTML(); ?><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
