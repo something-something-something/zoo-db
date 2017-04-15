@@ -163,7 +163,7 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 
 
 
-			$departmentsArr=['IT','Reptiles','Small Animals','Aquatic','Large Mammals','Food And Beverages','Retail','Park Maintenance','Security',	'Customer Service'];
+			$departmentsArr=['IT','Reptiles','Small Animals','Aquatic','Large Mammals','Food And Beverages','Retail','Park Maintenance','Security',	'Customer Service', 'Administration'];
 			for($i=0;$i<count($departmentsArr);$i++){
 				$deptAddStatment=$mysqlidb->prepare("insert into Department values(DEFAULT,?)");
 				$deptAddStatment->bind_param('s',$departmentsArr[$i]);
@@ -184,13 +184,16 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			VALUES ('cage', 'Tiger pen', 'okay');");
 
 			$mysqlidb->query("INSERT INTO Animals (Aname, species, animalDOB, habitatID, sex, departmentID)
-			VALUES ('Toothy', 'Dinosaur', '2017-04-08', '1', 'f', '2');");
+			VALUES ('Toothy', 'T-Rex', '2017-04-08', '1', 'f', '2');");
+			
+			$mysqlidb->query("INSERT INTO Animals (Aname, species, animalDOB, habitatID, sex, departmentID)
+			VALUES ('Sir Purrsalot', 'Tiger', '2017-04-05', '3', 'm', '5');");
 
 			$mysqlidb->query("INSERT INTO Vendor (vendorType, Vname, department, capacity)
-			VALUES ('food', 'Peezahute', '7', '50');");
+			VALUES ('food', 'Peezahute', '6', '50');");
 
 			$mysqlidb->query("INSERT INTO Vendor (vendorType, Vname, department, capacity)
-			VALUES ('retail', 'The Junk Store', '6', '20');");
+			VALUES ('retail', 'The Junk Store', '7', '20');");
 
 
 			$fnameArr=['Jane','John','Sally','Jill','Tom','Lucy','Robert','William','Abby','Helen','Ben','Susan','Jukka'];
@@ -231,8 +234,12 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 				$memSalesStatment->close();
 			}
 			//TODO MAKE INO PREPARED STATMENTS
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2016-01-01 11:42:16', '1')");
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-03-11 10:45:16', '2')");
-			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-04-08 09:42:16', '2')");
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('2', '2017-03-11 11:42:16', '1')");
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('1', '2017-04-09 09:42:16', '4')");
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople) VALUES ('2', '2017-04-20 09:42:16', '3')");
+			
 			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Shock Baton', 'small-tools', '20', '2')");
 			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Mice', 'animal-food-meat', '20500', '2')");
 			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'25ft light Rope', 'small-tools', '3', '2')");
@@ -242,8 +249,12 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'2016 Jeep Wrangler', 'vehicle', '1', '9')");
 			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'2014 Jeep Wrangler', 'vehicle', '1', '9')");
 			$mysqlidb->query("INSERT INTO EquipmentAndSupplies VALUES (DEFAULT,'Powered Wheelchair', 'vehicle', '5', '10')");
+			
 			$mysqlidb->query("INSERT INTO Tickets
-			VALUES (DEFAULT,'child', '20000.00', '2015-03-01')");
+			VALUES (DEFAULT,'child', '10.00', '2015-03-01')");
+			
+			$mysqlidb->query("INSERT INTO Tickets
+			VALUES (DEFAULT,'child', '10.00', '2016-01-01')");
 
 			$mysqlidb->query("INSERT INTO Tickets
 			VALUES (DEFAULT,'student', '20.00', '2017-03-01')");
@@ -405,52 +416,91 @@ if(isset($_POST['host'],$_POST['user'],$_POST['pass'],$_POST['dbname'],$_POST['f
 			VALUES (DEFAULT,'student', '20.00', '2017-05-25')");		
 			
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
-			VALUES ('1', '2017-03-11 10:45:16', '2');");
+			VALUES ('1', '2014-03-11 10:45:16', '1');");
 
 			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
-			VALUES ('1', '2017-04-08 09:42:16', '2');");
+			VALUES ('1', '2014-04-08 09:42:16', '2');");
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('2', '2015-04-08 09:42:16', '2');");			
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('3', '2015-04-08 09:42:16', '5');");	
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-04-09 09:42:16', '2');");
+
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-04-10 09:42:16', '1');");	
+
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('2', '2017-05-07 09:42:16', '1');");
+
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('3', '2017-05-15 09:42:16', '3');");
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-06-13 09:42:16', '1');");
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-06-14 09:42:16', '1');");
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-06-15 09:42:16', '1');");
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-06-16 09:42:16', '1');");
+			
+			$mysqlidb->query("INSERT INTO MemberVisits (MID, TimeStamp, numOfPeople)
+			VALUES ('1', '2017-06-17 09:42:16', '1');");
+			
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2015-03-01', '1000.00');");
+			
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2016-02-01', '1.00');");
+			
+			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-01', '1.00');");
 
 			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-01', '13489.55');");
+			VALUES ('1', '2017-03-02', '1.00');");
 
 			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-02', '16548.77');");
+			VALUES ('1', '2017-03-03', '1.00');");
+
+			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
+			VALUES ('1', '2017-03-04', '1.00');");
 
 			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-03', '1.25');");
+			VALUES ('1', '2017-03-05', '1.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-04', '6897.20');");
-
-			$mysqlidb->query("INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-05', '11000');");
+			VALUES ('1', '2017-03-06', '1.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-06', '8000.42');");
+			VALUES ('1', '2017-03-07', '1.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-07', '8011.42');");
+			VALUES ('1', '2017-03-08', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-08', '5860.99');");
+			VALUES ('1', '2017-03-09', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-09', '12345.67');");
+			VALUES ('1', '2017-03-10', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-10', '3333.55');");
+			VALUES ('1', '2017-03-11', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-11', '9876.54');");
+			VALUES ('1', '2017-03-12', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-12', '8888.54');");
+			VALUES ('1', '2017-03-13', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-13', '78984.10');");
-
-			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
-			VALUES ('1', '2017-03-14', '2684.54');");
+			VALUES ('1', '2017-03-14', '100.00');");
 
 			$mysqlidb->query("	INSERT INTO GrossVendorSales (ID, Day, saleAmount)
 			VALUES ('1', '2017-03-15', '1111.54');");
