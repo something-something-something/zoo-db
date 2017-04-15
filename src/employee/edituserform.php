@@ -42,18 +42,18 @@ $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 Username: $username
 	<form action="edituser.php" method="POST">
-		first name<input type="text" name="fname" value="$fn"><br>
-		last name<input type="text" name="lname" value="$ln"><br>
-		ssn<input type="text" name="ssn" value="$ssn"><br>
+		First Name<input type="text" name="fname" value="$fn" required><br>
+		Last Name<input type="text" name="lname" value="$ln" required><br>
+		SSN<input type="text" name="ssn" value="$ssn" required><br>
 		$sexHTML
-		email:<input type="text" value="$email" name="email"><br>
-		dob:<input type="date" value="$dob" name="dob"><br>
-		job<br>
+		Email:<input type="text" value="$email" name="email" required><br>
+		DOB:<input type="date" value="$dob" name="dob"><br>
+		Job<br>
 		$selectPosHTML
 		<br>
 		$selectTypeHTML
 		<br>
-		$selectDeptHTML
+		Department $selectDeptHTML
 		<br>
 		<textarea name="address">$addr</textarea><br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">

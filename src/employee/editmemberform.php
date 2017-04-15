@@ -37,14 +37,14 @@ else{
 $htmlformmain=<<<HTMLFORMMAIN
 ID: $id<br>
 	<form action="editmember.php" method="POST">
-		first name<input type="text" name="fname" value="$fn"><br>
-		last name<input type="text" name="lname" value="$ln"><br>
-		dob<input type="date" name="dob" value="$dob"><br>
+		First Name<input type="text" name="fname" value="$fn" required><br>
+		Last Name<input type="text" name="lname" value="$ln" required ><br>
+		DOB<input type="date" name="dob" value="$dob"><br>
 		$sexHTML
-		email:<input type="text" value="$email" name="email"><br>
-		address:<input type="text" value="$address" name="address">
+		Email:<input type="text" value="$email" name="email" required><br>
+		Address:<input type="text" value="$address" name="address" required>
 		<br>
-		phone:<input type="text" value="$phone" name="phone">
+		Phone:<input type="text" value="$phone" name="phone" required>
 		<br>
 
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">

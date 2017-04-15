@@ -29,7 +29,7 @@ echo "<table>
 while($statment->fetch()){
 	//need to escape html charchters will do later
 	echo '<tr>
-	<td><a href="editmemberform.php?id='.$id.'">'.$id.'</a></td>
+	<td>'.$id.'</td>
 	<td>'.$fname.'</td>
 	<td>'.$lname.'</td>
 	<td>'.$dob.'</td>

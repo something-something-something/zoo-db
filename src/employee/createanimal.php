@@ -5,8 +5,7 @@
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../includes/checkcsrf.php');
-?>
-<?php
+?><?php
 //TODO validate Posts
 $habID=NULL;
 if($_POST['habitat']==='none'){
@@ -26,6 +25,7 @@ $statment=$db->prepare("insert into Animals values(DEFAULT,?,?,?,?,?,?)");
 echo $db->error;
 $statment->bind_param('sssisi',$_POST['name'],$_POST['tax'],$_POST['dob'],$habID,$_POST['sex'],$deptID);
 if($statment->execute()){
+	header("Location: ./animallist.php");
 	echo 'added animal';
 }
 else{

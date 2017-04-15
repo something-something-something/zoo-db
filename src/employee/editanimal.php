@@ -33,10 +33,10 @@
 	$dept,
 	$_POST['id']);
 	if($statment->execute()){
-		echo 'updated animal';
+		echo '<i>Succesfully updated animal</i>';
 	}
 	else{
-		echo 'Failed to update animal';
+		echo '<i>Failed to update animal</i>';
 	}
 	$statment->close();
 ?>

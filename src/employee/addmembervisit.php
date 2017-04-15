@@ -18,14 +18,15 @@
 		echo $db->error;
 		$statment->bind_param('ii',$_POST['id'],$_POST['num']);
 		if($statment->execute()){
+			header("Location: ./membervisits.php");
 			echo 'Added visit';
 		}
 		else{
-			echo 'Did not add visit';
+			echo '<i>Failed To Add Visit <a href="javascript:history.back()">Go Back</a></i>';
 		}
 		$statment->close();
 	}
 	else{
-		echo 'Did not add visit';
+		echo '<i>Failed To Add Visit <a href="javascript:history.back()">Go Back</a></i>';
 	}
 ?>
