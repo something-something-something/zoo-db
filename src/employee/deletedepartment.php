@@ -8,7 +8,7 @@
 ?>
 <?php
 
-$statment=$db->prepare("delete from department where departmentID=?");
+$statment=$db->prepare("delete from Department where departmentID=?");
 $statment->bind_param('i',$_POST['id']);
 $statment->execute();
 $statment->close();
