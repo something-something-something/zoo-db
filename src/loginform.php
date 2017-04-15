@@ -7,10 +7,10 @@ require_once('func/fancy.php');
 <?php
 if(!EmplUser\loggedIn()){
 ?>
-<?php Fancy\printHeader($db,'Log In'); ?>
-
+<?php Fancy\printHeader($db,'Employee Login'); ?>
 	<form action="login.php" method="POST">
-		User name:<input type="text" name="user"></br>
+	<h2>Log In</h2>
+		Username:<input type="text" name="user"></br>
 		Password:<input type="password" name="pass"><br>
 		<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 		<input type="submit" value="Log In">

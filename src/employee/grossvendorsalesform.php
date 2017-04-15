@@ -7,14 +7,14 @@
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Vendor Salses','employee','vendor'); ?>
+<?php Fancy\printHeader($db,'Vendor Sales','employee','vendor'); ?>
 <form action="grossvendorsales.php" method="POST">
-	<h1>Enter Sales Amount</h1>
+	<h2>Enter Sales Amount</h2>
 	Vendor ID: <input type="number" name="id"><br>
 	Day: <input type="date" name="day"><br>
 	Sales Amount: <input type="number" value="" name="saleamount"><br>
-	<?php echo Dept\selectDeptHTML($db); ?><br>
+	Department: <?php echo Dept\selectDeptHTML($db); ?><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf"> <br>
-	<input type="submit">
+	<input type="submit" value="Add New Sales">
 </form>
 <?php Fancy\printFooter(); ?>

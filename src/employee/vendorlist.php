@@ -6,7 +6,7 @@
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 		require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Vendors','employee','vendor'); ?>
+<?php Fancy\printHeader($db,'Vendor List','employee','vendor'); ?>
 <?php
 //needs more error checking will do later
 $statment=$db->prepare("select vendorID, vendortype,vname,department,capacity from Vendor");
