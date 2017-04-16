@@ -7,7 +7,7 @@
 	require_once('../includes/checkcsrf.php');
 		require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Vendors','employee','vendor'); ?>
+<?php  ?>
 <?php
 //TODO validate Posts
 //$habID=NULL;
@@ -19,15 +19,16 @@ else{
 	$deptID=$_POST['dept'];
 }
 $statment=$db->prepare("insert into Vendor values(DEFAULT,?,?,?,?)");
-echo $db->error;
 $statment->bind_param('ssii',$_POST['type'],$_POST['name'],$deptID,$_POST['capacity']);
 if($statment->execute()){
+	header("Location: ./vendorlist.php");
 	echo 'added vendor';
 }
 else{
+	Fancy\printHeader($db,'Vendors','employee','vendor');
 	echo 'can\'t add vendor';
+	Fancy\printFooter();
 }
 $statment->close();
 
 ?>
-<?php Fancy\printFooter(); ?>

@@ -6,9 +6,7 @@
 	EmplUser\restrictPageToPositions($db,['superUser']);
 	require_once('../includes/checkcsrf.php');
 	require_once('../func/fancy.php');
-?>
-<?php Fancy\printHeader($db,'Vendor Sales','employee','vendor'); ?>
-<?php
+?><?php
 //TODO validate Posts
 //$habID=NULL;
 
@@ -23,11 +21,13 @@ $statment=$db->prepare("insert into GrossVendorSales values(?,?,?)");
 echo $db->error;
 $statment->bind_param('isi',$_POST['id'],$_POST['day'],$_POST['saleamount']);
 if($statment->execute()){
+	header("Location: ./vendorsaleslist.php");
 	echo 'added Sales';
 }
 else{
-	echo 'can\'t add Sales';
+	Fancy\printHeader($db,'Vendor Sales','employee','vendor');
+	echo '<i>Failed to add sales</i>';
+	Fancy\printFooter(); 
 }
 $statment->close();
 ?>
-<?php Fancy\printFooter(); ?>

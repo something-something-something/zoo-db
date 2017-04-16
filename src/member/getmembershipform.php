@@ -14,7 +14,7 @@ $statment->bind_param('i',$_SESSION['MEMID']);
 $statment->execute();
 $statment->bind_result($type,$enddate);
 if($statment->fetch()){
-	echo 'You have a '.$type.' membership that expires on '.$enddate.'.';
+	echo '<hr><br><b><p style="text-align:center;">You have a <i>' . $type . ' </i>membership that expires on <i>'.$enddate . '.</i></p></b>';
 	$statment->close();
 }
 else{
