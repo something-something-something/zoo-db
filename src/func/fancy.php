@@ -108,6 +108,7 @@ HEADHTML;
 		['/member/editmemberform.php','Edit'],
 		['/member/getmembershipform.php','Membership'],
 		['/member/membershipinfo.php','Purchase History'],
+		['/memloginform.php','Log Out']
 		];
 	}
 	else{
