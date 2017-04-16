@@ -12,10 +12,10 @@
 	$_POST['superid'],
 	$_POST['id']);
 	if($statment->execute()){
-		echo '<i>Successfully Updated</i>';
+		echo '<i>Successfully Updated</i> <a href="javascript:history.back()">Go Back</a>';
 	}
 	else{
-		echo '<i>Failed To Update</i>';
+		echo '<i>Failed To Update</i> <a href="javascript:history.back()">Go Back</a>';
 	}
 	$statment->close();
 ?>
