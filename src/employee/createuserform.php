@@ -30,7 +30,7 @@
 	<br>
 	Department: <?php echo Dept\selectDeptHTML($db) ?>
 	<br>
-	Address <textarea name="address" required>12345 Some street</textarea><br>
+	Address<br> <textarea name="address" required>12345 Some street</textarea><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit">
 </form>

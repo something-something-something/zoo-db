@@ -11,7 +11,7 @@
 	Last Name<input type="text" value="Doe" name="lname"><br>
 	Username:<input type="text" value="jDoe" name="username"><br>
 	Password:<input type="password" name="pass"><br>
-	Address <textarea name="address">12345 Some street</textarea><br>
+	Address <br><textarea name="address">12345 Some street</textarea><br>
 	DOB:<input type="date" value="2010-10-21" name="dob"><br>
 	Male<input type="radio" name="sex" value="m">
 	Female<input type="radio" checked name="sex" value="f"><br>
