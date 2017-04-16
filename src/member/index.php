@@ -24,5 +24,8 @@ if($statment->fetch()){
 		echo 'Phone: '.$phone.'<br>';
 }
 $statment->close();
+
 ?>
+<?php $arrImages=['/img/zoo.png','/img/dino.png']; ?>
+<img style="width:100%;height:auto;" src="<?php echo $arrImages[random_int(0,1)]; ?>">
 <?php Fancy\printFooter(); ?>

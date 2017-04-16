@@ -5,9 +5,6 @@
 	require_once('func/fancy.php');
 ?>
 <?php Fancy\printHeader($db,'Home'); ?>
-<a href="loginform.php">Employee login</a><br>
-<a href="/employee">Employee Home</a><br>
-<a href="memregisterform.php">Register as Member</a><br>
-<a href="memloginform.php">Member login</a><br>
-<a href="/member">Member Home</a><br>
+<?php $arrImages=['/img/zoo.png','/img/dino.png']; ?>
+<img style="width:100%;height:auto;" src="<?php echo $arrImages[random_int(0,1)]; ?>">
 <?php Fancy\printFooter(); ?>
