@@ -36,7 +36,7 @@ ID: {$_SESSION['MEMID']}<br>
 		$sexHTML
 		dob:<input type="date" value="$dob" name="dob"><br>
 		email<input type="text" name="email" value="$email"><br>
-		address<textarea name="address">$address</textarea>
+		address<br><textarea name="address">$address</textarea><br>
 		phone<input type="text" name="phone" value="$phone"><br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 		<input type="submit">

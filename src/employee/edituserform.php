@@ -54,7 +54,7 @@ Username: $username
 		$selectTypeHTML
 		<br>
 		Department $selectDeptHTML
-		<br>
+		<br>Address<br>
 		<textarea name="address">$addr</textarea><br>
 		<input type="hidden" value="{$_SESSION['CSRF']}" name="csrf">
 		<input type="hidden" value="$id" name="id">
