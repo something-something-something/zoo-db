@@ -6,16 +6,16 @@
 	require_once('includes/checkcsrf.php');
 	require_once('func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Adding User'); ?>
+<?php Fancy\printHeader($db,'Account Created'); ?>
 <?php
 
 	//TODO validate POST
 	if(MemUser\add($db,$_POST['username'],$_POST['pass'],$_POST['fname'],$_POST['lname'],$_POST['dob'],$_POST['sex'],$_POST['email'],$_POST['address'],$_POST['phone'])){
-		echo 'added member';
+		echo 'Added member';
 
 	}
 	else{
-		echo 'failed to create member';
+		echo 'Failed to create member';
 	}
 ?>
 <?php Fancy\printFooter(); ?>

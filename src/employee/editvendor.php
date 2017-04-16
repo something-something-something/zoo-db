@@ -6,9 +6,7 @@
 	require_once('../includes/checkcsrf.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 	require_once('../func/fancy.php');
-?>
-<?php Fancy\printHeader($db,'Edit Vendor','employee','vendor'); ?>
-<?php
+?><?php
 	if($_POST['dept']==='none'){
 		$dept=NULL;
 	}
@@ -26,11 +24,13 @@
 	$_POST['id']
 	);
 	if($statment->execute()){
+		header("Location: ./vendorlist.php");
 		echo 'updated Vendor';
 	}
 	else{
+		Fancy\printHeader($db,'Edit Vendor','employee','vendor');
 		echo 'Failed to update Vendor';
+		Fancy\printFooter();
 	}
 	$statment->close();
 ?>
-<?php Fancy\printFooter(); ?>

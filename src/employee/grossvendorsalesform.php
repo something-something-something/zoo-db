@@ -14,7 +14,7 @@
 	Vendor: <?php echo Vendor\selectVendorHTML($db); ?>
 	<br>
 	Day: <input type="date" name="day"><br>
-	Sales Amount: <input type="number" value="" name="saleamount"><br>
+	Sales Amount: <input type="number" value="" name="saleamount" required><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf"> <br>
 	<input type="submit" value="Add New Sales">
 </form>

@@ -6,9 +6,7 @@
 	require_once('../includes/checkcsrf.php');
 	EmplUser\restrictPageToPositions($db,["superUser"]);
 	require_once('../func/fancy.php');
-?>
-<?php Fancy\printHeader($db,'Equipment And Supplies','employee','sup'); ?>
-<?php
+?><?php
 
 // TODO add checks to make sure post data is okay
 	if($_POST['dept']==='none'){
@@ -26,11 +24,14 @@
 	$dept,
 	$_POST['id']);
 	if($statment->execute()){
+		header("Location: ./supplieslist.php");
 		echo 'updated supply';
 	}
 	else{
+		Fancy\printHeader($db,'Equipment And Supplies','employee','sup');
 		echo 'Failed to update supply';
+
+		Fancy\printFooter();
 	}
 	$statment->close();
 ?>
-<?php Fancy\printFooter(); ?>

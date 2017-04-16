@@ -16,8 +16,8 @@
   		<option value="retail">Retail</option>
   		<option value="ride">Ride</option>
 	</select><br>
-	Name: <input type="text" value="" name="name"><br>
-	Capacity: <input type="number" value="" name="capacity"><br>
+	Name: <input type="text" value="" name="name" required><br>
+	Capacity: <input type="number" value="" name="capacity" required><br>
 	Department: <?php echo Dept\selectDeptHTML($db); ?><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit" value="Add New Vendor">

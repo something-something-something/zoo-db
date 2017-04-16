@@ -8,7 +8,7 @@
 	MemUser\restrictPageToLoggedIn();
 	require_once('../includes/checkcsrf.php');
 ?>
-<?php Fancy\printHeader($db,'Purchasing Membership','member'); ?>
+<?php Fancy\printHeader($db,'Purchased Membership','member'); ?>
 <?php
 if($_POST['type']==='senior'){
 	$price=119;
@@ -23,6 +23,5 @@ else{
 $statment=$db->prepare("insert into MembershipSales values(DEFAULT,CURDATE(),CURDATE() + INTERVAL 1 YEAR,?,?,?)");
 $statment->bind_param('sii',$_POST['type'],$price,$_SESSION['MEMID']);
 $statment->execute();
-echo 'Purchased Membership';
 ?>
 <?php Fancy\printFooter(); ?>
