@@ -7,7 +7,7 @@
 	EmplUser\restrictPageToPositions($db,["superUser","bookKeeper"]);
 	$today = date('Y\-m\-d');
 ?>
-<?php Fancy\printHeader($db,'Sales Report','employee'); ?>
+<?php Fancy\printHeader($db,'Sales Report','employee','finance'); ?>
 <form action="salesreport.php" method="POST">
 <h2>Enter Report Dates</h2>
 	From Date (yyyy-mm-dd):<br>

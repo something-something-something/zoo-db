@@ -6,7 +6,7 @@
 	EmplUser\restrictPageToPositions($db,["superUser","bookKeeper"]);
 		require_once('../func/fancy.php');
 ?>
-<?php Fancy\printHeader($db,'Sales Report','employee'); ?>
+<?php Fancy\printHeader($db,'Sales Report','employee','finance'); ?>
 <?php
 // Tickets
 $statment=$db->prepare("SELECT serialNumber, ticketType, ticketPrice, date FROM Tickets WHERE date >=? AND date <=?");

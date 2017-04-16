@@ -108,6 +108,7 @@ HEADHTML;
 		['/member/editmemberform.php','Edit'],
 		['/member/getmembershipform.php','Membership'],
 		['/member/membershipinfo.php','Purchase History'],
+		['/memloginform.php','Log Out']
 		];
 	}
 	else{
@@ -168,6 +169,12 @@ if($subNav!=='none'){
 		['/employee/createvendorform.php','Create Vendor'],
 		['/employee/grossvendorsalesform.php','Add Vendor Sale'],
 		['/employee/vendorsaleslist.php','View Vendor Sales']
+		];
+	}
+	else if($subNav==='finance'&&($emplPos==='superUser'||$emplPos==='bookKeeper')){
+		$subNavArr=[
+		['/employee/salesreportform.php','Sales Report'],
+		['/employee/membervisitsform.php','Member Visits Report']
 		];
 	}
 	else if($subNav==='vendor'&&($emplPos==='vendor'||$emplPos==='departmentManager')){

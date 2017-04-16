@@ -6,7 +6,7 @@
 	require_once('../func/empluser.php');
 	EmplUser\restrictPageToPositions($db,["superUser","ticketSeller"]);
 ?>
-<?php Fancy\printHeader($db,'Tickets','employee','ticket'); ?>
+<?php Fancy\printHeader($db,'Member Visits','employee','ticket'); ?>
 <form action="addmembervisit.php" method="POST">
 	<label>Member id</label><input type="text" name="id"><br>
 	<label>Number of people</label><input type="text" name="num"><br>

@@ -29,7 +29,7 @@ else{
 
 //TODO need to escape stuff
 $htmlformmain=<<<HTMLFORMMAIN
-ID: $id<br>
+ID: {$_SESSION['MEMID']}<br>
 	<form action="editmember.php" method="POST">
 		first name<input type="text" name="fname" value="$fname"><br>
 		last name<input type="text" name="lname" value="$lname"><br>
