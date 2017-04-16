@@ -10,18 +10,6 @@
 	EmplUser\restrictPageToLoggedIn();
 ?>
 <?php Fancy\printHeader($db,'Welcome Employee','employee'); ?>
-you are logged in now. <a href="/loginform.php">Logout</a><br>
-See <a href="employeelist.php">the employee list</a> if you are a superUser<br>
-See <a href="createuserform.php">Create a User</a> if you are a superUser<br>
-See <a href="createdepartmentform.php">Create a Department</a> if you are a superUser<br>
-See <a href="createanimalform.php">Create a Animal</a> if you are a superUser<br>
-See <a href="createhabform.php">Create a Habitat</a> if you are a superUser<br>
-See <a href="createvendorform.php">Create a Vendor</a> if you are a superUser<br>
-See <a href="createsupplyform.php">Create Supplies</a> if you are a superUser<br>
-See <a href="animallist.php">the animal list</a> if you are a superUser<br>
-See <a href="deptlist.php">the Department list</a> if you are a superUser<br>
-See <a href="hablist.php">the Habitat list</a> if you are a superUser<br>
-See <a href="supplieslist.php">supplies list</a> if you are a superUser<br>
-See <a href="deptsupplieslist.php">depart supplies list</a> if you are a superUserZookeeper or dept manager or quatermater<br>
-See <a href="deptanimallist.php">the animal list</a> if you are a superUser,departmentManager, or zooKeeper<br>
+<?php $arrImages=['/img/zoo.png','/img/dino.png']; ?>
+<img style="width:100%;height:auto;" src="<?php echo $arrImages[random_int(0,1)]; ?>">
 <?php Fancy\printFooter(); ?>

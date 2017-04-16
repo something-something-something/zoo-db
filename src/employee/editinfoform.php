@@ -22,7 +22,7 @@ if(!$statment->fetch()){
 <form action="editinfo.php" method="POST">
 	<h2>Edit Your Information</h2>
 	Email: <input type="text" value="<?php echo $email ?>" name="email"><br>
-	Address: <input type="text" value="<?php echo $address ?>" name="address"><br>
+	Address: <textarea name="address"><?php echo $address ?></textarea><br>
 	<input type="hidden" value="<?php echo($_SESSION['CSRF']);?>" name="csrf">
 	<input type="submit" value="Update Information">
 </form>
