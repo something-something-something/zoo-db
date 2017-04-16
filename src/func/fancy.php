@@ -170,6 +170,12 @@ if($subNav!=='none'){
 		['/employee/vendorsaleslist.php','View Vendor Sales']
 		];
 	}
+	else if($subNav==='finance'&&($emplPos==='superUser'||$emplPos==='bookKeeper')){
+		$subNavArr=[
+		['/employee/salesreportform.php','Sales Report'],
+		['/employee/membervisitsform.php','Member Visits Report']
+		];
+	}
 	else if($subNav==='vendor'&&($emplPos==='vendor'||$emplPos==='departmentManager')){
 		$subNavArr=[
 
